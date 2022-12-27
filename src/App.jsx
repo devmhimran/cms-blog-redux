@@ -7,6 +7,10 @@ import About from './Pages/About/About'
 import Contact from './Pages/Contact/Contact'
 import ErrorPage from './Pages/ErrorPage/ErrorPage'
 import NavMenu from './Component/NavMenu/NavMenu'
+import Dashboard from './Pages/Dashboard/Dashboard'
+import AllBlog from './Pages/AllBlog/AllBlog'
+import AddBlog from './Pages/AddBlog/AddBlog'
+import AddCategory from './Pages/AddCategory/AddCategory'
 
 
 function App() {
@@ -19,6 +23,11 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="dashboard" element={<Dashboard />} >
+          <Route index element={<AllBlog/>} />
+          <Route path='add-blog' index element={<AddBlog/>} />
+          <Route path='add-category' element={<AddCategory/>} />
+        </Route>
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </div>

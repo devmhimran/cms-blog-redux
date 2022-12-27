@@ -6,7 +6,7 @@ import { RxHamburgerMenu, RxCross1 } from 'react-icons/rx';
 const NavMenu = () => {
     const [open, setOpen] = useState(false);
     return (
-        <div className="nav__menu py-5 border-b">
+        <div id='nav__menu' className="nav__menu py-5 border-b">
             <div className='container max-w-screen-xl lg:mx-auto lg:px-0  px-3'>
                 <div className="grid grid-cols-2 items-center">
                     <div className="logo">
@@ -21,9 +21,9 @@ const NavMenu = () => {
                             <li className='text-lg font-medium hover:text-[#2304FB] lg:my-0 my-2'><Link to='/contact'>Contact</Link></li>
                             <li className='lg:my-0 my-2'>
                                 <div className='search__box'>
-                                    <div class="relative block border border-[#C7C9D1] rounded-full">
-                                        <span class="sr-only">Search</span>
-                                        <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+                                    <div className="relative block border border-[#C7C9D1] rounded-full">
+                                        <span className="sr-only">Search</span>
+                                        <span className="absolute inset-y-0 left-0 flex items-center pl-2">
                                             <RiSearchLine className='h-3.5 w-3.5 fill-black' />
                                         </span>
                                         <input className='placeholder:text-black border border-0 pl-9 pr-3 rounded-full py-1 w-48 outline-0 text-base' placeholder="Search" type="text" name="search" />
@@ -50,9 +50,9 @@ const NavMenu = () => {
                                         <li className='text-lg font-medium hover:text-[#2304FB] my-3'><Link>Contact</Link></li>
                                         <li className='my-3'>
                                             <div className='search__box'>
-                                                <div class="relative block border border-[#C7C9D1] rounded-full">
-                                                    <span class="sr-only">Search</span>
-                                                    <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+                                                <div className="relative block border border-[#C7C9D1] rounded-full">
+                                                    <span className="sr-only">Search</span>
+                                                    <span className="absolute inset-y-0 left-0 flex items-center pl-2">
                                                         <RiSearchLine className='h-3.5 w-3.5 fill-black' />
                                                     </span>
                                                     <input className='placeholder:text-black border-0 pl-9 pr-3 rounded-full py-1 border w-48 outline-0 text-base' placeholder="Search" type="text" name="search" />
