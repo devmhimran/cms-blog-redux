@@ -21,7 +21,7 @@ const Dashboard = () => {
     return (
         <div className='flex h-screen gap-6'>
             <DashboardSidebar />
-            <div className='p-8'>
+            <div className='p-8 w-full'>
                 <Outlet />
             </div>
         </div>

@@ -1,9 +1,10 @@
 import React from 'react';
+import SidebarHeading from '../../Component/SidebarHeading/SidebarHeading';
 
 const AddCategory = () => {
     return (
         <div>
-            add category
+            <SidebarHeading title='Add Category' />
         </div>
     );
 };

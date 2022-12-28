@@ -1,9 +1,10 @@
 import React from 'react';
+import SidebarHeading from '../../Component/SidebarHeading/SidebarHeading';
 
 const AddBlog = () => {
     return (
         <div>
-            add blog
+            <SidebarHeading title='Add Blog' />
         </div>
     );
 };
