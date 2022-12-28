@@ -41,29 +41,6 @@ const NavMenu = () => {
                                     <div className='border p-1.5' onClick={() => setOpen(!open)}><RxHamburgerMenu className='ml-auto w-5 h-5' /></div>
                             }
                         </>
-                        {/* {
-                            open ? <>
-                                <div className={`navbar__phone__container absolute duration-500 ease-in ${open ? "top-[8%]" : "top-[-150px]"} left-0 w-full border bg-white p-5`}>
-                                    <ul className='inter gap-6 justify-end'>
-                                        <li className='text-lg font-medium hover:text-[#2304FB] my-3'><Link>Home</Link></li>
-                                        <li className='text-lg font-medium hover:text-[#2304FB] my-3'><Link>About</Link></li>
-                                        <li className='text-lg font-medium hover:text-[#2304FB] my-3'><Link>Contact</Link></li>
-                                        <li className='my-3'>
-                                            <div className='search__box'>
-                                                <div className="relative block border border-[#C7C9D1] rounded-full">
-                                                    <span className="sr-only">Search</span>
-                                                    <span className="absolute inset-y-0 left-0 flex items-center pl-2">
-                                                        <RiSearchLine className='h-3.5 w-3.5 fill-black' />
-                                                    </span>
-                                                    <input className='placeholder:text-black border-0 pl-9 pr-3 rounded-full py-1 border w-48 outline-0 text-base' placeholder="Search" type="text" name="search" />
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li className='text-base font-medium py-3 my-3'><Link className='bg-black text-white px-5 py-2 hover:bg-white hover:text-black border border-black rounded-full duration-300'>Sign In</Link></li>
-                                    </ul>
-                                </div>
-                            </> : ''
-                        } */}
                     </div>
                 </div>
             </div>

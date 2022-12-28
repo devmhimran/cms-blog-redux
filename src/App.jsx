@@ -11,26 +11,30 @@ import Dashboard from './Pages/Dashboard/Dashboard'
 import AllBlog from './Pages/AllBlog/AllBlog'
 import AddBlog from './Pages/AddBlog/AddBlog'
 import AddCategory from './Pages/AddCategory/AddCategory'
+import { Provider } from 'react-redux'
+import store from './Redux/Store'
 
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="App">
-      <NavMenu />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="dashboard" element={<Dashboard />} >
-          <Route index element={<AllBlog/>} />
-          <Route path='add-blog' index element={<AddBlog/>} />
-          <Route path='add-category' element={<AddCategory/>} />
-        </Route>
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        <NavMenu />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="dashboard" element={<Dashboard />} >
+            <Route index element={<AllBlog />} />
+            <Route path='add-blog' index element={<AddBlog />} />
+            <Route path='add-category' element={<AddCategory />} />
+          </Route>
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+      </div>
+    </Provider>
   )
 }
 

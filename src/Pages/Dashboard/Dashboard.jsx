@@ -4,18 +4,11 @@ import DashboardSidebar from '../../Component/DashboardSidebar/DashboardSidebar'
 
 const Dashboard = () => {
     const location = useLocation();
-    console.log(location.pathname)
-    if (location.pathname.includes('dashboard')) {
-
-    }
-
     useEffect(() => {
         if (location.pathname.includes('dashboard')) {
             const nav = document.getElementById('nav__menu');
-            console.log(nav)
             nav.style.display = 'none'
         }
-
     }, [])
 
     return (
