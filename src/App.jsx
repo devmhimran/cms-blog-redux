@@ -13,6 +13,7 @@ import AddBlog from './Pages/AddBlog/AddBlog'
 import AddCategory from './Pages/AddCategory/AddCategory'
 import { Provider } from 'react-redux'
 import store from './Redux/Store'
+import UpdateCategory from './Pages/UpdateCategory/UpdateCategory'
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route index element={<AllBlog />} />
             <Route path='add-blog' index element={<AddBlog />} />
             <Route path='add-category' element={<AddCategory />} />
+            <Route path='update-category/:id' element={<UpdateCategory />} />
           </Route>
           <Route path="*" element={<ErrorPage />} />
         </Routes>
