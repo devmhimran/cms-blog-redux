@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const CategoryTable = ({ data, index }) => {
     const {categoryName, _id} = data
-    console.log(_id)
+    // console.log(_id)
     const dispatch = useDispatch();
     const navigate = useNavigate();
     return (

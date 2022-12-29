@@ -1,4 +1,4 @@
-import { ADD_CATEGORY, DELETE_CATEGORY, LOAD_CATEGORY, UPDATE_CATEGORY } from "../actionTypes/actionTypes"
+import { ADD_CATEGORY, DELETE_CATEGORY, LOAD_CATEGORY, LOAD_SINGLE_CATEGORY, UPDATE_CATEGORY } from "../actionTypes/actionTypes"
 
 
 export const addCategory = (data) =>{
