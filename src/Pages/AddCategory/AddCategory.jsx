@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SidebarHeading from '../../Component/SidebarHeading/SidebarHeading';
 import { useDispatch, useSelector } from 'react-redux';
 import { ADD_CATEGORY } from '../../Redux/actionTypes/actionTypes';
 
 import CategoryTable from '../../Component/CategoryTable/CategoryTable';
+import addCategoryData from '../../Redux/Thunk/addCategoryData';
+import loadCategoryData from '../../Redux/Thunk/loadCategoryData';
 
 const AddCategory = () => {
     const dispatch = useDispatch();
@@ -13,8 +15,13 @@ const AddCategory = () => {
         const categoryValue = {
             categoryName: categoryName,
         }
-        dispatch({ type: ADD_CATEGORY, payload: categoryValue })
+        dispatch(addCategoryData(categoryValue))
     }
+
+    useEffect(()=>{
+        dispatch(loadCategoryData())
+    },[])
+
     const { category } = useSelector(state => state.blog)
     console.log(category)
     return (
@@ -24,7 +31,7 @@ const AddCategory = () => {
                 <div className="grid grid-cols-3 gap-6">
                     <form onSubmit={handleCategory}>
                         <div className="category__input flex gap-3">
-                            <input className='border border-[#C7C9D1] px-4 py-1 w-full rounded-full outline-0' placeholder='Category' type="text" name="categoryName" />
+                            <input className='border border-[#C7C9D1] px-4 py-1 w-full rounded-full outline-0' placeholder='Category' type="text" name="categoryName" required />
                             <div className="addBtn">
                                 <button className='bg-black text-white px-5 py-2 hover:bg-white hover:text-black border border-black rounded-full duration-300'>Add</button>
                             </div>
@@ -39,10 +46,10 @@ const AddCategory = () => {
                                     <th className='text-left text-white p-2'>Status</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody className='bg-[#f8f8f9]'>
 
                                 {
-                                    category.map((data, index) => <CategoryTable key={index} data={data} />)
+                                    category.map((data, index) => <CategoryTable key={index} index={index} data={data} />)
                                 }
                             </tbody>
                         </table>
