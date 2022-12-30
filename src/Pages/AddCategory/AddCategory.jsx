@@ -7,26 +7,17 @@ import CategoryTable from '../../Component/CategoryTable/CategoryTable';
 import addCategoryData from '../../Redux/Thunk/addCategoryData';
 import loadCategoryData from '../../Redux/Thunk/loadCategoryData';
 import { ToastContainer, toast } from 'react-toastify';
+import toastify from '../../Component/Toastify/Toastify';
 
 const AddCategory = () => {
     const dispatch = useDispatch();
-    const notify = () => toast.success("Category Added Successfully", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-    });
     const handleCategory = (e) => {
         e.preventDefault();
         const categoryName = e.target.categoryName.value;
         const categoryValue = {
             categoryName: categoryName,
         }
-        // notify()
+
         dispatch(addCategoryData(categoryValue))
         e.target.reset()
     }

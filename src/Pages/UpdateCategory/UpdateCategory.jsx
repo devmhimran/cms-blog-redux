@@ -25,7 +25,11 @@ const UpdateCategory = () => {
         const categoryValue = {
             categoryName: categoryName,
         }
-        console.log(categoryValue)
+        
+        
+
+
+
         dispatch(updateCategoryData(id, categoryValue))
     }
 
@@ -37,7 +41,6 @@ const UpdateCategory = () => {
     // console.log(singleCategory)
     return (
         <div>
-            <h1>{id}</h1>
             <SidebarHeading title='Update Category' />
             <div className="dashboard__container p-6 inter">
                 <div className="grid grid-cols-3 gap-6">
