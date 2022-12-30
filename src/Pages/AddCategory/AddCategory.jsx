@@ -11,23 +11,31 @@ import toastify from '../../Component/Toastify/Toastify';
 
 const AddCategory = () => {
     const dispatch = useDispatch();
+    const { category } = useSelector(state => state.blog)
+    console.log(category)
     const handleCategory = (e) => {
         e.preventDefault();
         const categoryName = e.target.categoryName.value;
+        const nameValidate = category.find(data => data.categoryName === categoryName)
         const categoryValue = {
             categoryName: categoryName,
         }
 
-        dispatch(addCategoryData(categoryValue))
-        e.target.reset()
+        console.log(nameValidate)
+        if (!nameValidate) {
+            dispatch(addCategoryData(categoryValue))
+            e.target.reset()
+        } else {
+            toastify('error', 'Already Exists')
+        }
+
     }
 
     useEffect(() => {
         dispatch(loadCategoryData())
     }, [])
 
-    const { category } = useSelector(state => state.blog)
-    console.log(category)
+
     return (
         <div>
             <SidebarHeading title='Add Category' />
@@ -60,18 +68,6 @@ const AddCategory = () => {
                     </div>
                 </div>
             </div>
-            <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-            />
         </div>
     );
 };

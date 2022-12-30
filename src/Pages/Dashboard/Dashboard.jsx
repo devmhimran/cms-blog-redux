@@ -15,7 +15,9 @@ const Dashboard = () => {
         <div className='flex h-screen gap-6'>
             <DashboardSidebar />
             <div className='p-8 w-full'>
-                <Outlet />
+                <div className="container mx-auto">
+                    <Outlet />
+                </div>
             </div>
         </div>
     );

@@ -1,3 +1,4 @@
+import toastify from "../../Component/Toastify/Toastify";
 import { updateCategory } from "../actionCreators/categoryActionCreators";
 
 
@@ -18,6 +19,8 @@ const updateCategoryData = (id, category) => {
                     _id: id,
                     ...category
                 }))
+            window.location.reload();
+            toastify('success', 'successfully added')
         }
     }
 }

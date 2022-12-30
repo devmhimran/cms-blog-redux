@@ -7,38 +7,47 @@ import addCategoryData from '../../Redux/Thunk/addCategoryData';
 import loadCategoryData from '../../Redux/Thunk/loadCategoryData';
 import { useParams } from 'react-router-dom';
 import updateCategoryData from '../../Redux/Thunk/updateCategoryData';
+import toastify from '../../Component/Toastify/Toastify';
 
 
 const UpdateCategory = () => {
     const { id } = useParams();
     const [data, setData] = useState([])
     const dispatch = useDispatch();
-    useEffect(()=>{
+    const { category } = useSelector(state => state.blog)
+
+    useEffect(() => {
         fetch(`http://localhost:5000/category/${id}`)
-        .then(res => res.json())
-        .then(data => setData(data))
-    },[id])
+            .then(res => res.json())
+            .then(data => setData(data))
+    }, [id])
 
     const handleCategory = (e) => {
         e.preventDefault();
         const categoryName = e.target.categoryName.value;
+        const proceed = window.confirm('Are your sure?');
+        const nameValidate = category.find(data => data.categoryName === categoryName)
         const categoryValue = {
             categoryName: categoryName,
         }
-        
-        
+        console.log(nameValidate)
 
+        if (proceed) {
+            if (!nameValidate) {
+                dispatch(updateCategoryData(id, categoryValue))
+                e.target.reset()
+            } else {
+                toastify('error', 'Already Exists')
+            }
+        }
 
-
-        dispatch(updateCategoryData(id, categoryValue))
     }
 
     useEffect(() => {
         dispatch(loadCategoryData())
     }, [])
 
-    const { category, singleCategory } = useSelector(state => state.blog)
-    // console.log(singleCategory)
+    console.log(category)
     return (
         <div>
             <SidebarHeading title='Update Category' />
@@ -63,7 +72,7 @@ const UpdateCategory = () => {
                             </thead>
                             <tbody className='bg-[#f8f8f9]'>
                                 {
-                                    category.sort((a,b)=> a._id - b._id).map((data, index) => <CategoryTable key={index} index={index} data={data} />)
+                                    category.sort((a, b) => a._id - b._id).map((data, index) => <CategoryTable key={index} index={index} data={data} />)
                                 }
                             </tbody>
                         </table>

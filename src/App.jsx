@@ -14,6 +14,7 @@ import AddCategory from './Pages/AddCategory/AddCategory'
 import { Provider } from 'react-redux'
 import store from './Redux/Store'
 import UpdateCategory from './Pages/UpdateCategory/UpdateCategory'
+import { ToastContainer } from 'react-toastify'
 
 
 function App() {
@@ -35,6 +36,18 @@ function App() {
           </Route>
           <Route path="*" element={<ErrorPage />} />
         </Routes>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
       </div>
     </Provider>
   )
