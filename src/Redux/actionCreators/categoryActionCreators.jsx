@@ -2,6 +2,7 @@ import { ADD_CATEGORY, DELETE_CATEGORY, LOAD_CATEGORY, LOAD_SINGLE_CATEGORY, UPD
 
 
 export const addCategory = (data) =>{
+    console.log(data)
     return {
         type: ADD_CATEGORY,
         payload: data

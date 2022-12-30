@@ -11,12 +11,17 @@ const addCategoryData = (category) => {
                 "Content-type": "application/json"
             }
         })
-        const data = await res.json();
-
-            dispatch(addCategory(category))
-            console.log('category data', data)
-
+        const data = res.json();
         
+    
+                
+                dispatch(addCategory({
+                    _id: data.insertedId,
+                    ...category
+                }))
+                
+
+                
     }
 }
 

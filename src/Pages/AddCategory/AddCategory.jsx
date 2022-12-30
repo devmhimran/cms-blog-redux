@@ -6,21 +6,34 @@ import { ADD_CATEGORY } from '../../Redux/actionTypes/actionTypes';
 import CategoryTable from '../../Component/CategoryTable/CategoryTable';
 import addCategoryData from '../../Redux/Thunk/addCategoryData';
 import loadCategoryData from '../../Redux/Thunk/loadCategoryData';
+import { ToastContainer, toast } from 'react-toastify';
 
 const AddCategory = () => {
     const dispatch = useDispatch();
+    const notify = () => toast.success("Category Added Successfully", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+    });
     const handleCategory = (e) => {
         e.preventDefault();
         const categoryName = e.target.categoryName.value;
         const categoryValue = {
             categoryName: categoryName,
         }
+        // notify()
         dispatch(addCategoryData(categoryValue))
+        e.target.reset()
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(loadCategoryData())
-    },[])
+    }, [])
 
     const { category } = useSelector(state => state.blog)
     console.log(category)
@@ -56,6 +69,18 @@ const AddCategory = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
     );
 };

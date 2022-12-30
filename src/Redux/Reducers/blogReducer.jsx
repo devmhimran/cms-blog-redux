@@ -7,6 +7,7 @@ export const initialState = {
 }
 
 export const blogReducer = (state = initialState, action) => {
+    console.log(action.type)
     switch (action.type) {
 
         case LOAD_CATEGORY:

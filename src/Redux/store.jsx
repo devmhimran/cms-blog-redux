@@ -6,6 +6,6 @@ import categoryCounter from "./Middleware/categoryCounter";
 
 
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(categoryCounter, thunk)))
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
 
 export default store;

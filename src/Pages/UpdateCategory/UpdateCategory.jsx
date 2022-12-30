@@ -60,7 +60,7 @@ const UpdateCategory = () => {
                             </thead>
                             <tbody className='bg-[#f8f8f9]'>
                                 {
-                                    category.sort((a,b) => a._id - b._id).map((data, index) => <CategoryTable key={index} index={index} data={data} />)
+                                    category.sort((a,b)=> a._id - b._id).map((data, index) => <CategoryTable key={index} index={index} data={data} />)
                                 }
                             </tbody>
                         </table>
