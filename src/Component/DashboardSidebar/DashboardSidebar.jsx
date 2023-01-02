@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 
 const DashboardSidebar = () => {
     const location = useLocation();
-    console.log(location)
     const activeNav  = (nav) =>{
         const content = location.pathname
         if(content === nav){
@@ -11,7 +10,6 @@ const DashboardSidebar = () => {
         }
         
     }
-    console.log(activeNav('add-blog'))
     return (
         <div className='sidebar__main'>
             <div className="flex flex-col fixed z-10 h-full items-center w-56 h-full overflow-hidden text-gray-400 bg-gray-900 inter">

@@ -8,6 +8,7 @@ import loadCategoryData from '../../Redux/Thunk/loadCategoryData';
 import { useParams } from 'react-router-dom';
 import updateCategoryData from '../../Redux/Thunk/updateCategoryData';
 import toastify from '../../Component/Toastify/Toastify';
+import PageTitle from '../../Component/PageTitle/PageTitle'
 
 
 const UpdateCategory = () => {
@@ -30,7 +31,6 @@ const UpdateCategory = () => {
         const categoryValue = {
             categoryName: categoryName,
         }
-        console.log(nameValidate)
 
         if (proceed) {
             if (!nameValidate) {
@@ -47,9 +47,9 @@ const UpdateCategory = () => {
         dispatch(loadCategoryData())
     }, [])
 
-    console.log(category)
     return (
         <div>
+          <PageTitle title='Update Category' />
             <SidebarHeading title='Update Category' />
             <div className="dashboard__container py-6 inter">
                 <div className="flex gap-5 justify-between">

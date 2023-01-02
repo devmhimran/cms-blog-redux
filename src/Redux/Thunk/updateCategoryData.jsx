@@ -12,7 +12,6 @@ const updateCategoryData = (id, category) => {
             }
         })
         const data = await res.json();
-        console.log()
         if (data.acknowledged) {
             dispatch(updateCategory(
                 {

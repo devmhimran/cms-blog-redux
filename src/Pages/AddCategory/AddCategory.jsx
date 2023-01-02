@@ -12,7 +12,6 @@ import PageTitle from '../../Component/PageTitle/PageTitle';
 const AddCategory = () => {
     const dispatch = useDispatch();
     const { category } = useSelector(state => state.blog)
-    console.log(category)
     const handleCategory = (e) => {
         e.preventDefault();
         const categoryName = e.target.categoryName.value;
@@ -21,7 +20,6 @@ const AddCategory = () => {
             categoryName: categoryName,
         }
 
-        console.log(nameValidate)
         if (!nameValidate) {
             dispatch(addCategoryData(categoryValue))
             e.target.reset()

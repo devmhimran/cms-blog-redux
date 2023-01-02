@@ -7,6 +7,8 @@ import JoditEditor from 'jodit-react';
 import { useState, useRef, useMemo } from 'react';
 import { TiDeleteOutline } from 'react-icons/ti';
 import PageTitle from '../../Component/PageTitle/PageTitle';
+import addCategoryData from '../../Redux/Thunk/addCategoryData';
+import addBlogData from '../../Redux/Thunk/addBlogData';
 
 const AddBlog = () => {
     const dispatch = useDispatch();
@@ -15,19 +17,29 @@ const AddBlog = () => {
     const [featuredImage, setFeaturedImage] = useState('')
     const resetFeaturedImageFile = useRef();
     const imageApi = 'ef367f576eca302d4916e3889c6e0cc6';
-
     useEffect(() => {
         dispatch(loadCategoryData())
     }, [])
     const handleAddBlog = (e) => {
         e.preventDefault();
+        const blogTitle = e.target.blogTitle.value;
+        const blogKeyword = e.target.blogKeyword.value;
+        const blogCategory = e.target.blogCategory.value;
+        const blogContent = {
+            blogTitle,
+            content,
+            blogKeyword,
+            blogCategory,
+            featuredImage
+        }
+        console.log(blogContent)
+        dispatch(addBlogData(blogContent))
     }
 
     const handleFeaturedImage = (e) => {
         const photoURL = e.target.files[0];
         const formData = new FormData();
         formData.append('image', photoURL);
-        console.log(photoURL)
         const imgUrl = `https://api.imgbb.com/1/upload?key=${imageApi}`;
         fetch(imgUrl, {
             method: 'POST',
@@ -48,9 +60,6 @@ const AddBlog = () => {
 
     const { category } = useSelector(state => state.blog)
 
-    const handleCategorySelect = (value) => {
-        console.log(value)
-    }
 
     return (
         <div>
@@ -60,7 +69,7 @@ const AddBlog = () => {
                 <form onSubmit={handleAddBlog}>
                     <div className="blog__title my-4">
                         <p className='text-xl font-semibold mb-2'>Blog Title</p>
-                        <input className='border border-[#C7C9D1] px-4 py-1 w-full rounded-full outline-0' placeholder='Enter Blog Title' type="text" name="blog__title" id="" />
+                        <input className='border border-[#C7C9D1] px-4 py-1 w-full rounded-full outline-0' placeholder='Enter Blog Title' type="text" name="blogTitle" id="" />
                     </div>
                     <div className="blog__title my-4">
                         <p className='text-xl font-semibold mb-2'>Blog Description</p>
@@ -74,11 +83,11 @@ const AddBlog = () => {
                     <div className='flex gap-3 items-center'>
                         <div className="blog__keyword w-full my-4">
                             <p className='text-xl font-semibold mb-2'>Keyword</p>
-                            <input disabled className='border border-[#C7C9D1] px-4 py-1 w-full rounded-full outline-0' placeholder='Enter Keyword' type="text" name="blog__title" id="" />
+                            <input disabled className='border border-[#C7C9D1] px-4 py-1 w-full rounded-full outline-0' placeholder='Enter Keyword' type="text" name="blogKeyword" id="" />
                         </div>
                         <div className="blog__category w-full my-4">
                         <p className='text-xl font-semibold mb-2'>Select Category</p>
-                            <select className='py-1.5 w-full border border-[#C7C9D1] rounded-full outline-0' name="category" onChange={(e) => handleCategorySelect(e.target.value)} required>
+                            <select className='py-1.5 w-full border border-[#C7C9D1] rounded-full outline-0' name="blogCategory" required>
                                 {
                                     category.map(data => <option key={data._id} value={data.categoryName}>{data.categoryName}</option>)
                                 }
@@ -114,7 +123,7 @@ const AddBlog = () => {
                         }
                     </div>
                         <div className="blog__pubslish__btn my-3">
-                        <button className='bg-black text-white mt-3 px-5 py-2 hover:bg-white hover:text-black border border-black rounded-full duration-300'>Publish</button>
+                        <button type='submit' className='bg-black text-white mt-3 px-5 py-2 hover:bg-white hover:text-black border border-black rounded-full duration-300'>Publish</button>
                         </div>
                 </form>
             </div>

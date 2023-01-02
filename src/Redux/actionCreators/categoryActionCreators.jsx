@@ -1,8 +1,7 @@
-import { ADD_CATEGORY, DELETE_CATEGORY, LOAD_CATEGORY, LOAD_SINGLE_CATEGORY, UPDATE_CATEGORY } from "../actionTypes/actionTypes"
+import { ADD_BLOG, ADD_CATEGORY, DELETE_CATEGORY, LOAD_CATEGORY, LOAD_SINGLE_CATEGORY, UPDATE_CATEGORY } from "../actionTypes/actionTypes"
 
 
 export const addCategory = (data) =>{
-    console.log(data)
     return {
         type: ADD_CATEGORY,
         payload: data
@@ -26,6 +25,13 @@ export const deleteCategory = (data) =>{
 export const updateCategory = (data) =>{
     return {
         type: UPDATE_CATEGORY,
+        payload: data
+    }
+}
+
+export const addBlog = (data) =>{
+    return {
+        type: ADD_BLOG,
         payload: data
     }
 }
