@@ -1,4 +1,4 @@
-import { ADD_BLOG, ADD_CATEGORY, DELETE_CATEGORY, LOAD_CATEGORY, LOAD_SINGLE_CATEGORY, UPDATE_CATEGORY } from "../actionTypes/actionTypes"
+import { ADD_BLOG, ADD_CATEGORY, DELETE_CATEGORY, LOAD_BLOG, LOAD_CATEGORY, LOAD_SINGLE_CATEGORY, UPDATE_CATEGORY } from "../actionTypes/actionTypes"
 
 export const initialState = {
     blog: [],
@@ -14,16 +14,21 @@ export const blogReducer = (state = initialState, action) => {
                 ...state,
                 category: action.payload,
             }
+        case LOAD_BLOG:
+            return {
+                ...state,
+                blog: action.payload
+            }
         case ADD_CATEGORY:
             return {
                 ...state,
                 category: [...state.category, action.payload]
             }
-            case ADD_BLOG:
-                return{
-                    ...state,
-                    blog: [...state.blog, action.payload]
-                }
+        case ADD_BLOG:
+            return {
+                ...state,
+                blog: [...state.blog, action.payload]
+            }
         case UPDATE_CATEGORY:
             const previousCategory = state.category.filter(data => data._id !== action.payload._id);
             return {
