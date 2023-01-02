@@ -7,6 +7,7 @@ import addCategoryData from '../../Redux/Thunk/addCategoryData';
 import loadCategoryData from '../../Redux/Thunk/loadCategoryData';
 import { ToastContainer, toast } from 'react-toastify';
 import toastify from '../../Component/Toastify/Toastify';
+import PageTitle from '../../Component/PageTitle/PageTitle';
 
 const AddCategory = () => {
     const dispatch = useDispatch();
@@ -37,6 +38,7 @@ const AddCategory = () => {
 
     return (
         <div>
+            <PageTitle title='Add Category' />
             <SidebarHeading title='Add Category' />
             <div className="dashboard__container py-6 inter">
                 <div className="flex gap-5 justify-between">

@@ -6,13 +6,14 @@ import loadCategoryData from '../../Redux/Thunk/loadCategoryData';
 import JoditEditor from 'jodit-react';
 import { useState, useRef, useMemo } from 'react';
 import { TiDeleteOutline } from 'react-icons/ti';
+import PageTitle from '../../Component/PageTitle/PageTitle';
 
 const AddBlog = () => {
     const dispatch = useDispatch();
     const editor = useRef(null);
     const [content, setContent] = useState('');
-    const [badge, setBadge] = useState('')
-    const resetBadgeFile = useRef();
+    const [featuredImage, setFeaturedImage] = useState('')
+    const resetFeaturedImageFile = useRef();
     const imageApi = 'ef367f576eca302d4916e3889c6e0cc6';
 
     useEffect(() => {
@@ -22,7 +23,7 @@ const AddBlog = () => {
         e.preventDefault();
     }
 
-    const handleBadge = (e) => {
+    const handleFeaturedImage = (e) => {
         const photoURL = e.target.files[0];
         const formData = new FormData();
         formData.append('image', photoURL);
@@ -34,15 +35,15 @@ const AddBlog = () => {
         })
             .then(res => res.json())
             .then((result) => {
-                const badge = result.data.image.url;
-                setBadge(badge);
+                const featuredImage = result.data.image.url;
+                setFeaturedImage(featuredImage);
                 // console.log(logo)
             })
 
     }
-    const handleBadgePreviewClear = () => {
-        setBadge('')
-        resetBadgeFile.current.value = "";
+    const handleFeaturedImagePreviewClear = () => {
+        setFeaturedImage('')
+        resetFeaturedImageFile.current.value = "";
     }
 
     const { category } = useSelector(state => state.blog)
@@ -53,6 +54,7 @@ const AddBlog = () => {
 
     return (
         <div>
+            <PageTitle title='Add Blog' />
             <SidebarHeading title='Add Blog' />
             <div className="add__post inter w-3/5">
                 <form onSubmit={handleAddBlog}>
@@ -84,8 +86,8 @@ const AddBlog = () => {
                         </div>
                     </div>
                     <div className='blog__featured__image my-3'>
-                        <label className="block">
-                            <span className="sr-only">Choose profile photo</span>
+                        <label className="block w-96 border rounded-full">
+                            <span className="sr-only">Choose Featured Image</span>
                             <input type="file" className="block w-full text-sm text-slate-500
                             file:mr-4 file:py-2 file:px-4
                             file:rounded-full file:border-0
@@ -93,17 +95,17 @@ const AddBlog = () => {
                             file:bg-grey-50 file:text-grey-700
                             hover:file:bg-blue-100
                             "
-                                onChange={handleBadge}
-                                name='badge'
-                                ref={resetBadgeFile}
+                                onChange={handleFeaturedImage}
+                                name='featuredImage'
+                                ref={resetFeaturedImageFile}
                             />
                         </label>
                         {
-                            badge ?
+                            featuredImage ?
                                 <>
-                                    <div className="preview__logo relative w-fit">
-                                        <img className='w-64 mt-4' src={badge} alt="" />
-                                        <span className='absolute top-[-5px] right-[-7px] cursor-pointer bg-white rounded-full' onClick={handleBadgePreviewClear}>
+                                    <div className="featured__image relative w-fit">
+                                        <img className='w-64 mt-4' src={featuredImage} alt="" />
+                                        <span className='absolute top-[-5px] right-[-7px] cursor-pointer bg-white rounded-full' onClick={handleFeaturedImagePreviewClear}>
                                             <TiDeleteOutline className='text-2xl text-gray-600' />
                                         </span>
                                     </div>
@@ -111,11 +113,10 @@ const AddBlog = () => {
                                 : ''
                         }
                     </div>
-
+                        <div className="blog__pubslish__btn my-3">
+                        <button className='bg-black text-white mt-3 px-5 py-2 hover:bg-white hover:text-black border border-black rounded-full duration-300'>Publish</button>
+                        </div>
                 </form>
-
-                {/* <div dangerouslySetInnerHTML ={{ __html: content }} /> */}
-
             </div>
         </div>
     );
