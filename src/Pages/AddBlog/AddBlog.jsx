@@ -17,9 +17,12 @@ const AddBlog = () => {
     const [featuredImage, setFeaturedImage] = useState('')
     const resetFeaturedImageFile = useRef();
     const imageApi = 'ef367f576eca302d4916e3889c6e0cc6';
+    const today = new Date();
+    const todayDate = today.toLocaleDateString("en-US");
     useEffect(() => {
         dispatch(loadCategoryData())
     }, [])
+   
     const handleAddBlog = (e) => {
         e.preventDefault();
         const blogTitle = e.target.blogTitle.value;
@@ -30,7 +33,8 @@ const AddBlog = () => {
             content,
             blogKeyword,
             blogCategory,
-            featuredImage
+            featuredImage,
+            date : todayDate
         }
         console.log(blogContent)
         dispatch(addBlogData(blogContent))
