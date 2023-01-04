@@ -1,6 +1,7 @@
+import { deleteBlog } from "../actionCreators/categoryActionCreators"
 
 
-const deleteBlog = (id) => {
+const deleteBlogData = (id) => {
     return async (dispatch, getState) => {
         const res = await fetch(`http://localhost:5000/blog-delete/${id}`, {
             method: "DELETE",
@@ -14,3 +15,5 @@ const deleteBlog = (id) => {
         }
     }
 }
+
+export default deleteBlogData

@@ -14,7 +14,7 @@ const NavMenu = () => {
                     </div>
                     {/* navbar desktop */}
                     <div className={`navbar__desktop lg:block lg:static absolute lg:top-0 bg-white w-full left-0 lg:p-0 p-4 lg:border-0 border lg:duration-75 duration-500 ease-in 
-                    ${open ? 'top-[8%]': 'top-[-550px]'}`}>
+                    ${open ? 'top-[8%]' : 'top-[-550px]'}`}>
                         <ul className='inter block lg:flex items-center gap-6 justify-end'>
                             <li className='text-lg font-medium hover:text-[#2304FB] lg:my-0 my-2'><Link to='/'>Home</Link></li>
                             <li className='text-lg font-medium hover:text-[#2304FB] lg:my-0 my-2'><Link to='/about'>About</Link></li>
@@ -30,7 +30,9 @@ const NavMenu = () => {
                                     </div>
                                 </div>
                             </li>
-                            <li className='text-base font-medium lg:py-0 py-2'><Link className='bg-black text-white px-5 py-2 hover:bg-white hover:text-black border border-black rounded-full duration-300'>Sign In</Link></li>
+                            <li className='text-base font-medium lg:py-0 py-2'>
+                                <Link className='bg-black text-white px-5 py-2 hover:bg-white hover:text-black border border-black rounded-full duration-300' to='/sign-in'>Sign In</Link>
+                            </li>
                         </ul>
                     </div>
                     {/* navbar phone */}

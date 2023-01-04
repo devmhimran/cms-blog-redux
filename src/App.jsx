@@ -16,6 +16,8 @@ import store from './Redux/Store'
 import UpdateCategory from './Pages/UpdateCategory/UpdateCategory'
 import { ToastContainer } from 'react-toastify'
 import Loading from './Component/Loading/Loadind'
+import SignIn from './Pages/SignIn/SignIn'
+import SignUp from './Pages/SignUp/SignUp'
 
 
 function App() {
@@ -30,6 +32,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/loading" element={<Loading />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/sign-up" element={<SignUp />} />
           <Route path="dashboard" element={<Dashboard />} >
             <Route index element={<AllBlog />} />
             <Route path='add-blog' index element={<AddBlog />} />
