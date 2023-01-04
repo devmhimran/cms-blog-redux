@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FcGoogle } from 'react-icons/fc';
 
 const SignIn = () => {
     return (
@@ -16,10 +17,21 @@ const SignIn = () => {
                             <div className="input__form py-2">
                                 <label htmlFor="email" className='text-gray-800 font-semibold'>Enter your password</label>
                                 <input className='placeholder:text-black  border border-[#C7C9D1] px-3 rounded-full py-1 w-full outline-0 text-base' type="password" name="password" id="password" required />
-                                <Link className='mb-2 text-blue-600'>Forgot Password?</Link>
+                                <Link className='mb-2 text-blue-600' to='/forgot-password'>Forgot Password?</Link>
                             </div>
                             <div className="input__form py-2.5">
                                 <button className='bg-black text-white px-5 py-2 hover:bg-white hover:text-black border border-black rounded-full duration-300' to='/sign-in'>Sign In</button>
+                            </div>
+                            <div className="input__form pt-2.5">
+                                <Link className='mb-2' to='/sign-up'>Don't have an account? <span className='text-blue-600'>Sign up</span></Link>
+                            </div>
+                            <div className="input__form pt-2.5 flex items-center">
+                                <hr className='w-full' />
+                                <span className='mx-3 text-gray-500'>or</span>
+                                <hr  className='w-full' />
+                            </div>
+                            <div className="input__form pt-2.5">
+                                <button className='flex items-center mx-auto gap-1.5 border px-6 py-2.5 rounded-full hover:shadow-lg duration-300' to='/sign-in'> <span><FcGoogle/></span> <span>Continue With Google</span></button>
                             </div>
                         </form>
                     </div>
