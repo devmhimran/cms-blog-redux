@@ -15,10 +15,11 @@ import { Provider } from 'react-redux'
 import store from './Redux/Store'
 import UpdateCategory from './Pages/UpdateCategory/UpdateCategory'
 import { ToastContainer } from 'react-toastify'
-import Loading from './Component/Loading/Loadind'
+import Loading from './Component/Loading/Loading'
 import SignIn from './Pages/SignIn/SignIn'
 import SignUp from './Pages/SignUp/SignUp'
 import Footer from './Component/Footer/Footer'
+import RequiredAuth from './Component/RequiredAuth/RequiredAuth'
 
 
 function App() {
@@ -37,7 +38,11 @@ function App() {
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/forgot-password" element={<SignUp />} />
-          <Route path="dashboard" element={<Dashboard />} >
+          <Route path="dashboard" element={
+            <RequiredAuth>
+              <Dashboard />
+            </RequiredAuth>
+          } >
             <Route index element={<AllBlog />} />
             <Route path='add-blog' index element={<AddBlog />} />
             <Route path='add-category' element={<AddCategory />} />
@@ -57,7 +62,7 @@ function App() {
           pauseOnHover
           theme="light"
         />
-        <Footer/>
+        <Footer />
       </div>
     </Provider>
   )
