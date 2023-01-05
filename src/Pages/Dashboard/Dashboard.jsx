@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import DashboardSidebar from '../../Component/DashboardSidebar/DashboardSidebar';
 
 const Dashboard = () => {
@@ -10,7 +10,7 @@ const Dashboard = () => {
             nav.style.display = 'none'
         }
     }, [])
-
+ 
     return (
         <div className='flex h-screen gap-6'>
             <DashboardSidebar />

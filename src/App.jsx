@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import Home from './Pages/Home/Home'
 import About from './Pages/About/About'
 import Contact from './Pages/Contact/Contact'
@@ -22,7 +22,8 @@ import Footer from './Component/Footer/Footer'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const history = useLocation()
+  console.log(history)
 
   return (
     <Provider store={store}>
