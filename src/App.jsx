@@ -39,9 +39,9 @@ function App() {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/forgot-password" element={<SignUp />} />
           <Route path="dashboard" element={
-            <RequiredAuth>
+           
               <Dashboard />
-            </RequiredAuth>
+          
           } >
             <Route index element={<AllBlog />} />
             <Route path='add-blog' index element={<AddBlog />} />

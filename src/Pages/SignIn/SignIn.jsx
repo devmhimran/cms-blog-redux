@@ -23,7 +23,7 @@ const SignIn = () => {
                                 <button className='bg-black text-white px-5 py-2 hover:bg-white hover:text-black border border-black rounded-full duration-300' to='/sign-in'>Sign In</button>
                             </div>
                             <div className="input__form pt-2.5">
-                                <Link className='mb-2' to='/sign-up'>Don't have an account? <span className='text-blue-600'>Sign up</span></Link>
+                                <span className='mb-2'>Don't have an account? <Link  className='text-blue-600' to='/sign-up'>Sign up</Link> </span>
                             </div>
                             <div className="input__form pt-2.5 flex items-center">
                                 <hr className='w-full' />
