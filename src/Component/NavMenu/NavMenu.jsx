@@ -15,7 +15,7 @@ const NavMenu = () => {
     }
     console.log(user)
     return (
-        <div id='nav__menu' className="nav__menu py-5 border-b">
+        <div id='nav__menu' className="nav__menu py-5 border-b" onClick={()=>setProfileDropdown(!profileDropdown) }>
             <div className='container max-w-screen-xl lg:mx-auto lg:px-0  px-3'>
                 <div className="grid grid-cols-2 items-center">
                     <div className="logo">
