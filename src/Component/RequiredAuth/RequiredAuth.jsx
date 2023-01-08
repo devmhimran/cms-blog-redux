@@ -4,7 +4,7 @@ import { useAuthState, useSendEmailVerification } from 'react-firebase-hooks/aut
 import { Navigate, useLocation } from 'react-router-dom';
 import Loading from '../Loading/Loading';
 
-const RequiredAuth = () => {
+const RequiredAuth = ({children}) => {
     const [user, loading] = useAuthState(auth);
     const [sendEmailVerification, sending, error] = useSendEmailVerification(auth);
     const location = useLocation();
@@ -15,9 +15,9 @@ const RequiredAuth = () => {
         return <Navigate to='/sign-in' state={{ from: location }} replace></Navigate>
     }
     if (!user.emailVerified) {
-        return <div className='container text-center'>
-            <div className="card w-96 border border-dashed border-gray-400 mx-auto">
-                <div className="card-body py-5">
+        return <div className='container mx-auto text-center h-[85vh] flex items-center justify-center'>
+            <div className="card border border-dashed border-gray-400 mx-auto p-10">
+                <div className="card-body">
                     <p>Your email is not verified</p>
                     <p>Please verify your email</p>
                     <button className='resendBtn mt-3 text-blue-400' onClick={async () => {
@@ -27,7 +27,7 @@ const RequiredAuth = () => {
                     <small className='block mt-4' disabled={true}>Note: If you not get this email, <br /> please check your spam box</small>
                 </div>
             </div>
-            <Toaster position="top-center" reverseOrder={false} />
+            {/* <Toaster position="top-center" reverseOrder={false} /> */}
         </div>;
     }
     return children;

@@ -9,32 +9,36 @@ import { TiDeleteOutline } from 'react-icons/ti';
 import PageTitle from '../../Component/PageTitle/PageTitle';
 import addCategoryData from '../../Redux/Thunk/addCategoryData';
 import addBlogData from '../../Redux/Thunk/addBlogData';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../firebase.init';
 
 const AddBlog = () => {
     const dispatch = useDispatch();
     const editor = useRef(null);
+    const [user] = useAuthState(auth)
     const [content, setContent] = useState('');
     const [featuredImage, setFeaturedImage] = useState('')
     const resetFeaturedImageFile = useRef();
     const imageApi = 'ef367f576eca302d4916e3889c6e0cc6';
-    const today = new Date();
-    const todayDate = today.toLocaleDateString("en-US");
+    const date = new Date();
+    const options = { month: "short", day: "numeric", year: "numeric" };
     useEffect(() => {
         dispatch(loadCategoryData())
     }, [])
-   
+
     const handleAddBlog = (e) => {
         e.preventDefault();
         const blogTitle = e.target.blogTitle.value;
         const blogKeyword = e.target.blogKeyword.value;
         const blogCategory = e.target.blogCategory.value;
         const blogContent = {
+            userId: user.uid,
             blogTitle,
             content,
             blogKeyword,
             blogCategory,
             featuredImage,
-            date : todayDate
+            date: new Intl.DateTimeFormat("en-US", options).format(date)
         }
         console.log(blogContent)
         dispatch(addBlogData(blogContent))
@@ -90,7 +94,7 @@ const AddBlog = () => {
                             <input disabled className='border border-[#C7C9D1] px-4 py-1 w-full rounded-full outline-0' placeholder='Enter Keyword' type="text" name="blogKeyword" id="" />
                         </div>
                         <div className="blog__category w-full my-4">
-                        <p className='text-xl font-semibold mb-2'>Select Category</p>
+                            <p className='text-xl font-semibold mb-2'>Select Category</p>
                             <select className='py-1.5 w-full border border-[#C7C9D1] rounded-full outline-0' name="blogCategory" required>
                                 {
                                     category.map(data => <option key={data._id} value={data.categoryName}>{data.categoryName}</option>)
@@ -126,9 +130,9 @@ const AddBlog = () => {
                                 : ''
                         }
                     </div>
-                        <div className="blog__pubslish__btn my-3">
+                    <div className="blog__pubslish__btn my-3">
                         <button type='submit' className='bg-black text-white mt-3 px-5 py-2 hover:bg-white hover:text-black border border-black rounded-full duration-300'>Publish</button>
-                        </div>
+                    </div>
                 </form>
             </div>
         </div>

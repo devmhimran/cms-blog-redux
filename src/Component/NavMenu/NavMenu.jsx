@@ -10,12 +10,12 @@ const NavMenu = () => {
     const [open, setOpen] = useState(false);
     const [profileDropdown, setProfileDropdown] = useState(false);
     const [user] = useAuthState(auth);
-    const handleLogout = () =>{
+    const handleSignOut = () =>{
         signOut(auth);
     }
     console.log(user)
     return (
-        <div id='nav__menu' className="nav__menu py-5 border-b" onClick={()=>setProfileDropdown(!profileDropdown) }>
+        <div id='nav__menu' className="nav__menu py-5 border-b">
             <div className='container max-w-screen-xl lg:mx-auto lg:px-0  px-3'>
                 <div className="grid grid-cols-2 items-center">
                     <div className="logo">
@@ -60,7 +60,7 @@ const NavMenu = () => {
                                                                     <Link to='#'>Setting</Link>
                                                                 </li>
                                                                 <hr />
-                                                                <li className='mt-2' onClick={handleLogout}>Logout</li>
+                                                                <li className='mt-2' onClick={handleSignOut}>Logout</li>
                                                             </ul>
                                                         </div>
                                                     </> :

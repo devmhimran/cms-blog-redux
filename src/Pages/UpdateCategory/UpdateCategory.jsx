@@ -40,7 +40,6 @@ const UpdateCategory = () => {
                 toastify('error', 'Already Exists')
             }
         }
-
     }
 
     useEffect(() => {

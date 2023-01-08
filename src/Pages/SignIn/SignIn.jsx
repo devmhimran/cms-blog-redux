@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../firebase.init';
+import Loading from '../../Component/Loading/Loading';
 
 const SignIn = () => {
     const [
@@ -12,23 +13,27 @@ const SignIn = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
     let errorMessage;
-
-
-    if (error) {
-        errorMessage = error?.message
-    }
     const navigate = useNavigate();
     const location = useLocation();
-    let from = location.state?.from?.pathname || "/dashboard";
-    if (user) {
-        navigate(from, { replace: true });
-    }
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
         signInWithEmailAndPassword(email, password)
     }
+    if(loading){
+        return <Loading></Loading>
+    }
+    if (error) {
+        errorMessage = error?.message
+    }
+    
+    let from = location.state?.from?.pathname || "/dashboard";
+    if (user) {
+        navigate(from, { replace: true });
+    }
+    
     return (
         <div className='container mx-auto h-[90vh] flex justify-center items-center'>
             <div className="signin__form">

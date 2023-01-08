@@ -81,7 +81,7 @@ const SignUp = () => {
     if(user){
         navigate(from, {replace:true});
     }
-    console.log(user)
+    console.log(user, error)
 
     return (
         <div className='container mx-auto h-[90vh] flex justify-center items-center my-4'>
@@ -205,7 +205,7 @@ const SignUp = () => {
                             </div>
 
                             <div className="input__form pt-2.5">
-                                <span className='mb-2'>Already have account? <Link className='text-blue-600' to='/sign-up'>Sign in</Link> </span>
+                                <span className='mb-2'>Already have account? <Link className='text-blue-600' to='/sign-in'>Sign in</Link> </span>
                             </div>
                             <div className="input__form pt-2.5 flex items-center">
                                 <hr className='w-full' />
