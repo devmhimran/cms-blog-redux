@@ -2,9 +2,18 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { RiSearchLine } from 'react-icons/ri';
 import { RxHamburgerMenu, RxCross1 } from 'react-icons/rx';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../Pages/firebase.init';
+import { signOut } from 'firebase/auth';
 
 const NavMenu = () => {
     const [open, setOpen] = useState(false);
+    const [profileDropdown, setProfileDropdown] = useState(false);
+    const [user] = useAuthState(auth);
+    const handleLogout = () =>{
+        signOut(auth);
+    }
+    console.log(user)
     return (
         <div id='nav__menu' className="nav__menu py-5 border-b">
             <div className='container max-w-screen-xl lg:mx-auto lg:px-0  px-3'>
@@ -30,9 +39,44 @@ const NavMenu = () => {
                                     </div>
                                 </div>
                             </li>
-                            <li className='text-base font-medium lg:py-0 py-2'>
-                                <Link className='bg-black text-white px-5 py-2 hover:bg-white hover:text-black border border-black rounded-full duration-300' to='/sign-in'>Sign In</Link>
-                            </li>
+                            {
+                                user ?
+                                    <>
+                                        <li className='text-base font-medium lg:py-0 py-2 relative'>
+                                            <div className="profile__img border hover:border-black cursor-pointer rounded-full"
+                                                onClick={()=> setProfileDropdown(!profileDropdown)}
+                                            >
+                                                <img className='w-10 h-10 object-cover rounded-full m-0.5' src={user.photoURL} alt="" />
+                                            </div>
+                                            {
+                                                profileDropdown ?
+                                                    <>
+                                                        <div className="profile__dropdown rounded-lg shadow absolute top-[55px] bg-white py-2 px-4">
+                                                            <ul className='text-base syne'>
+                                                                <li className='mb-2'>
+                                                                    <Link to='/dashboard'>Dashboard</Link>
+                                                                </li>
+                                                                <li className='mb-2'>
+                                                                    <Link to='#'>Setting</Link>
+                                                                </li>
+                                                                <hr />
+                                                                <li className='mt-2' onClick={handleLogout}>Logout</li>
+                                                            </ul>
+                                                        </div>
+                                                    </> :
+                                                    ''
+
+                                            }
+
+                                        </li>
+                                    </>
+                                    :
+                                    <>
+                                        <li className='text-base font-medium lg:py-0 py-2'>
+                                            <Link className='bg-black text-white px-5 py-2 hover:bg-white hover:text-black border border-black rounded-full duration-300' to='/sign-in'>Sign In</Link>
+                                        </li>
+                                    </>
+                            }
                         </ul>
                     </div>
                     {/* navbar phone */}
