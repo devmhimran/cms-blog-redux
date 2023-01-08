@@ -8,8 +8,6 @@ import { deleteCategoryData } from '../../Redux/Thunk/deleteCategoryData';
 
 const CategoryTable = ({ data, index }) => {
     const { categoryName, _id } = data
-    // console.log(_id)
-
 
     const dispatch = useDispatch();
     const navigate = useNavigate();

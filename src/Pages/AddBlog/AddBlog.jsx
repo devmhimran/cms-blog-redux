@@ -40,7 +40,6 @@ const AddBlog = () => {
             featuredImage,
             date: new Intl.DateTimeFormat("en-US", options).format(date)
         }
-        console.log(blogContent)
         dispatch(addBlogData(blogContent))
     }
 
@@ -57,7 +56,6 @@ const AddBlog = () => {
             .then((result) => {
                 const featuredImage = result.data.image.url;
                 setFeaturedImage(featuredImage);
-                // console.log(logo)
             })
 
     }

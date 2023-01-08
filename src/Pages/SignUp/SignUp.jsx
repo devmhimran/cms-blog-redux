@@ -41,7 +41,6 @@ const SignUp = () => {
             .then((result) => {
                 const featuredImage = result.data.image.url;
                 setFeaturedImage(featuredImage);
-                // console.log(logo)
             })
 
     }
@@ -73,15 +72,11 @@ const SignUp = () => {
             confirmPassword,
             profileImage
         }
-
-
-        console.log(signUpForm, passwordError)
     }
     
     if(user){
         navigate(from, {replace:true});
     }
-    console.log(user, error)
 
     return (
         <div className='container mx-auto h-[90vh] flex justify-center items-center my-4'>

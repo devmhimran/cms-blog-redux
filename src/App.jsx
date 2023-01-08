@@ -24,7 +24,6 @@ import RequiredAuth from './Component/RequiredAuth/RequiredAuth'
 
 function App() {
   const history = useLocation()
-  console.log(history)
 
   return (
     <Provider store={store}>

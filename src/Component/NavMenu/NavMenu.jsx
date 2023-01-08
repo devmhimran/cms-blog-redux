@@ -13,7 +13,6 @@ const NavMenu = () => {
     const handleSignOut = () =>{
         signOut(auth);
     }
-    console.log(user)
     return (
         <div id='nav__menu' className="nav__menu py-5 border-b">
             <div className='container max-w-screen-xl lg:mx-auto lg:px-0  px-3'>

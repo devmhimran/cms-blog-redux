@@ -1,9 +1,33 @@
+import { ALL_POST, YOUR_POST } from "../actionTypes/actionTypes"
 
 
 export const initialState = {
-    test: "test"
+     dashboardFilter : {
+        allPost: true,
+        yourPost: false
+    }
 }
 
 export const filterReducer = (state = initialState, action) =>{
-    return state
+    switch(action.type){
+        case ALL_POST:
+            return {
+                ...state,
+                dashboardFilter:{
+                    ...state.dashboardFilter,
+                    allPost: true,
+                    yourPost: false
+                }
+            }
+        case YOUR_POST:
+            return {
+                ...state,
+                dashboardFilter:{
+                    ...state.dashboardFilter,
+                    allPost: false,
+                    yourPost: true
+                }
+            }
+            default : return state
+    }
 }
