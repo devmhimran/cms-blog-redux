@@ -29,40 +29,42 @@ function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        <NavMenu />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/loading" element={<Loading />} />
-          <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/forgot-password" element={<SignUp />} />
-          <Route path="dashboard" element={
-           
+        <div className="posthub__main">
+          <NavMenu />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/loading" element={<Loading />} />
+            <Route path="/sign-in" element={<SignIn />} />
+            <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/forgot-password" element={<SignUp />} />
+            <Route path="dashboard" element={
+
               <Dashboard />
-          
-          } >
-            <Route index element={<AllBlog />} />
-            <Route path='add-blog' index element={<AddBlog />} />
-            <Route path='add-category' element={<AddCategory />} />
-            <Route path='update-category/:id' element={<UpdateCategory />} />
-          </Route>
-          <Route path="*" element={<ErrorPage />} />
-        </Routes>
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
-        <Footer />
+
+            } >
+              <Route index element={<AllBlog />} />
+              <Route path='add-blog' index element={<AddBlog />} />
+              <Route path='add-category' element={<AddCategory />} />
+              <Route path='update-category/:id' element={<UpdateCategory />} />
+            </Route>
+            <Route path="*" element={<ErrorPage />} />
+          </Routes>
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
+          <Footer />
+        </div>
       </div>
     </Provider>
   )
