@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import loadBlogData from '../../Redux/Thunk/loadBlogData';
-import HomeBlog from './HomeBlog';
+import HomeBlog from '../../Component/HomeBlog/HomeBlog';
 
 const Home = () => {
     const dispatch = useDispatch();

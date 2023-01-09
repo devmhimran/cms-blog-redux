@@ -5,6 +5,7 @@ import { RxHamburgerMenu, RxCross1 } from 'react-icons/rx';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../Pages/firebase.init';
 import { signOut } from 'firebase/auth';
+import FlagIcon from '../FlagIcon/FlagIcon';
 
 const NavMenu = () => {
     const [open, setOpen] = useState(false);
@@ -38,6 +39,7 @@ const NavMenu = () => {
                                     </div>
                                 </div>
                             </li>
+                            <li><FlagIcon width={'w-7'} /></li>
                             {
                                 user ?
                                     <>
