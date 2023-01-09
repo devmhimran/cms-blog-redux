@@ -128,7 +128,7 @@ const AddBlog = () => {
                                 : ''
                         }
                     </div>
-                    <div className="blog__pubslish__btn my-3">
+                    <div className="blog__publish__btn my-3">
                         <button type='submit' className='bg-black text-white mt-3 px-5 py-2 hover:bg-white hover:text-black border border-black rounded-full duration-300'>Publish</button>
                     </div>
                 </form>
