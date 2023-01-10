@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import loadBlogData from '../../Redux/Thunk/loadBlogData';
 import HomeBlog from '../../Component/HomeBlog/HomeBlog';
+import HomeCategory from '../../Component/HomeCategory/HomeCategory';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const Home = () => {
     return (
         <div className='container max-w-screen-xl lg:mx-auto lg:px-0 px-3 py-20'>
             <h1 className='syne text-5xl font-bold'>Home</h1>
+            <HomeCategory/>
             <div className="postHub__blog">
                 <div className="grid grid-cols-3 gap-5">
                     {
