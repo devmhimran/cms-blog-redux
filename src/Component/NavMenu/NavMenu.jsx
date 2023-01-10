@@ -52,7 +52,7 @@ const NavMenu = () => {
                                             {
                                                 profileDropdown ?
                                                     <>
-                                                        <div className="profile__dropdown rounded-lg shadow absolute top-[55px] bg-white py-2 px-4">
+                                                        <div className="profile__dropdown rounded-lg shadow absolute top-[55px] z-10 bg-white py-2 px-4">
                                                             <ul className='text-base syne'>
                                                                 <li className='mb-2'>
                                                                     <Link to='/dashboard'>Dashboard</Link>
