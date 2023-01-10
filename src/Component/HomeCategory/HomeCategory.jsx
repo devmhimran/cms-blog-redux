@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
+import { useDispatch, useSelector } from 'react-redux';
+import loadCategoryData from '../../Redux/Thunk/loadCategoryData';
 
 const HomeCategory = () => {
+    const dispatch = useDispatch();
+    const category = useSelector(state => state.blog.category)
+    useEffect(()=>{
+        dispatch(loadCategoryData())
+    },[])
+    console.log(category)
     return (
         <div>
             <Swiper
@@ -14,14 +22,9 @@ const HomeCategory = () => {
                 onSlideChange={() => console.log('slide change')}
                 onSwiper={(swiper) => console.log(swiper)}
             >
-                <SwiperSlide className='border border-black px-3 p-1'>Slide 1</SwiperSlide>
-                <SwiperSlide className='border border-black px-3 p-1'>Slide 2</SwiperSlide>
-                <SwiperSlide className='border border-black px-3 p-1'>Slide 3</SwiperSlide>
-                <SwiperSlide className='border border-black px-3 p-1'>Slide 4</SwiperSlide>
-                <SwiperSlide className='border border-black px-3 p-1'>Slide 5</SwiperSlide>
-                <SwiperSlide className='border border-black px-3 p-1'>Slide 6</SwiperSlide>
-                <SwiperSlide className='border border-black px-3 p-1'>Slide 7</SwiperSlide>
-                <SwiperSlide className='border border-black px-3 p-1'>Slide 8</SwiperSlide>
+                {
+                    category.map(data => <SwiperSlide key={data._id} className='bg-gray-300 px-3 p-1 syne'>{data.categoryName}</SwiperSlide>)
+                }
             </Swiper>
         </div>
     );
