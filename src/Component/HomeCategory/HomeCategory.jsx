@@ -26,7 +26,7 @@ const HomeCategory = () => {
                 onSwiper={(swiper) => console.log(swiper)}
             >
                 {
-                    category.map(data => <SwiperSlide key={data._id} className='bg-gray-100 p-2 rounded-lg inter text-base font-normal text-center'>{data.categoryName}</SwiperSlide>)
+                    category.map(data => <SwiperSlide key={data._id} className='bg-gray-100 p-2 rounded-lg inter text-base hover:bg-gray-200 font-normal text-center'>{data.categoryName}</SwiperSlide>)
                 }
             </Swiper>
         </div>
