@@ -71,3 +71,7 @@
   background-color: #fff;
   border-radius: 50%;
 }
+.flag__path:hover{
+  fill: red;
+  border-color: red;
+}
