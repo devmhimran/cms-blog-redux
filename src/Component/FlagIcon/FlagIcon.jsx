@@ -1,7 +1,6 @@
 import React from 'react';
 
 const FlagIcon = ({width, fill}) => {
-    console.log(fill)
     return (
         <div className=' '>
             <svg stroke="currentColor" className={`${width}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">

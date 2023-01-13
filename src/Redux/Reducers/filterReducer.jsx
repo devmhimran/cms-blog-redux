@@ -1,19 +1,22 @@
-import { ALL_POST, YOUR_POST } from "../actionTypes/actionTypes"
+import { ALL_POST, FILTER_CATEGORY, YOUR_POST } from "../actionTypes/actionTypes"
 
 
 export const initialState = {
-     dashboardFilter : {
+    dashboardFilter: {
         allPost: true,
-        yourPost: false
+        yourPost: false,
+    },
+    homePageFilter:{
+        filterCategory: ''
     }
 }
 
-export const filterReducer = (state = initialState, action) =>{
-    switch(action.type){
+export const filterReducer = (state = initialState, action) => {
+    switch (action.type) {
         case ALL_POST:
             return {
                 ...state,
-                dashboardFilter:{
+                dashboardFilter: {
                     ...state.dashboardFilter,
                     allPost: true,
                     yourPost: false
@@ -22,12 +25,20 @@ export const filterReducer = (state = initialState, action) =>{
         case YOUR_POST:
             return {
                 ...state,
-                dashboardFilter:{
+                dashboardFilter: {
                     ...state.dashboardFilter,
                     allPost: false,
                     yourPost: true
                 }
             }
-            default : return state
+        case FILTER_CATEGORY:
+            return{
+                ...state,
+                homePageFilter:{
+                    ...state.homePageFilter,
+                    filterCategory: action.payload
+                }
+            }
+            default: return state
     }
 }

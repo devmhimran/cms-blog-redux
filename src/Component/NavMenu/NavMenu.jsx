@@ -22,7 +22,7 @@ const NavMenu = () => {
                         <Link className='syne font-extrabold text-xl md:text-2xl lg:text-4xl' to='/'>Post Hub</Link>
                     </div>
                     {/* navbar desktop */}
-                    <div className={`navbar__desktop lg:block lg:static absolute lg:top-0 bg-white w-full left-0 lg:p-0 p-4 lg:border-0 border lg:duration-75 duration-500 ease-in 
+                    <div className={`navbar__desktop lg:block lg:static absolute z-10 lg:top-0 bg-white w-full left-0 lg:p-0 p-4 lg:border-0 border lg:duration-75 duration-500 ease-in 
                     ${open ? 'top-[8%]' : 'top-[-550px]'}`}>
                         <ul className='inter block lg:flex items-center gap-6 justify-end'>
                             <li className='text-lg font-medium hover:text-[#2304FB] lg:my-0 my-2'><Link to='/'>Home</Link></li>

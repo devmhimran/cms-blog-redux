@@ -7,14 +7,21 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import { filterCategory } from '../../Redux/actionCreators/categoryActionCreators';
 
 const HomeCategory = () => {
     const dispatch = useDispatch();
     const category = useSelector(state => state.blog.category)
+    const categorySelected = useSelector(state => state.filter.homePageFilter.filterCategory)
     useEffect(() => {
         dispatch(loadCategoryData())
     }, [])
-    console.log(category)
+    const handleSelectCategory = (data) =>{
+        dispatch(filterCategory(data))
+    }
+    console.log(categorySelected)
+    const categoryClass = 'bg-gray-100 hover:bg-gray-200';
+    const categoryActive = 'bg-black text-white'
     return (
         <div>
             <Swiper
@@ -26,7 +33,7 @@ const HomeCategory = () => {
                 onSwiper={(swiper) => console.log(swiper)}
             >
                 {
-                    category.map(data => <SwiperSlide key={data._id} className='bg-gray-100 p-2 rounded-lg inter text-base hover:bg-gray-200 font-normal text-center'>{data.categoryName}</SwiperSlide>)
+                    category.map(data => <SwiperSlide key={data._id} onClick={()=>handleSelectCategory(data.categoryName)} className={`${data.categoryName.includes(categorySelected) ? categoryActive : categoryClass} p-2 rounded-lg inter text-base font-normal text-center cursor-pointer`}>{data.categoryName}</SwiperSlide>)
                 }
             </Swiper>
         </div>
