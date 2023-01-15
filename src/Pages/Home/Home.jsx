@@ -11,6 +11,7 @@ const Home = () => {
     }, [])
     const { blog } = useSelector(state => state.blog)
     console.log(blog)
+    // const {}
     return (
         <div className='container max-w-screen-xl lg:mx-auto lg:px-0 px-3 pb-20'>
             <div className='py-8'>
