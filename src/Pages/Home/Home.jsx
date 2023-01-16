@@ -34,7 +34,11 @@ const Home = () => {
             .map(data => <HomeBlog key={data._id} data={data} />)
     }
     if (blogFilter.length === 0 && homePageFilter.allPost === false) {
-        content = <><h1>No Data Yet</h1></>
+        content = <>
+            <div className='h-[65vh]'>
+                <h1 className='font-bold text-5xl text-gray-500 mt-16'>No Data Yet</h1>
+            </div>
+        </>
     }
     return (
         <div className='container max-w-screen-xl lg:mx-auto lg:px-0 px-3 pb-20'>
