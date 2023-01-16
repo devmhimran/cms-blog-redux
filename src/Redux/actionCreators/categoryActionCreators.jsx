@@ -1,4 +1,4 @@
-import { ADD_BLOG, ADD_CATEGORY, DELETE_BLOG, DELETE_CATEGORY, FILTER_CATEGORY, LOAD_BLOG, LOAD_CATEGORY, LOAD_SINGLE_CATEGORY, UPDATE_CATEGORY } from "../actionTypes/actionTypes"
+import { ADD_BLOG, ADD_CATEGORY, DELETE_BLOG, DELETE_CATEGORY, FILTER_CATEGORY, HOME_ALL_POST, LOAD_BLOG, LOAD_CATEGORY, LOAD_SINGLE_CATEGORY, UPDATE_CATEGORY } from "../actionTypes/actionTypes"
 
 
 export const addCategory = (data) => {
@@ -50,9 +50,15 @@ export const deleteBlog = (data) => {
     }
 }
 
-export const filterCategory = (data) => {
+export const categoryFilter = (data) => {
     return {
         type: FILTER_CATEGORY,
         payload: data
+    }
+}
+
+export const homeAllPost = () =>{
+    return {
+        type: HOME_ALL_POST
     }
 }

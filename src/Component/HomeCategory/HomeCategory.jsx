@@ -7,19 +7,19 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import { filterCategory } from '../../Redux/actionCreators/categoryActionCreators';
+import { categoryFilter, homeAllPost } from '../../Redux/actionCreators/categoryActionCreators';
 
 const HomeCategory = () => {
     const dispatch = useDispatch();
     const category = useSelector(state => state.blog.category)
-    const categorySelected = useSelector(state => state.filter.homePageFilter.filterCategory)
+    const {filterCategory, allPost} = useSelector(state => state.filter.homePageFilter)
     useEffect(() => {
         dispatch(loadCategoryData())
     }, [])
     const handleSelectCategory = (data) => {
-        dispatch(filterCategory(data))
+        dispatch(categoryFilter(data))
     }
-    console.log(categorySelected)
+    // console.log(filterCategory)
     const categoryClass = 'bg-gray-100 hover:bg-gray-200';
     const categoryActive = 'bg-black text-white'
     return (
@@ -32,9 +32,9 @@ const HomeCategory = () => {
                 onSlideChange={() => console.log('slide change')}
                 onSwiper={(swiper) => console.log(swiper)}
             >
-                <SwiperSlide onClick={() => handleSelectCategory('All Post')} className={`${ categorySelected && categorySelected === 'All Post' ? categoryActive : categoryClass} p-2 rounded-lg inter text-base font-normal text-center cursor-pointer`}>All Post</SwiperSlide>
+                <SwiperSlide onClick={() => dispatch(homeAllPost())} className={`${ allPost ? categoryActive : categoryClass} p-2 rounded-lg inter text-base font-normal text-center cursor-pointer`}>All Post</SwiperSlide>
                 {
-                    category.map(data => <SwiperSlide key={data._id} onClick={() => handleSelectCategory(data.categoryName)} className={`${categorySelected && data.categoryName.includes(categorySelected) ? categoryActive : categoryClass} p-2 rounded-lg inter text-base font-normal text-center cursor-pointer`}>{data.categoryName}</SwiperSlide>)
+                    category.map(data => <SwiperSlide key={data._id} onClick={() => handleSelectCategory(data.categoryName)} className={`${filterCategory && data.categoryName.includes(filterCategory) ? categoryActive : categoryClass} p-2 rounded-lg inter text-base font-normal text-center cursor-pointer`}>{data.categoryName}</SwiperSlide>)
                 }
             </Swiper>
         </div>

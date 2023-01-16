@@ -1,4 +1,4 @@
-import { ALL_POST, FILTER_CATEGORY, YOUR_POST } from "../actionTypes/actionTypes"
+import { ALL_POST, FILTER_CATEGORY, HOME_ALL_POST, YOUR_POST } from "../actionTypes/actionTypes"
 
 
 export const initialState = {
@@ -6,8 +6,9 @@ export const initialState = {
         allPost: true,
         yourPost: false,
     },
-    homePageFilter:{
-        filterCategory: ''
+    homePageFilter: {
+        filterCategory: '',
+        allPost: false
     }
 }
 
@@ -32,11 +33,21 @@ export const filterReducer = (state = initialState, action) => {
                 }
             }
         case FILTER_CATEGORY:
-            return{
+            return {
+                ...state,
+                homePageFilter: {
+                    ...state.homePageFilter,
+                    filterCategory: action.payload,
+                    allPost: false
+                }
+            }
+        case HOME_ALL_POST:
+            return {
                 ...state,
                 homePageFilter:{
                     ...state.homePageFilter,
-                    filterCategory: action.payload
+                    filterCategory: '',
+                    allPost: true
                 }
             }
             default: return state
