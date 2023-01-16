@@ -5,7 +5,7 @@ import { RxHamburgerMenu, RxCross1 } from 'react-icons/rx';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../Pages/firebase.init';
 import { signOut } from 'firebase/auth';
-import FlagIcon from '../FlagIcon/FlagIcon';
+import { BiBookmark } from 'react-icons/bi';
 
 const NavMenu = () => {
     const [open, setOpen] = useState(false);
@@ -25,26 +25,26 @@ const NavMenu = () => {
                     <div className={`navbar__desktop lg:block lg:static absolute z-10 lg:top-0 bg-white w-full left-0 lg:p-0 p-4 lg:border-0 border lg:duration-75 duration-500 ease-in 
                     ${open ? 'top-[8%]' : 'top-[-550px]'}`}>
                         <ul className='inter block lg:flex items-center gap-6 justify-end'>
-                            <li className='text-lg font-medium hover:text-[#2304FB] lg:my-0 my-2'><Link to='/'>Home</Link></li>
+                            {/* <li className='text-lg font-medium hover:text-[#2304FB] lg:my-0 my-2'><Link to='/'>Home</Link></li>
                             <li className='text-lg font-medium hover:text-[#2304FB] lg:my-0 my-2'><Link to='/about'>About</Link></li>
-                            <li className='text-lg font-medium hover:text-[#2304FB] lg:my-0 my-2'><Link to='/contact'>Contact</Link></li>
-                            <li className='lg:my-0 my-2'>
+                            <li className='text-lg font-medium hover:text-[#2304FB] lg:my-0 my-2'><Link to='/contact'>Contact</Link></li> */}
+                            <li className='lg:my-0 my-2 w-8/12'>
                                 <div className='search__box'>
                                     <div className="relative block border border-[#C7C9D1] rounded-full">
                                         <span className="sr-only">Search</span>
                                         <span className="absolute inset-y-0 left-0 flex items-center pl-2">
                                             <RiSearchLine className='h-3.5 w-3.5 fill-black' />
                                         </span>
-                                        <input className='placeholder:text-black border border-0 pl-9 pr-3 rounded-full py-1 w-48 outline-0 text-base' placeholder="Search" type="text" name="search" />
+                                        <input className='placeholder:text-black border border-0 pl-9 pr-3 rounded-full py-1 w-full outline-0 text-base' placeholder="Search" type="text" name="search" />
                                     </div>
                                 </div>
                             </li>
-                            <li><FlagIcon width={'w-7'} /></li>
+                            <li><BiBookmark className='text-2xl' /></li>
                             {
                                 user ?
                                     <>
                                         <li className='text-base font-medium lg:py-0 py-2 relative'>
-                                            <div className="profile__img border hover:border-black cursor-pointer rounded-full"
+                                            <div className="profile__img border w-[46px] hover:border-black cursor-pointer rounded-full"
                                                 onClick={()=> setProfileDropdown(!profileDropdown)}
                                             >
                                                 <img className='w-10 h-10 object-cover rounded-full m-0.5' src={user.photoURL} alt="" />

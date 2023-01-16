@@ -19,7 +19,7 @@ const Home = () => {
         content = blog.map(data => <HomeBlog key={data._id} data={data} />)
     }
     if (blog.length && homePageFilter.allPost) {
-        content = blog.map(data => <HomeBlog key={data._id} data={data} />)
+        content = blog.reverse().map(data => <HomeBlog key={data._id} data={data} />)
     }
     const blogFilter = blog.filter(data => data.blogCategory === homePageFilter.filterCategory)
     console.log(blogFilter)
@@ -31,12 +31,12 @@ const Home = () => {
             }
             return data
         })
-            .map(data => <HomeBlog key={data._id} data={data} />)
+            .reverse().map(data => <HomeBlog key={data._id} data={data} />)
     }
     if (blogFilter.length === 0 && homePageFilter.allPost === false) {
         content = <>
             <div className='h-[65vh]'>
-                <h1 className='font-bold text-5xl text-gray-500 mt-16'>No Data Yet</h1>
+                <h1 className='font-bold text-5xl text-gray-500 mt-16'>No Blog Post Yet</h1>
             </div>
         </>
     }
