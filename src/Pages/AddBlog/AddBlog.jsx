@@ -41,6 +41,9 @@ const AddBlog = () => {
             date: new Intl.DateTimeFormat("en-US", options).format(date)
         }
         dispatch(addBlogData(blogContent))
+        setContent('')
+        setFeaturedImage('')
+        e.target.reset();
     }
 
     const handleFeaturedImage = (e) => {
@@ -57,7 +60,7 @@ const AddBlog = () => {
                 const featuredImage = result.data.image.url;
                 setFeaturedImage(featuredImage);
             })
-
+            e.target.reset();
     }
     const handleFeaturedImagePreviewClear = () => {
         setFeaturedImage('')
@@ -65,7 +68,8 @@ const AddBlog = () => {
     }
 
     const { category } = useSelector(state => state.blog)
-
+    const btnClass = 'bg-black text-white hover:bg-white hover:text-black border border-black ';
+    const btnDisable = 'bg-gray-300 text-gray-600'
 
     return (
         <div>
@@ -129,7 +133,7 @@ const AddBlog = () => {
                         }
                     </div>
                     <div className="blog__publish__btn my-3">
-                        <button type='submit' className='bg-black text-white mt-3 px-5 py-2 hover:bg-white hover:text-black border border-black rounded-full duration-300'>Publish</button>
+                        <button disabled={featuredImage ? false : true} type='submit' className={`${featuredImage ? btnClass : btnDisable}  rounded-full duration-300 mt-3 px-5 py-2`}>Publish</button>
                     </div>
                 </form>
             </div>

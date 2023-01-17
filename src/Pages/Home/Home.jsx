@@ -14,25 +14,28 @@ const Home = () => {
     }, [])
     const { blog } = useSelector(state => state.blog)
     const { homePageFilter } = useSelector(state => state.filter)
-    console.log(!homePageFilter.filterCategory)
+
+    // console.log(homePageFilter.allPost)
+
     if (blog.length) {
-        content = blog.map(data => <HomeBlog key={data._id} data={data} />)
+        content = [...blog].reverse().map(data => <HomeBlog key={data._id} data={data} />)
+        console.log(content)
     }
     if (blog.length && homePageFilter.allPost) {
-        content = blog.reverse().map(data => <HomeBlog key={data._id} data={data} />)
+        content = [...blog].reverse().map(data => <HomeBlog key={data._id} data={data} />)
     }
     const blogFilter = blog.filter(data => data.blogCategory === homePageFilter.filterCategory)
-    console.log(blogFilter)
 
-    if (blog.length && homePageFilter.filterCategory) {
-        content = blog.filter(data => {
-            if (data) {
-                return data.blogCategory === homePageFilter.filterCategory
-            }
-            return data
-        })
-            .reverse().map(data => <HomeBlog key={data._id} data={data} />)
-    }
+
+    // if (blog.length && homePageFilter.filterCategory) {
+    //     content = blog.filter(data => {
+    //         if (data) {
+    //             return data.blogCategory === homePageFilter.filterCategory
+    //         }
+    //         return data
+    //     })
+    //     .reverse().map(data => <HomeBlog key={data._id} data={data} />)
+    // }
     if (blogFilter.length === 0 && homePageFilter.allPost === false) {
         content = <>
             <div className='h-[65vh]'>
