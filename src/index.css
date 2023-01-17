@@ -75,3 +75,6 @@
   fill: red;
   border-color: red;
 }
+.lazy-load-image-loaded{
+  width: 100%;
+}

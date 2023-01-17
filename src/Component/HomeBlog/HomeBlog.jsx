@@ -1,13 +1,21 @@
 import React from 'react';
 import FlagIcon from '../FlagIcon/FlagIcon';
 import { BiBookmark } from 'react-icons/bi';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const HomeBlog = ({ data }) => {
     const { blogTitle, featuredImage, content, blogCategory, date } = data
     return (
         <div className="card border relative h-[465px] rounded-3xl hover:shadow duration-300">
             <div className="card-body p-3">
-                <img className='w-full h-72 object-cover rounded-2xl' src={featuredImage} alt={blogTitle} />
+            <LazyLoadImage
+                src={featuredImage} 
+                alt={blogTitle}
+                effect="blur"
+                
+                className='w-full h-72 object-cover rounded-2xl'
+             loading='eager'
+            />
                 <div className="blog__date mt-1">
                     <p className='text-gray-500'>Posted on: {date}</p>
                 </div>

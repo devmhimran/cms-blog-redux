@@ -4,6 +4,7 @@ import loadBlogData from '../../Redux/Thunk/loadBlogData';
 import HomeBlog from '../../Component/HomeBlog/HomeBlog';
 import HomeCategory from '../../Component/HomeCategory/HomeCategory';
 import { homeAllPost } from '../../Redux/actionCreators/categoryActionCreators';
+import { HiOutlineArrowLongLeft, HiOutlineArrowLongRight } from 'react-icons/hi2';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -14,7 +15,7 @@ const Home = () => {
     }, [])
     const { blog } = useSelector(state => state.blog)
     const { homePageFilter } = useSelector(state => state.filter)
-
+    const paginationActive = 'bg-black text-white'
     // console.log(homePageFilter.allPost)
 
     if (blog.length) {
@@ -27,15 +28,15 @@ const Home = () => {
     const blogFilter = blog.filter(data => data.blogCategory === homePageFilter.filterCategory)
 
 
-    // if (blog.length && homePageFilter.filterCategory) {
-    //     content = blog.filter(data => {
-    //         if (data) {
-    //             return data.blogCategory === homePageFilter.filterCategory
-    //         }
-    //         return data
-    //     })
-    //     .reverse().map(data => <HomeBlog key={data._id} data={data} />)
-    // }
+    if (blog.length && homePageFilter.filterCategory) {
+        content = blog.filter(data => {
+            if (data) {
+                return data.blogCategory === homePageFilter.filterCategory
+            }
+            return data
+        })
+        .reverse().map(data => <HomeBlog key={data._id} data={data} />)
+    }
     if (blogFilter.length === 0 && homePageFilter.allPost === false) {
         content = <>
             <div className='h-[65vh]'>
@@ -54,6 +55,11 @@ const Home = () => {
                         content
                     }
                 </div>
+            </div>
+            <div className="pagination flex justify-between pt-16">
+                <button className=' py-1.5 px-4 border text-lg rounded-full flex items-center gap-2'><span><HiOutlineArrowLongLeft/></span> Previous</button>
+                <p>1/4</p>
+                <button className='bg-black text-white py-1.5 px-4 border text-lg rounded-full flex items-center gap-2'>Next <span><HiOutlineArrowLongRight/></span> </button>
             </div>
         </div>
     );
