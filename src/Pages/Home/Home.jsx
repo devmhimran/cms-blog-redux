@@ -4,7 +4,8 @@ import loadBlogData from '../../Redux/Thunk/loadBlogData';
 import HomeBlog from '../../Component/HomeBlog/HomeBlog';
 import HomeCategory from '../../Component/HomeCategory/HomeCategory';
 import { homeAllPost } from '../../Redux/actionCreators/categoryActionCreators';
-import { HiOutlineArrowLongLeft, HiOutlineArrowLongRight } from 'react-icons/hi2';
+
+import Pagination from '../../Component/Pagination/Pagination';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -56,11 +57,7 @@ const Home = () => {
                     }
                 </div>
             </div>
-            <div className="pagination flex justify-between pt-16">
-                <button className=' py-1.5 px-4 border text-lg rounded-full flex items-center gap-2'><span><HiOutlineArrowLongLeft/></span> Previous</button>
-                <p>1/4</p>
-                <button className='bg-black text-white py-1.5 px-4 border text-lg rounded-full flex items-center gap-2'>Next <span><HiOutlineArrowLongRight/></span> </button>
-            </div>
+            <Pagination/>
         </div>
     );
 };
