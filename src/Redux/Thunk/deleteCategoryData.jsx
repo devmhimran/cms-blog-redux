@@ -1,4 +1,4 @@
-import { deleteCategory } from "../actionCreators/categoryActionCreators"
+import { deleteCategory } from "../actionCreators/actionCreators"
 
 
 export const deleteCategoryData = (id) => {

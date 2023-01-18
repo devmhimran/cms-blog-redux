@@ -2,7 +2,7 @@ import React from 'react';
 import { VscLinkExternal } from 'react-icons/vsc';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
-import { deleteCategory, updateCategory } from '../../Redux/actionCreators/categoryActionCreators';
+import { deleteCategory, updateCategory } from '../../Redux/actionCreators/actionCreators';
 import { Link, useNavigate } from 'react-router-dom';
 import { deleteCategoryData } from '../../Redux/Thunk/deleteCategoryData';
 

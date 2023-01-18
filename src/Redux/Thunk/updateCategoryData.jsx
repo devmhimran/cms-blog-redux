@@ -1,5 +1,5 @@
 import toastify from "../../Component/Toastify/Toastify";
-import { updateCategory } from "../actionCreators/categoryActionCreators";
+import { updateCategory } from "../actionCreators/actionCreators";
 
 
 const updateCategoryData = (id, category) => {

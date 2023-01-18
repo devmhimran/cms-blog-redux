@@ -1,4 +1,4 @@
-import { deleteBlog } from "../actionCreators/categoryActionCreators"
+import { deleteBlog } from "../actionCreators/actionCreators"
 
 
 const deleteBlogData = (id) => {

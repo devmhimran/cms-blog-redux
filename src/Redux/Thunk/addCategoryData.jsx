@@ -1,5 +1,5 @@
 import toastify from "../../Component/Toastify/Toastify";
-import { addCategory } from "../actionCreators/categoryActionCreators";
+import { addCategory } from "../actionCreators/actionCreators";
 
 
 

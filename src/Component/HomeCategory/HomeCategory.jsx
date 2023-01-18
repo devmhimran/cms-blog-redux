@@ -9,7 +9,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import 'swiper/css/autoplay';
 
-import { categoryFilter, homeAllPost } from '../../Redux/actionCreators/categoryActionCreators';
+import { categoryFilter, homeAllPost } from '../../Redux/actionCreators/actionCreators';
 
 const HomeCategory = () => {
     const dispatch = useDispatch();

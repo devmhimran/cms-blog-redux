@@ -1,5 +1,5 @@
 import toastify from "../../Component/Toastify/Toastify";
-import { addBlog } from "../actionCreators/categoryActionCreators";
+import { addBlog } from "../actionCreators/actionCreators";
 
 
 const addBlogData = (blog) => {

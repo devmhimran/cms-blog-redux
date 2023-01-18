@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import loadBlogData from '../../Redux/Thunk/loadBlogData';
 import HomeBlog from '../../Component/HomeBlog/HomeBlog';
 import HomeCategory from '../../Component/HomeCategory/HomeCategory';
-import { homeAllPost } from '../../Redux/actionCreators/categoryActionCreators';
+import { homeAllPost } from '../../Redux/actionCreators/actionCreators';
 
 import Pagination from '../../Component/Pagination/Pagination';
 

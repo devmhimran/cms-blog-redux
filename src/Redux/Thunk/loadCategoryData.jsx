@@ -1,4 +1,4 @@
-import { loadCategory } from "../actionCreators/categoryActionCreators"
+import { loadCategory } from "../actionCreators/actionCreators"
 
 
 const loadCategoryData = () =>{
