@@ -14,7 +14,7 @@ const Pagination = () => {
             .then(res => res.json())
             .then(data => {
                 const count = data.count
-                const pages = Math.ceil(count / 9)
+                const pages = Math.ceil(count / 6)
                 setPageCount(pages)
             })
     }, [])

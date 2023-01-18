@@ -9,11 +9,15 @@ import Pagination from '../../Component/Pagination/Pagination';
 
 const Home = () => {
     const dispatch = useDispatch();
+    const { pageNum } = useSelector(state => state.blog)
     let content;
     useEffect(() => {
         dispatch(loadBlogData())
+   
+    }, [pageNum])
+    useEffect(()=>{
         dispatch(homeAllPost())
-    }, [])
+    },[])
     const { blog } = useSelector(state => state.blog)
     const { homePageFilter } = useSelector(state => state.filter)
     const paginationActive = 'bg-black text-white'
