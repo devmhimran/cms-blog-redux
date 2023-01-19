@@ -22,6 +22,7 @@ import Footer from './Component/Footer/Footer'
 import RequiredAuth from './Component/RequiredAuth/RequiredAuth'
 import YourBlog from './Pages/YourBlog/YourBlog'
 import UpdateBlog from './Pages/UpdateBlog/UpdateBlog'
+import SingleBlog from './Pages/SingleBlog/SingleBlog'
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <NavMenu />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/blog/:id" element={<SingleBlog />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/loading" element={<Loading />} />
