@@ -20,7 +20,7 @@ const YourBlog = () => {
         dispatch(loadBlogData())
     }, [dispatch])
 
-
+console.log(user)
 
     if (blog.length) {
         content = [...blog].reverse().filter(post =>  post.userId === user.uid).map((data, index) => <BlogTable key={data._id} index={index} data={data} />)

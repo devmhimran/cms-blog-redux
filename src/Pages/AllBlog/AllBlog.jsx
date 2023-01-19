@@ -20,7 +20,7 @@ const AllBlog = () => {
 
     useEffect(() => {
         dispatch(loadBlogData())
-    }, [pageNum])
+    }, [dispatch && pageNum])
 
     // if (yourPost) {
     //     content = blog.filter(post =>  post.userId === user.uid).map((data, index) => <BlogTable key={data._id} index={index} data={data} />)

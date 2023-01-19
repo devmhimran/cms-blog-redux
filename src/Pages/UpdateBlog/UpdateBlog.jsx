@@ -7,6 +7,7 @@ import auth from '../firebase.init';
 import PageTitle from '../../Component/PageTitle/PageTitle';
 import SidebarHeading from '../../Component/SidebarHeading/SidebarHeading';
 import loadCategoryData from '../../Redux/Thunk/loadCategoryData';
+import { TiDeleteOutline } from 'react-icons/ti';
 
 const UpdateBlog = () => {
     const { id } = useParams();
@@ -16,6 +17,8 @@ const UpdateBlog = () => {
     const [blog, setBlog] = useState([]);
     const [content, setContent] = useState('');
     const [featuredImage, setFeaturedImage] = useState('')
+    // const [previousFeaturedImage, setPreviousFeaturedImage] = useState('');
+    // setFeaturedImage(blog.featuredImage)
     const resetFeaturedImageFile = useRef();
     const imageApi = 'ef367f576eca302d4916e3889c6e0cc6';
     const date = new Date();
@@ -60,8 +63,11 @@ const UpdateBlog = () => {
     const handleUpdateBlog = (e) => {
 
     }
-
-    console.log(content)
+    // setPreviousFeaturedImage(blog.featuredImage)
+    // const handlePreviousFeaturedImage = () =>{
+    //     setPreviousFeaturedImage('')
+    // }
+    console.log(blog.blogCategory)
     return (
         <div>
             <PageTitle title='Update Blog' />
@@ -77,8 +83,9 @@ const UpdateBlog = () => {
                         <JoditEditor
                             className='p-4'
                             ref={editor}
-                            value={content}
+                            value={blog.content}
                             onChange={newContent => setContent(newContent)}
+                            // defaultValue={blog.content}
                         />
                     </div>
                     <div className='flex gap-3 items-center'>
@@ -90,7 +97,7 @@ const UpdateBlog = () => {
                             <p className='text-xl font-semibold mb-2'>Select Category</p>
                             <select className='py-1.5 w-full border border-[#C7C9D1] rounded-full outline-0' name="blogCategory" required>
                                 {
-                                    category.map(data => <option key={data._id} value={data.categoryName}>{data.categoryName}</option>)
+                                    category.map(data => <option selected={ data.categoryName === blog.blogCategory ? true : false} key={data._id} defaultValue={data.categoryName}>{data.categoryName}</option>)
                                 }
                             </select>
                         </div>
@@ -120,11 +127,18 @@ const UpdateBlog = () => {
                                         </span>
                                     </div>
                                 </>
-                                : ''
+                                : <>
+                                <div className="featured__image relative w-fit">
+                                    <img className='w-64 mt-4' src={blog.featuredImage} alt="" />
+                                    <span className='absolute top-[-5px] right-[-7px] cursor-pointer bg-white rounded-full' onClick={handleFeaturedImagePreviewClear}>
+                                        {/* <TiDeleteOutline className='text-2xl text-gray-600' /> */}
+                                    </span>
+                                </div>
+                            </>
                         }
                     </div>
                     <div className="blog__publish__btn my-3">
-                        <button disabled={featuredImage ? false : true} type='submit' className={`${featuredImage ? btnClass : btnDisable}  rounded-full duration-300 mt-3 px-5 py-2`}>Publish</button>
+                        <button type='submit' className={`${btnClass}  rounded-full duration-300 mt-3 px-5 py-2`}>Publish</button>
                     </div>
                 </form>
             </div>
