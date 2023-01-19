@@ -12,8 +12,8 @@ const Home = () => {
     let content;
     useEffect(() => {
         dispatch(homeBlogData())
-   
     }, [dispatch])
+    
     useEffect(()=>{
         dispatch(homeAllPost())
     },[])

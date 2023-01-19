@@ -1,4 +1,4 @@
-import { ADD_BLOG, ADD_CATEGORY, DELETE_BLOG, DELETE_CATEGORY, FILTER_CATEGORY, HOME_ALL_POST, HOME_BLOG, LOAD_BLOG, LOAD_CATEGORY, LOAD_SINGLE_CATEGORY, PAGE_COUNT, UPDATE_CATEGORY } from "../actionTypes/actionTypes"
+import { ADD_BLOG, ADD_CATEGORY, DELETE_BLOG, DELETE_CATEGORY, FETCH_ERROR, FETCH_START, FILTER_CATEGORY, HOME_ALL_POST, HOME_BLOG, LOAD_BLOG, LOAD_CATEGORY, LOAD_SINGLE_CATEGORY, PAGE_COUNT, UPDATE_CATEGORY } from "../actionTypes/actionTypes"
 
 
 export const addCategory = (data) => {
@@ -74,5 +74,17 @@ export const pageCountNum = (data) =>{
     return {
         type: PAGE_COUNT,
         payload: data
+    }
+}
+
+export const fetchStart = () =>{
+    return {
+        type: FETCH_START
+    }
+}
+
+export const fetchError = () =>{
+    return {
+        type: FETCH_ERROR
     }
 }
