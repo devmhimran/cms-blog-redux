@@ -3,38 +3,37 @@ import { useDispatch, useSelector } from 'react-redux';
 import loadBlogData from '../../Redux/Thunk/loadBlogData';
 import HomeBlog from '../../Component/HomeBlog/HomeBlog';
 import HomeCategory from '../../Component/HomeCategory/HomeCategory';
-import { homeAllPost } from '../../Redux/actionCreators/actionCreators';
-
-import Pagination from '../../Component/Pagination/Pagination';
+import { homeAllPost, loadHomeBlog } from '../../Redux/actionCreators/actionCreators';
+import homeBlogData from '../../Redux/Thunk/homeBlog';
 
 const Home = () => {
     const dispatch = useDispatch();
-    const { pageNum } = useSelector(state => state.blog)
+
     let content;
     useEffect(() => {
-        dispatch(loadBlogData())
+        dispatch(homeBlogData())
    
-    }, [pageNum])
+    }, [dispatch])
     useEffect(()=>{
         dispatch(homeAllPost())
     },[])
-    const { blog } = useSelector(state => state.blog)
+    const { homeBlog } = useSelector(state => state.blog)
     const { homePageFilter } = useSelector(state => state.filter)
     const paginationActive = 'bg-black text-white'
     // console.log(homePageFilter.allPost)
 
-    if (blog.length) {
-        content = [...blog].reverse().map(data => <HomeBlog key={data._id} data={data} />)
+    if (homeBlog.length) {
+        content = [...homeBlog].reverse().map(data => <HomeBlog key={data._id} data={data} />)
         console.log(content)
     }
-    if (blog.length && homePageFilter.allPost) {
-        content = [...blog].reverse().map(data => <HomeBlog key={data._id} data={data} />)
+    if (homeBlog.length && homePageFilter.allPost) {
+        content = [...homeBlog].reverse().map(data => <HomeBlog key={data._id} data={data} />)
     }
-    const blogFilter = blog.filter(data => data.blogCategory === homePageFilter.filterCategory)
+    const blogFilter = homeBlog.filter(data => data.blogCategory === homePageFilter.filterCategory)
 
 
-    if (blog.length && homePageFilter.filterCategory) {
-        content = blog.filter(data => {
+    if (homeBlog.length && homePageFilter.filterCategory) {
+        content = homeBlog.filter(data => {
             if (data) {
                 return data.blogCategory === homePageFilter.filterCategory
             }
@@ -61,7 +60,6 @@ const Home = () => {
                     }
                 </div>
             </div>
-            <Pagination/>
         </div>
     );
 };

@@ -1,7 +1,8 @@
-import { ADD_BLOG, ADD_CATEGORY, DELETE_BLOG, DELETE_CATEGORY, LOAD_BLOG, LOAD_CATEGORY, LOAD_SINGLE_CATEGORY, PAGE_COUNT, UPDATE_CATEGORY } from "../actionTypes/actionTypes"
+import { ADD_BLOG, ADD_CATEGORY, DELETE_BLOG, DELETE_CATEGORY, HOME_BLOG, LOAD_BLOG, LOAD_CATEGORY, LOAD_SINGLE_CATEGORY, PAGE_COUNT, UPDATE_CATEGORY } from "../actionTypes/actionTypes"
 
 export const initialState = {
     blog: [],
+    homeBlog: [],
     category: [],
     favorite: [],
     pageNum: ''
@@ -50,6 +51,11 @@ export const blogReducer = (state = initialState, action) => {
             return {
                 ...state,
                 pageNum: action.payload
+            }
+        case HOME_BLOG:
+            return {
+                ...state,
+                homeBlog: action.payload
             }
 
         default: return state

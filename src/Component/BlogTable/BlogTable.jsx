@@ -3,6 +3,7 @@ import { VscLinkExternal } from 'react-icons/vsc';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
 import deleteBlogData from '../../Redux/Thunk/deleteBlogData';
+import { useNavigate } from 'react-router-dom';
 
 const BlogTable = ({ data, index }) => {
     const { _id, featuredImage, blogTitle, blogCategory, date } = data
@@ -13,6 +14,10 @@ const BlogTable = ({ data, index }) => {
             dispatch(deleteBlogData(id))
         }
     }
+    const navigate = useNavigate();
+    const handleUpdate = (id) =>{
+        navigate(`/dashboard/update-blog/${id}`)
+    }
     return (
         <tr className='border-b inter'>
             <td className='p-1.5'>{index + 1}</td>
@@ -22,7 +27,7 @@ const BlogTable = ({ data, index }) => {
             <td className='p-1.5'>{date}</td>
             <td className='p-1.5'>
                 <div className=' flex items-center'>
-                    <span><VscLinkExternal className='mx-2 cursor-pointer w-5 h-5' /></span>
+                    <span onClick={()=> handleUpdate(_id)}><VscLinkExternal className='mx-2 cursor-pointer w-5 h-5' /></span>
                     <span onClick={()=> handleDelete(_id)}><AiOutlineDelete className='mx-2 cursor-pointer w-6 h-6' /></span>
                 </div>
             </td>

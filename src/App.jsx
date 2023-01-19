@@ -21,6 +21,7 @@ import SignUp from './Pages/SignUp/SignUp'
 import Footer from './Component/Footer/Footer'
 import RequiredAuth from './Component/RequiredAuth/RequiredAuth'
 import YourBlog from './Pages/YourBlog/YourBlog'
+import UpdateBlog from './Pages/UpdateBlog/UpdateBlog'
 
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
               <Route path='your-blog' index element={<YourBlog />} />
               <Route path='add-category' element={<AddCategory />} />
               <Route path='update-category/:id' element={<UpdateCategory />} />
+              <Route path='update-blog/:id' element={<UpdateBlog />} />
             </Route>
             <Route path="*" element={<ErrorPage />} />
           </Routes>

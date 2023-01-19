@@ -7,25 +7,25 @@ import PageTitle from '../../Component/PageTitle/PageTitle';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../firebase.init';
 import { allPostAction, yourPostAction } from '../../Redux/actionCreators/dashboardFilter';
+import Pagination from '../../Component/Pagination/Pagination';
 
 const AllBlog = () => {
     const { blog } = useSelector(state => state.blog)
-    const  {allPost, yourPost}  = useSelector(state => state.filter.dashboardFilter)
+    const { allPost, yourPost } = useSelector(state => state.filter.dashboardFilter)
     const [user] = useAuthState(auth)
     const [filter, setFilter] = useState({})
     const dispatch = useDispatch();
+    const { pageNum } = useSelector(state => state.blog)
     let content;
 
     useEffect(() => {
         dispatch(loadBlogData())
-    }, [dispatch])
-
-
+    }, [pageNum])
 
     // if (yourPost) {
     //     content = blog.filter(post =>  post.userId === user.uid).map((data, index) => <BlogTable key={data._id} index={index} data={data} />)
     // } 
-    if(allPost) {
+    if (allPost) {
         content = [...blog].reverse().map((data, index) => <BlogTable key={data._id} index={index} data={data} />)
     }
     const activeBtn = 'bg-black text-white px-5 py-1.5 border border-black rounded-full duration-300'
@@ -59,6 +59,7 @@ const AllBlog = () => {
                     </tbody>
                 </table>
             </div>
+            <Pagination />
         </div>
     );
 };
