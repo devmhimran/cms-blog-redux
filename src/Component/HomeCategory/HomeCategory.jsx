@@ -3,13 +3,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { useDispatch, useSelector } from 'react-redux';
 import loadCategoryData from '../../Redux/Thunk/loadCategoryData';
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
+import { categoryFilter, homeAllPost } from '../../Redux/actionCreators/actionCreators';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import 'swiper/css/autoplay';
-
-import { categoryFilter, homeAllPost } from '../../Redux/actionCreators/actionCreators';
 
 const HomeCategory = () => {
     const dispatch = useDispatch();

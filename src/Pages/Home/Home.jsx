@@ -5,6 +5,7 @@ import HomeBlog from '../../Component/HomeBlog/HomeBlog';
 import HomeCategory from '../../Component/HomeCategory/HomeCategory';
 import { homeAllPost, loadHomeBlog } from '../../Redux/actionCreators/actionCreators';
 import homeBlogData from '../../Redux/Thunk/homeBlog';
+import FeaturedPost from '../../Component/FeaturedPost/FeaturedPost';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -50,8 +51,13 @@ const Home = () => {
     }
     return (
         <div className='container max-w-screen-xl lg:mx-auto lg:px-0 px-3 pb-20'>
-            <div className='py-8'>
+            <div className='py-10'>
                 <HomeCategory />
+            </div>
+            <div className="pb-10">
+                <div className="featured__post">
+                    <FeaturedPost data={homeBlog}/>
+                </div>
             </div>
             <div className="postHub__blog">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">

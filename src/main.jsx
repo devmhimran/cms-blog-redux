@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { HelmetProvider } from 'react-helmet-async'
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <HelmetProvider>
