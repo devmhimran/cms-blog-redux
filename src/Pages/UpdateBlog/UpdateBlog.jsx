@@ -17,12 +17,11 @@ const UpdateBlog = () => {
     const [blog, setBlog] = useState([]);
     const [content, setContent] = useState('');
     const [featuredImage, setFeaturedImage] = useState('')
-    // const [previousFeaturedImage, setPreviousFeaturedImage] = useState('');
-    // setFeaturedImage(blog.featuredImage)
     const resetFeaturedImageFile = useRef();
     const imageApi = 'ef367f576eca302d4916e3889c6e0cc6';
     const date = new Date();
     const options = { month: "short", day: "numeric", year: "numeric" };
+    const [featuredBlog, setFeaturedBlog] = useState(false)
 
     useEffect(() => {
         dispatch(loadCategoryData())
@@ -38,6 +37,10 @@ const UpdateBlog = () => {
     const btnClass = 'bg-black text-white hover:bg-white hover:text-black border border-black ';
     const btnDisable = 'bg-gray-300 text-gray-600'
 
+    const handleFeaturedBlog = () =>{
+        setFeaturedBlog(!featuredBlog)
+    }
+
     const handleFeaturedImage = (e) => {
         const photoURL = e.target.files[0];
         const formData = new FormData();
@@ -52,7 +55,6 @@ const UpdateBlog = () => {
                 const featuredImage = result.data.image.url;
                 setFeaturedImage(featuredImage);
             })
-        e.target.reset();
     }
 
     const handleFeaturedImagePreviewClear = () => {
@@ -61,17 +63,37 @@ const UpdateBlog = () => {
     }
 
     const handleUpdateBlog = (e) => {
-
+        e.preventDefault();
+        const blogTitle = e.target.blogTitle.value;
+        const blogKeyword = e.target.blogKeyword.value;
+        const blogCategory = e.target.blogCategory.value;
+        let blogImage;
+        if(featuredImage){
+            blogImage = featuredImage
+        }else{
+            blogImage = blog.featuredImage
+        }
+        const blogContent = {
+            userId: user.uid,
+            blogTitle,
+            content,
+            blogKeyword,
+            blogCategory,
+            blogImage,
+            featuredBlog,
+            date: new Intl.DateTimeFormat("en-US", options).format(date)
+        }
+        console.log(blogContent)
     }
     // setPreviousFeaturedImage(blog.featuredImage)
     // const handlePreviousFeaturedImage = () =>{
     //     setPreviousFeaturedImage('')
     // }
-    console.log(blog.blogCategory)
+    // console.log(blog.blogCategory)
     return (
         <div>
-            <PageTitle title='Update Blog' />
-            <SidebarHeading title='Update Blog' />
+            <PageTitle title={`${blog.blogTitle} Edit Blog`} />
+            <SidebarHeading title='Edit Blog' />
             <div className="add__post inter w-3/5">
                 <form onSubmit={handleUpdateBlog}>
                     <div className="blog__title my-4">
@@ -83,23 +105,49 @@ const UpdateBlog = () => {
                         <JoditEditor
                             className='p-4'
                             ref={editor}
-                            value={blog.content}
+                            defaultValue={blog.content}
                             onChange={newContent => setContent(newContent)}
-                            // defaultValue={blog.content}
+                        // defaultValue={blog.content}
                         />
                     </div>
                     <div className='flex gap-3 items-center'>
                         <div className="blog__keyword w-full my-4">
                             <p className='text-xl font-semibold mb-2'>Keyword</p>
+                            
                             <input disabled className='border border-[#C7C9D1] px-4 py-1 w-full rounded-full outline-0' placeholder='Enter Keyword' type="text" name="blogKeyword" id="" />
                         </div>
                         <div className="blog__category w-full my-4">
                             <p className='text-xl font-semibold mb-2'>Select Category</p>
                             <select className='py-1.5 w-full border border-[#C7C9D1] rounded-full outline-0' name="blogCategory" required>
                                 {
-                                    category.map(data => <option selected={ data.categoryName === blog.blogCategory ? true : false} key={data._id} defaultValue={data.categoryName}>{data.categoryName}</option>)
+                                    category.map(data => <option selected={data.categoryName === blog.blogCategory ? true : false} key={data._id} defaultValue={data.categoryName}>{data.categoryName}</option>)
                                 }
                             </select>
+                        </div>
+                    </div>
+
+                    <div className="featured__blog py-6">
+                    <p className="text-xl font-semibold mb-2">Select As Featured Blog</p>
+                        <div className="inline-flex items-center border rounded-3xl">
+                            <div className="relative inline-block h-4 w-8 cursor-pointer rounded-full">
+                                <input
+                                    id="switch-component"
+                                    type="checkbox"
+                                    className="peer absolute h-4 w-8 cursor-pointer appearance-none rounded-full bg-blue-gray-100 transition-colors duration-300 checked:bg-pink-500 peer-checked:border-pink-500 peer-checked:before:bg-pink-500"
+                                    name='featuredCheckbox'
+                                    checked={featuredBlog}
+                                    onChange={handleFeaturedBlog}
+                                />
+                                <label
+                                    htmlFor="switch-component"
+                                    className="before:content[''] absolute top-2/4 -left-1 h-5 w-5 -translate-y-2/4 cursor-pointer rounded-full border border-blue-gray-100 bg-white shadow-md transition-all duration-300 before:absolute before:top-2/4 before:left-2/4 before:block before:h-10 before:w-10 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity hover:before:opacity-10 peer-checked:translate-x-full peer-checked:border-pink-500 peer-checked:before:bg-pink-500"
+                                >
+                                    <div
+                                        className="top-2/4 left-2/4 inline-block -translate-x-2/4 -translate-y-2/4 rounded-full p-5"
+                                        data-ripple-dark="true"
+                                    ></div>
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <div className='blog__featured__image my-3'>
@@ -128,18 +176,19 @@ const UpdateBlog = () => {
                                     </div>
                                 </>
                                 : <>
-                                <div className="featured__image relative w-fit">
-                                    <img className='w-64 mt-4' src={blog.featuredImage} alt="" />
-                                    <span className='absolute top-[-5px] right-[-7px] cursor-pointer bg-white rounded-full' onClick={handleFeaturedImagePreviewClear}>
-                                        {/* <TiDeleteOutline className='text-2xl text-gray-600' /> */}
-                                    </span>
-                                </div>
-                            </>
+                                    <div className="featured__image relative w-fit">
+                                        <img className='w-64 mt-4' src={blog.featuredImage} alt="" />
+                                        <span className='absolute top-[-5px] right-[-7px] cursor-pointer bg-white rounded-full' onClick={handleFeaturedImagePreviewClear}>
+                                            {/* <TiDeleteOutline className='text-2xl text-gray-600' /> */}
+                                        </span>
+                                    </div>
+                                </>
                         }
                     </div>
                     <div className="blog__publish__btn my-3">
                         <button type='submit' className={`${btnClass}  rounded-full duration-300 mt-3 px-5 py-2`}>Publish</button>
                     </div>
+
                 </form>
             </div>
         </div>
