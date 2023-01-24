@@ -14,10 +14,10 @@ const Home = () => {
     useEffect(() => {
         dispatch(homeBlogData())
     }, [dispatch])
-    
-    useEffect(()=>{
+
+    useEffect(() => {
         dispatch(homeAllPost())
-    },[])
+    }, [])
     const { homeBlog } = useSelector(state => state.blog)
     const { homePageFilter } = useSelector(state => state.filter)
     const paginationActive = 'bg-black text-white'
@@ -40,7 +40,7 @@ const Home = () => {
             }
             return data
         })
-        .reverse().map(data => <HomeBlog key={data._id} data={data} />)
+            .reverse().map(data => <HomeBlog key={data._id} data={data} />)
     }
     if (blogFilter.length === 0 && homePageFilter.allPost === false) {
         content = <>
@@ -56,7 +56,13 @@ const Home = () => {
             </div>
             <div className="pb-10">
                 <div className="featured__post">
-                    <FeaturedPost data={homeBlog}/>
+
+                    {homePageFilter.allPost &&
+                        <>
+                            <h1 className='text-4xl font-bold syne my-4'>Featured Post📌</h1>
+                            <FeaturedPost data={homeBlog} />
+                        </>
+                    }
                 </div>
             </div>
             <div className="postHub__blog">
