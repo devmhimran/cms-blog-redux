@@ -8,6 +8,7 @@ import PageTitle from '../../Component/PageTitle/PageTitle';
 import SidebarHeading from '../../Component/SidebarHeading/SidebarHeading';
 import loadCategoryData from '../../Redux/Thunk/loadCategoryData';
 import { TiDeleteOutline } from 'react-icons/ti';
+import toastify from '../../Component/Toastify/Toastify';
 
 const UpdateBlog = () => {
     const { id } = useParams();
@@ -21,24 +22,40 @@ const UpdateBlog = () => {
     const imageApi = 'ef367f576eca302d4916e3889c6e0cc6';
     const date = new Date();
     const options = { month: "short", day: "numeric", year: "numeric" };
-    const [featuredBlog, setFeaturedBlog] = useState(false)
 
+    const [featuredBlog, setFeaturedBlog] = useState(false)
+    let selected;
+
+
+
+
+    // setFeaturedBlog(blog.featuredBlog)
     useEffect(() => {
         dispatch(loadCategoryData())
-    }, [])
+    }, [id])
 
     useEffect(() => {
         fetch(`http://localhost:5000/blog/${id}`)
             .then(res => res.json())
             .then(data => setBlog(data))
+            setFeaturedBlog(blog.featuredBlog)
     }, [id])
 
     const { category } = useSelector(state => state.blog)
     const btnClass = 'bg-black text-white hover:bg-white hover:text-black border border-black ';
     const btnDisable = 'bg-gray-300 text-gray-600'
+    selected = { ...blog };
+    // setFeaturedBlog(selected.featuredBlog)
+    const handleFeaturedBlog = () => {
+        // setFeaturedBlog(!featuredBlog)
+        if(selected.featuredBlog){
+            selected.featuredBlog = false
+        }else{
+            selected.featuredBlog = true
+        }
+        // setFeaturedBlog(!featuredBlog)
 
-    const handleFeaturedBlog = () =>{
-        setFeaturedBlog(!featuredBlog)
+        console.log(selected.featuredBlog)
     }
 
     const handleFeaturedImage = (e) => {
@@ -57,6 +74,7 @@ const UpdateBlog = () => {
             })
     }
 
+
     const handleFeaturedImagePreviewClear = () => {
         setFeaturedImage('')
         resetFeaturedImageFile.current.value = "";
@@ -68,9 +86,9 @@ const UpdateBlog = () => {
         const blogKeyword = e.target.blogKeyword.value;
         const blogCategory = e.target.blogCategory.value;
         let blogImage;
-        if(featuredImage){
+        if (featuredImage) {
             blogImage = featuredImage
-        }else{
+        } else {
             blogImage = blog.featuredImage
         }
         const blogContent = {
@@ -83,13 +101,20 @@ const UpdateBlog = () => {
             featuredBlog,
             date: new Intl.DateTimeFormat("en-US", options).format(date)
         }
-        console.log(blogContent)
+
+        fetch(`http://localhost:5000/update-blog/${id}`, {
+            method: "PUT",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(blogContent),
+        })
+            .then(res => res.json())
+        toastify('success', 'Successfully Update')
+
     }
-    // setPreviousFeaturedImage(blog.featuredImage)
-    // const handlePreviousFeaturedImage = () =>{
-    //     setPreviousFeaturedImage('')
-    // }
-    // console.log(blog.blogCategory)
+
+
     return (
         <div>
             <PageTitle title={`${blog.blogTitle} Edit Blog`} />
@@ -105,7 +130,7 @@ const UpdateBlog = () => {
                         <JoditEditor
                             className='p-4'
                             ref={editor}
-                            defaultValue={blog.content}
+                            value={blog.content}
                             onChange={newContent => setContent(newContent)}
                         // defaultValue={blog.content}
                         />
@@ -113,7 +138,7 @@ const UpdateBlog = () => {
                     <div className='flex gap-3 items-center'>
                         <div className="blog__keyword w-full my-4">
                             <p className='text-xl font-semibold mb-2'>Keyword</p>
-                            
+
                             <input disabled className='border border-[#C7C9D1] px-4 py-1 w-full rounded-full outline-0' placeholder='Enter Keyword' type="text" name="blogKeyword" id="" />
                         </div>
                         <div className="blog__category w-full my-4">
@@ -127,7 +152,7 @@ const UpdateBlog = () => {
                     </div>
 
                     <div className="featured__blog py-6">
-                    <p className="text-xl font-semibold mb-2">Select As Featured Blog</p>
+                        <p className="text-xl font-semibold mb-2">Select As Featured Blog</p>
                         <div className="inline-flex items-center border rounded-3xl">
                             <div className="relative inline-block h-4 w-8 cursor-pointer rounded-full">
                                 <input
@@ -135,7 +160,7 @@ const UpdateBlog = () => {
                                     type="checkbox"
                                     className="peer absolute h-4 w-8 cursor-pointer appearance-none rounded-full bg-blue-gray-100 transition-colors duration-300 checked:bg-pink-500 peer-checked:border-pink-500 peer-checked:before:bg-pink-500"
                                     name='featuredCheckbox'
-                                    checked={featuredBlog}
+                                    checked={selected.featuredBlog}
                                     onChange={handleFeaturedBlog}
                                 />
                                 <label
