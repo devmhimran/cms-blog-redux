@@ -10,19 +10,18 @@ const HomeBlog = ({ data }) => {
     return (
         <div className="card border relative h-[465px] rounded-3xl hover:shadow duration-300">
             <div className="card-body p-3">
-            <LazyLoadImage
-                src={featuredImage} 
-                alt={blogTitle}
-                effect="blur"
-                
-                className='w-full h-72 object-cover rounded-2xl'
-             loading='eager'
-            />
+                <LazyLoadImage
+                    src={featuredImage}
+                    alt={blogTitle}
+                    effect="blur"
+                    className='w-full h-72 object-cover rounded-2xl'
+                    loading='eager'
+                />
                 <div className="blog__date mt-1">
                     <p className='text-gray-500'>Posted on: {date}</p>
                 </div>
                 <div className="blog__content mt-3">
-                    <h2 className='text-xl syne font-bold cursor-pointer hover:text-blue-800' onClick={()=> navigate(`/blog/${_id}`)}>{blogTitle.slice(0, 38)}...</h2>
+                    <h2 className='text-xl syne font-bold cursor-pointer hover:text-blue-800' onClick={() => navigate(`/blog/${_id}`)}>{blogTitle.slice(0, 38)}...</h2>
                     <div className='flex items-center justify-between w-11/12 absolute bottom-[15px]'>
                         <p className='my-2 text-base'>Category: <span className='p-1 px-3 border rounded-full'>{blogCategory}</span></p>
                         <BiBookmark className='text-xl hover:text-red-500 hover:fill-red-500' />

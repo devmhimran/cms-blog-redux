@@ -2,6 +2,7 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
 import 'swiper/css';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const FeaturedPost = ({ data }) => {
     // const { _id, blogTitle, featuredImage, content, blogCategory, date } = data
@@ -31,8 +32,14 @@ const FeaturedPost = ({ data }) => {
                                 </div>
                             </div>
                             <div className='w-[55%]'>
+                                <LazyLoadImage
+                                    src={featuredBlog.featuredImage}
+                                    alt={featuredBlog.blogTitle}
+                                    effect="blur"
 
-                                <img className='w-[900px] h-[450px] object-cover rounded-r-3xl' src={featuredBlog.featuredImage} alt="" />
+                                    className='w-[900px] h-[450px] object-cover rounded-r-3xl'
+                                    loading='eager'
+                                />
                             </div>
                         </SwiperSlide>
 
