@@ -5,6 +5,7 @@ import { TiDeleteOutline } from 'react-icons/ti';
 import { useForm } from 'react-hook-form';
 import auth from '../firebase.init';
 import { useAuthState, useCreateUserWithEmailAndPassword, useSendEmailVerification, useSignInWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import PageTitle from '../../Component/PageTitle/PageTitle';
 
 const SignUp = () => {
     const [profileImage, setProfileImage] = useState('')
@@ -80,6 +81,7 @@ const SignUp = () => {
 
     return (
         <div className='container mx-auto h-[90vh] flex justify-center items-center my-4'>
+            <PageTitle title='Sign Up' />
             <div className="signup__form">
                 <div className="card border w-96 p-6 syne rounded-xl">
                     <div className="card-body">

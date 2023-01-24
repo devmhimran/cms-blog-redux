@@ -6,6 +6,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../Pages/firebase.init';
 import { signOut } from 'firebase/auth';
 import { BiBookmark } from 'react-icons/bi';
+import postHubLogo from '../../assets/devmhimran-post-hub-logo.png'
 
 const NavMenu = () => {
     const [open, setOpen] = useState(false);
@@ -19,7 +20,9 @@ const NavMenu = () => {
             <div className='container max-w-screen-xl lg:mx-auto lg:px-0  px-3'>
                 <div className="grid grid-cols-2 items-center">
                     <div className="logo">
-                        <Link className='syne font-extrabold text-xl md:text-2xl lg:text-4xl' to='/'>Post Hub</Link>
+                        <Link className='syne font-extrabold text-xl md:text-2xl lg:text-4xl' to='/'>
+                            <img className='w-56' src={postHubLogo} alt="" />
+                        </Link>
                     </div>
                     {/* navbar desktop */}
                     <div className={`navbar__desktop lg:block lg:static absolute z-10 lg:top-0 bg-white w-full left-0 lg:p-0 p-4 lg:border-0 border lg:duration-75 duration-500 ease-in 

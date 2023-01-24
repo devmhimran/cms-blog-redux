@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import PageTitle from '../../Component/PageTitle/PageTitle';
 
 const SingleBlog = () => {
     const { id } = useParams();
@@ -12,6 +13,7 @@ const SingleBlog = () => {
     console.log(blog)
     return (
         <div className='container max-w-screen-xl lg:mx-auto lg:px-0 px-3 py-20'>
+            <PageTitle title={`${blog.blogTitle}`} />
             <div className="flex gap-6">
                 <div className="w-3/5 border p-6 rounded-2xl">
                     <h1 className='text-4xl font-bold mb-4 syne'>{blog.blogTitle}</h1>

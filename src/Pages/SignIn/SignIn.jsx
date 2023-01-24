@@ -4,6 +4,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../firebase.init';
 import Loading from '../../Component/Loading/Loading';
+import PageTitle from '../../Component/PageTitle/PageTitle';
 
 const SignIn = () => {
     const [
@@ -36,6 +37,7 @@ const SignIn = () => {
     
     return (
         <div className='container mx-auto h-[90vh] flex justify-center items-center'>
+            <PageTitle title='Sign In' />
             <div className="signin__form">
                 <div className="card border w-96 p-6 syne rounded-xl">
                     <div className="card-body">
