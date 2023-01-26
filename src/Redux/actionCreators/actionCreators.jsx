@@ -1,4 +1,4 @@
-import { ADD_BLOG, ADD_CATEGORY, DELETE_BLOG, DELETE_CATEGORY, FETCH_ERROR, FETCH_START, FILTER_CATEGORY, HOME_ALL_POST, HOME_BLOG, LOAD_BLOG, LOAD_CATEGORY, LOAD_SINGLE_CATEGORY, PAGE_COUNT, UPDATE_CATEGORY } from "../actionTypes/actionTypes"
+import { ADD_BLOG, ADD_CATEGORY, DELETE_BLOG, DELETE_CATEGORY, FETCH_ERROR, FETCH_START, FILTER_CATEGORY, HOME_ALL_POST, HOME_BLOG, LOAD_BLOG, LOAD_CATEGORY, LOAD_SINGLE_CATEGORY, PAGE_COUNT, TOGGLE_FEATURED_BLOG, UPDATE_CATEGORY } from "../actionTypes/actionTypes"
 
 
 export const addCategory = (data) => {
@@ -86,5 +86,12 @@ export const fetchStart = () =>{
 export const fetchError = () =>{
     return {
         type: FETCH_ERROR
+    }
+}
+
+export const toggleFeaturedBlog = (data) =>{
+    return {
+        type: TOGGLE_FEATURED_BLOG,
+        payload: data
     }
 }

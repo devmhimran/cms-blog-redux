@@ -9,6 +9,7 @@ import SidebarHeading from '../../Component/SidebarHeading/SidebarHeading';
 import loadCategoryData from '../../Redux/Thunk/loadCategoryData';
 import { TiDeleteOutline } from 'react-icons/ti';
 import toastify from '../../Component/Toastify/Toastify';
+import { toggleFeaturedBlog } from '../../Redux/actionCreators/actionCreators';
 
 const UpdateBlog = () => {
     const { id } = useParams();
@@ -24,38 +25,49 @@ const UpdateBlog = () => {
     const options = { month: "short", day: "numeric", year: "numeric" };
 
     const [featuredBlog, setFeaturedBlog] = useState(false)
-    let selected;
-
-
-
 
     // setFeaturedBlog(blog.featuredBlog)
     useEffect(() => {
         dispatch(loadCategoryData())
+       
     }, [id])
-
+   
     useEffect(() => {
+        
         fetch(`http://localhost:5000/blog/${id}`)
             .then(res => res.json())
             .then(data => setBlog(data))
-            setFeaturedBlog(blog.featuredBlog)
-    }, [id])
 
+        }, [])
+
+        useEffect(()=>{
+            dispatch(toggleFeaturedBlog(blog.featuredBlog))
+        },[blog])
+       
+
+    const selected = useSelector(state => state.featuredBlogReducer.featuredBlog)
+    // console.log(blog.featuredBlog)
     const { category } = useSelector(state => state.blog)
     const btnClass = 'bg-black text-white hover:bg-white hover:text-black border border-black ';
     const btnDisable = 'bg-gray-300 text-gray-600'
-    selected = { ...blog };
-    // setFeaturedBlog(selected.featuredBlog)
+
+ 
+    console.log(selected)
     const handleFeaturedBlog = () => {
+        dispatch(toggleFeaturedBlog(!selected))
+        // option = !selected.featuredBlog
+        // console.log(!selected)
+        // selected = { ...blog,
+        //     featuredBlog: !selected.featuredBlog
+        // };
         // setFeaturedBlog(!featuredBlog)
-        if(selected.featuredBlog){
-            selected.featuredBlog = false
-        }else{
-            selected.featuredBlog = true
-        }
+        // if(selected.featuredBlog){
+        //     selected.featuredBlog = false
+        // }else{
+        //     selected.featuredBlog = true
+        // }
         // setFeaturedBlog(!featuredBlog)
 
-        console.log(selected.featuredBlog)
     }
 
     const handleFeaturedImage = (e) => {
@@ -98,7 +110,7 @@ const UpdateBlog = () => {
             blogKeyword,
             blogCategory,
             blogImage,
-            featuredBlog,
+            featuredBlog: selected,
             date: new Intl.DateTimeFormat("en-US", options).format(date)
         }
 
@@ -160,7 +172,7 @@ const UpdateBlog = () => {
                                     type="checkbox"
                                     className="peer absolute h-4 w-8 cursor-pointer appearance-none rounded-full bg-blue-gray-100 transition-colors duration-300 checked:bg-pink-500 peer-checked:border-pink-500 peer-checked:before:bg-pink-500"
                                     name='featuredCheckbox'
-                                    checked={selected.featuredBlog}
+                                    checked={selected}
                                     onChange={handleFeaturedBlog}
                                 />
                                 <label

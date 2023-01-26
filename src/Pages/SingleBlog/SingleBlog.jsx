@@ -58,7 +58,7 @@ const SingleBlog = () => {
                         onSwiper={(swiper) => console.log(swiper)}
                     >
                         {
-                            [...homeBlog].reverse().filter(data => data.blogCategory === blog.blogCategory).map(blogData =>
+                            [...homeBlog].reverse().filter(data => data.blogCategory === blog.blogCategory).filter(data => data._id !== id).map(blogData =>
 
                                 <SwiperSlide className=''>
                                     <HomeBlog data={blogData} />
