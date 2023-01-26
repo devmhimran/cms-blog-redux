@@ -29,21 +29,21 @@ const UpdateBlog = () => {
     // setFeaturedBlog(blog.featuredBlog)
     useEffect(() => {
         dispatch(loadCategoryData())
-       
+
     }, [id])
-   
+
     useEffect(() => {
-        
+
         fetch(`http://localhost:5000/blog/${id}`)
             .then(res => res.json())
             .then(data => setBlog(data))
 
-        }, [])
+    }, [])
 
-        useEffect(()=>{
-            dispatch(toggleFeaturedBlog(blog.featuredBlog))
-        },[blog])
-       
+    useEffect(() => {
+        dispatch(toggleFeaturedBlog(blog.featuredBlog))
+    }, [blog])
+
 
     const selected = useSelector(state => state.featuredBlogReducer.featuredBlog)
     // console.log(blog.featuredBlog)
@@ -51,7 +51,7 @@ const UpdateBlog = () => {
     const btnClass = 'bg-black text-white hover:bg-white hover:text-black border border-black ';
     const btnDisable = 'bg-gray-300 text-gray-600'
 
- 
+
     console.log(selected)
     const handleFeaturedBlog = () => {
         dispatch(toggleFeaturedBlog(!selected))
@@ -127,6 +127,7 @@ const UpdateBlog = () => {
     }
 
 
+
     return (
         <div>
             <PageTitle title={`${blog.blogTitle} Edit Blog`} />
@@ -157,7 +158,9 @@ const UpdateBlog = () => {
                             <p className='text-xl font-semibold mb-2'>Select Category</p>
                             <select className='py-1.5 w-full border border-[#C7C9D1] rounded-full outline-0' name="blogCategory" required>
                                 {
-                                    category.map(data => <option selected={data.categoryName === blog.blogCategory ? true : false} key={data._id} defaultValue={data.categoryName}>{data.categoryName}</option>)
+                                    category.map(data =>
+                                        <option selected={data.categoryName === blog.blogCategory ? 'selected' : ''} key={data._id} value={data.categoryName}>{data.categoryName}</option>
+                                    )
                                 }
                             </select>
                         </div>
