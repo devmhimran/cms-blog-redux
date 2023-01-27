@@ -7,7 +7,6 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 const FeaturedPost = ({ data }) => {
     // const { _id, blogTitle, featuredImage, content, blogCategory, date } = data
     let blogContent;
-    console.log(blogContent)
     return (
         <div>
             <Swiper

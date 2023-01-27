@@ -64,7 +64,7 @@ const NavMenu = () => {
                                                                     <Link to='#'>Setting</Link>
                                                                 </li>
                                                                 <hr />
-                                                                <li className='mt-2' onClick={handleSignOut}>Logout</li>
+                                                                <li className='mt-2 cursor-pointer' onClick={handleSignOut}>Logout</li>
                                                             </ul>
                                                         </div>
                                                     </> :
