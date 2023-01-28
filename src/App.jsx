@@ -26,8 +26,8 @@ import SingleBlog from './Pages/SingleBlog/SingleBlog'
 
 
 function App() {
-  const history = useLocation()
-
+  const location = useLocation();
+  console.log(location.pathname)
   return (
     <Provider store={store}>
       <div className="App">
@@ -35,7 +35,11 @@ function App() {
           <NavMenu />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/blog/:id" element={<SingleBlog />} />
+            <Route path="/blog/:id" element={
+              <RequiredAuth>
+                <SingleBlog />
+              </RequiredAuth>
+            } />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/loading" element={<Loading />} />

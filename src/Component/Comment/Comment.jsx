@@ -15,9 +15,7 @@ const Comment = ({ data, postAuthor, id }) => {
     }, [])
 
     let author = profileUser.filter(profileData => profileData.uid === postAuthor)
-    console.log(author.length)
-
-
+    
     return (
         <div className="comment__data flex gap-2 my-6">
             <div className="profile__images w-[15%]">
