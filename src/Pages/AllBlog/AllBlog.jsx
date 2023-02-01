@@ -32,7 +32,7 @@ const AllBlog = () => {
     //     content = blog.filter(post =>  post.userId === user.uid).map((data, index) => <BlogTable key={data._id} index={index} data={data} />)
     // } 
     if (blog.length && allPost) {
-        content = [...blog].reverse().map((data, index) => <BlogTable key={data._id} index={index} data={data} />)
+        content = [...blog].map((data, index) => <BlogTable key={data._id} index={index} data={data} />)
     }
     const activeBtn = 'bg-black text-white px-5 py-1.5 border border-black rounded-full duration-300'
     const nonActiveBtn = 'bg-white text-black px-5 py-1.5 hover:bg-black hover:text-white border border-black rounded-full duration-300'

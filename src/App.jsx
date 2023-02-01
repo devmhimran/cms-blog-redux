@@ -23,6 +23,7 @@ import RequiredAuth from './Component/RequiredAuth/RequiredAuth'
 import YourBlog from './Pages/YourBlog/YourBlog'
 import UpdateBlog from './Pages/UpdateBlog/UpdateBlog'
 import SingleBlog from './Pages/SingleBlog/SingleBlog'
+import Saved from './Pages/Saved/Saved'
 
 
 function App() {
@@ -45,6 +46,11 @@ function App() {
             <Route path="/loading" element={<Loading />} />
             <Route path="/sign-in" element={<SignIn />} />
             <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/saved" element={
+              <RequiredAuth>
+                <Saved />
+              </RequiredAuth>
+            } />
             <Route path="/forgot-password" element={<SignUp />} />
             <Route path="dashboard" element={
               <RequiredAuth>

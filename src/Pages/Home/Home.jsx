@@ -7,6 +7,7 @@ import { homeAllPost, loadHomeBlog } from '../../Redux/actionCreators/actionCrea
 import homeBlogData from '../../Redux/Thunk/homeBlog';
 import FeaturedPost from '../../Component/FeaturedPost/FeaturedPost';
 import PageTitle from '../../Component/PageTitle/PageTitle';
+import Loading from '../../Component/Loading/Loading';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -14,11 +15,9 @@ const Home = () => {
     let content;
     useEffect(() => {
         dispatch(homeBlogData())
-    }, [dispatch])
-
-    useEffect(() => {
         dispatch(homeAllPost())
     }, [])
+
     const { homeBlog } = useSelector(state => state.blog)
     const { homePageFilter } = useSelector(state => state.filter)
     const paginationActive = 'bg-black text-white'

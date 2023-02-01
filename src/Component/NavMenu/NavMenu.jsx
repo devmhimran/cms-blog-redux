@@ -42,7 +42,7 @@ const NavMenu = () => {
                                     </div>
                                 </div>
                             </li>
-                            <li><BiBookmark className='text-2xl' /></li>
+                            <li><Link to='/saved'><BiBookmark className='text-2xl' /></Link></li>
                             {
                                 user ?
                                     <>
