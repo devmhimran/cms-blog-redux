@@ -20,13 +20,22 @@ const SingleBlog = () => {
     const [blog, setBlog] = useState([]);
     const dispatch = useDispatch();
     const [user, loading] = useAuthState(auth)
+    const [profileUser, setProfileUser] = useState([]);
+
     useEffect(() => {
         fetch(`http://localhost:5000/blog/${id}`)
             .then(res => res.json())
             .then(data => setBlog(data))
     }, [id])
 
+    useEffect(() => {
+        fetch('http://localhost:5000/user')
+            .then(res => res.json())
+            .then(data => setProfileUser(data))
+    }, [])
+
     let content;
+
     useEffect(() => {
         dispatch(homeBlogData())
     }, [])
@@ -34,6 +43,7 @@ const SingleBlog = () => {
     useEffect(() => {
         dispatch(loadCommentData())
     }, [])
+
 
 
     const { homeBlog } = useSelector(state => state.blog)
@@ -52,6 +62,10 @@ const SingleBlog = () => {
         console.log(blogComment)
         e.target.reset()
     }
+
+    const value = profileUser.find(data => blog.userId === data.uid)
+    console.log(value)
+
     let commentContent;
     const commentFIlter = comment.filter(data => data.postId === id)
     if (comment.length && commentFIlter) {
@@ -72,6 +86,15 @@ const SingleBlog = () => {
             <div className="flex gap-6">
                 <div className="w-3/5 border p-6 rounded-2xl">
                     <h1 className='text-4xl font-bold mb-4 syne'>{blog.blogTitle}</h1>
+                    <div className="author__detail my-3 flex items-center justify-between">
+                        <div className=' flex items-center gap-3'>
+                            <img className='w-10 h-10 rounded-full object-cover' src={value ? value.profileImage : ''} alt="" />
+                            <p className='capitalize font-semibold text-2xl'>{value ? value.name : ''}</p>
+                        </div>
+                        <div className="date">
+                            <p>{blog.date}</p>
+                        </div>
+                    </div>
                     <img className='w-full' src={blog.featuredImage} alt="" />
                     <p className='inter mt-6' dangerouslySetInnerHTML={{ __html: blog.content }} ></p>
                 </div>
