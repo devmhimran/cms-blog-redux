@@ -53,7 +53,7 @@ const SingleBlog = () => {
         e.target.reset()
     }
     let commentContent;
-    const commentFIlter = [...comment].reverse().filter(data => data.postId === id)
+    const commentFIlter = comment.filter(data => data.postId === id)
     if (comment.length && commentFIlter) {
         commentContent = commentFIlter.map(data => <Comment key={data._id} postAuthor={blog.userId} data={data} postId={id} />)
     }
