@@ -9,7 +9,6 @@ const HomeBlog = ({ data }) => {
     const { _id, blogTitle, featuredImage, content, blogCategory, date } = data
     const navigate = useNavigate();
     const time = TimeConvert(date)
-    console.log(time)
     return (
         <div className="card border relative h-[465px] rounded-3xl hover:shadow duration-300">
             <div className="card-body p-3">

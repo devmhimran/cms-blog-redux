@@ -3,10 +3,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
 import 'swiper/css';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import TimeConvert from '../TimeConvert/TimeConvert';
 
 const FeaturedPost = ({ data }) => {
     // const { _id, blogTitle, featuredImage, content, blogCategory, date } = data
     let blogContent;
+    // const time = TimeConvert(date)
     return (
         <div>
             <Swiper
@@ -27,7 +29,7 @@ const FeaturedPost = ({ data }) => {
                                 <div className=''>
                                     <p className='my-2 text-base'><span className='p-1 px-3 border rounded-full'>{featuredBlog.blogCategory}</span></p>
                                     <h2 className='text-4xl font-bold my-6 leading-normal'>{featuredBlog.blogTitle}</h2>
-                                    <p className='text-gray-500'>Posted on: {featuredBlog.date}</p>
+                                    <p className='text-gray-500'>Posted on: {TimeConvert(featuredBlog.date)}</p>
                                 </div>
                             </div>
                             <div className='w-[55%]'>
