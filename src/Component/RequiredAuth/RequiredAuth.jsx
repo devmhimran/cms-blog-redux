@@ -1,19 +1,24 @@
 import React from 'react';
 import auth from '../../Pages/firebase.init';
 import { useAuthState, useSendEmailVerification } from 'react-firebase-hooks/auth';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../Loading/Loading';
 
 const RequiredAuth = ({children}) => {
     const [user, loading] = useAuthState(auth);
     const [sendEmailVerification, sending, error] = useSendEmailVerification(auth);
     const location = useLocation();
+    const navigate = useNavigate()
+
     if (loading) {
         return <Loading></Loading>;
     }
+    console.log(<Navigate to='/sign-in' state={{ from: location }} replace></Navigate>)
+    console.log(<Navigate to='/' replace></Navigate>)
     if (!user) {
         return <Navigate to='/sign-in' state={{ from: location }} replace></Navigate>
     }
+
     if (!user.emailVerified) {
         return <div className='container mx-auto text-center h-[85vh] flex items-center justify-center'>
             <div className="card border border-dashed border-gray-400 mx-auto p-10">

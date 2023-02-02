@@ -24,6 +24,7 @@ import YourBlog from './Pages/YourBlog/YourBlog'
 import UpdateBlog from './Pages/UpdateBlog/UpdateBlog'
 import SingleBlog from './Pages/SingleBlog/SingleBlog'
 import Saved from './Pages/Saved/Saved'
+import ProtectRedirect from './Component/ProtectRedirect/ProtectRedirect'
 
 
 function App() {
@@ -44,8 +45,16 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/loading" element={<Loading />} />
-            <Route path="/sign-in" element={<SignIn />} />
-            <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/sign-in" element={
+              <ProtectRedirect>
+                <SignIn />
+              </ProtectRedirect>
+            } />
+            <Route path="/sign-up" element={
+              <ProtectRedirect>
+                <SignUp />
+              </ProtectRedirect>
+            } />
             <Route path="/saved" element={
               <RequiredAuth>
                 <Saved />
