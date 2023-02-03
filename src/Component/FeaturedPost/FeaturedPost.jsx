@@ -22,7 +22,7 @@ const FeaturedPost = ({ data }) => {
                 onSwiper={(swiper) => console.log(swiper)}
             >
                 {
-                    [...data].reverse().slice(3, 6).map((featuredBlog) =>
+                    [...data].reverse().filter(data => data.featuredBlog === true).map((featuredBlog) =>
 
                         <SwiperSlide key={featuredBlog._id} className='border rounded-3xl flex justify-between'>
                             <div className='p-6 flex items-center w-[45%]'>

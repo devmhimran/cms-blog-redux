@@ -23,7 +23,7 @@ const HomeBlog = ({ data }) => {
                     <p className='text-gray-500'>Posted on: {time}</p>
                 </div>
                 <div className="blog__content mt-3">
-                    <h2 className='text-xl syne font-bold cursor-pointer hover:text-blue-800' onClick={() => navigate(`/blog/${_id}`)}>{blogTitle.slice(0, 38)}...</h2>
+                    <h2 className='text-xl syne font-bold cursor-pointer hover:text-blue-700 hover:underline' onClick={() => navigate(`/blog/${_id}`)}>{blogTitle.slice(0, 38)}...</h2>
                     <div className='flex items-center justify-between w-11/12 absolute bottom-[15px]'>
                         <p className='my-2 text-base'>Category: <span className='p-1 px-3 border rounded-full'>{blogCategory}</span></p>
                         <BiBookmark className='text-xl hover:text-red-500 hover:fill-red-500' />

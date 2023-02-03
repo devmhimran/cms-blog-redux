@@ -49,6 +49,8 @@ const Home = () => {
             </div>
         </>
     }
+    // const featuredPost = homeBlog.filter(data => data.featuredPost === true)
+    // console.log(featuredPost)
     return (
         <div className='container max-w-screen-xl lg:mx-auto lg:px-0 px-3 pb-20'>
             <PageTitle title='Home' />
