@@ -14,6 +14,7 @@ import addCommentData from '../../Redux/Thunk/AddCommentData';
 import loadCommentData from '../../Redux/Thunk/loadCommentData';
 import Comment from '../../Component/Comment/Comment';
 import Loading from '../../Component/Loading/Loading';
+import TimeConvert from '../../Component/TimeConvert/TimeConvert';
 
 const SingleBlog = () => {
     const { id } = useParams();
@@ -21,6 +22,7 @@ const SingleBlog = () => {
     const dispatch = useDispatch();
     const [user, loading] = useAuthState(auth)
     const [profileUser, setProfileUser] = useState([]);
+    const time = TimeConvert(blog.date)
 
     useEffect(() => {
         fetch(`http://localhost:5000/blog/${id}`)
@@ -92,7 +94,7 @@ const SingleBlog = () => {
                             <p className='capitalize font-semibold text-2xl'>{value ? value.name : ''}</p>
                         </div>
                         <div className="date">
-                            <p>{blog.date}</p>
+                            <p>{time}</p>
                         </div>
                     </div>
                     <img className='w-full' src={blog.featuredImage} alt="" />

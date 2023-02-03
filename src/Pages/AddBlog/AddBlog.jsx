@@ -38,7 +38,7 @@ const AddBlog = () => {
             blogKeyword,
             blogCategory,
             featuredImage,
-            date: new Intl.DateTimeFormat("en-US", options).format(date)
+            date: date.getTime()
         }
         dispatch(addBlogData(blogContent))
         setContent('')
