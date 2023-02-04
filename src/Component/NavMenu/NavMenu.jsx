@@ -7,15 +7,17 @@ import auth from '../../Pages/firebase.init';
 import { signOut } from 'firebase/auth';
 import { BiBookmark } from 'react-icons/bi';
 import postHubLogo from '../../assets/devmhimran-post-hub-logo.png'
+import { useSelector } from 'react-redux';
 
 const NavMenu = () => {
     const [open, setOpen] = useState(false);
     const [profileDropdown, setProfileDropdown] = useState(false);
     const [user] = useAuthState(auth);
-    const handleSignOut = () =>{
+    const { userData } = useSelector(state => state.userDataAuth)
+    const handleSignOut = () => {
         signOut(auth);
     }
-    // console.log(user)
+    console.log(userData)
     return (
         <div id='nav__menu' className="nav__menu py-5 border-b">
             <div className='container max-w-screen-xl lg:mx-auto lg:px-0  px-3'>
@@ -49,9 +51,9 @@ const NavMenu = () => {
                                     <>
                                         <li className='text-base font-medium lg:py-0 py-2 relative'>
                                             <div className="profile__img border w-[46px] hover:border-black cursor-pointer rounded-full"
-                                                onClick={()=> setProfileDropdown(!profileDropdown)}
+                                                onClick={() => setProfileDropdown(!profileDropdown)}
                                             >
-                                                <img className='w-10 h-10 object-cover rounded-full m-0.5' src={user.photoURL} alt="" />
+                                                <img className='w-10 h-10 object-cover rounded-full m-0.5' src={userData.profileImage} alt="" />
                                             </div>
                                             {
                                                 profileDropdown ?

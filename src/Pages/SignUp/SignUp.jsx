@@ -7,6 +7,7 @@ import auth from '../firebase.init';
 import { useAuthState, useCreateUserWithEmailAndPassword, useSendEmailVerification, useSignInWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import PageTitle from '../../Component/PageTitle/PageTitle';
 import useToken from '../../Component/Token/useToken';
+import { useDispatch } from 'react-redux';
 
 const SignUp = () => {
     const [profileImage, setProfileImage] = useState('')
@@ -29,12 +30,8 @@ const SignUp = () => {
     const [updateProfile, updating, userUpdateError] = useUpdateProfile(auth);
     const location = useLocation();
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     let from = location.state?.from?.pathname || "/dashboard";
     const [name, setName] = useState('');
-    
-    console.log(from)
-
 
     const handleFeaturedImage = (e) => {
         const photoURL = e.target.files[0];

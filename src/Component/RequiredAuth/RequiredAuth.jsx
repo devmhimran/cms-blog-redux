@@ -3,12 +3,19 @@ import auth from '../../Pages/firebase.init';
 import { useAuthState, useSendEmailVerification } from 'react-firebase-hooks/auth';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../Loading/Loading';
+import { useDispatch } from 'react-redux';
+import userAuthData from '../../Redux/Thunk/userAuthData';
+import { useEffect } from 'react';
 
 const RequiredAuth = ({children}) => {
     const [user, loading] = useAuthState(auth);
     const [sendEmailVerification, sending, error] = useSendEmailVerification(auth);
     const location = useLocation();
     const navigate = useNavigate()
+    const dispatch = useDispatch();
+
+    // dispatch(userAuthData())
+
 
     if (loading) {
         return <Loading></Loading>;

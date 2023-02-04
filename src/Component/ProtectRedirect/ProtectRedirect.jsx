@@ -8,7 +8,7 @@ const ProtectRedirect = ({children}) => {
     const location = useLocation();
     const navigate = useNavigate();
     let from = location.state?.from?.pathname || "/";
-    if(user && location.pathname === '/sign-in'){
+    if(user && location.pathname === '/sign-in' || location.pathname === '/sign-up'){
         navigate(from, { replace: true });
     }
     return children
