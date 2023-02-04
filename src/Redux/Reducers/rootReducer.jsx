@@ -5,8 +5,6 @@ import { paginationReducer } from "./paginationReducer";
 import featuredBlogReducer from "./featuredBlogReducer";
 import commentReducer from "./commentReducer";
 
-
-
 const rootReducer = combineReducers({
     blog: blogReducer,
     filter: filterReducer,

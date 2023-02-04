@@ -13,8 +13,8 @@ const RequiredAuth = ({children}) => {
     if (loading) {
         return <Loading></Loading>;
     }
-    console.log(<Navigate to='/sign-in' state={{ from: location }} replace></Navigate>)
-    console.log(<Navigate to='/' replace></Navigate>)
+    // console.log(<Navigate to='/sign-in' state={{ from: location }} replace></Navigate>)
+    // console.log(<Navigate to='/' replace></Navigate>)
     if (!user) {
         return <Navigate to='/sign-in' state={{ from: location }} replace></Navigate>
     }

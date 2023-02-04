@@ -29,7 +29,7 @@ import ProtectRedirect from './Component/ProtectRedirect/ProtectRedirect'
 
 function App() {
   const location = useLocation();
-  console.log(location.pathname)
+  // console.log(location.pathname)
   return (
     <Provider store={store}>
       <div className="App">
