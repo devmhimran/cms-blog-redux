@@ -25,7 +25,7 @@ const Home = () => {
 
     if (homeBlog.length) {
         content = [...homeBlog].reverse().map(data => <HomeBlog key={data._id} data={data} />)
-        console.log(content)
+        // console.log(content)
     }
     if (homeBlog.length && homePageFilter.allPost) {
         content = [...homeBlog].reverse().map(data => <HomeBlog key={data._id} data={data} />)

@@ -4,8 +4,7 @@ import { useAuthState, useSendEmailVerification } from 'react-firebase-hooks/aut
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../Loading/Loading';
 import { useDispatch } from 'react-redux';
-import userAuthData from '../../Redux/Thunk/userAuthData';
-import { useEffect } from 'react';
+
 
 const RequiredAuth = ({children}) => {
     const [user, loading] = useAuthState(auth);
@@ -13,9 +12,6 @@ const RequiredAuth = ({children}) => {
     const location = useLocation();
     const navigate = useNavigate()
     const dispatch = useDispatch();
-
-    // dispatch(userAuthData())
-
 
     if (loading) {
         return <Loading></Loading>;

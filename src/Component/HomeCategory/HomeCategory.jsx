@@ -34,8 +34,8 @@ const HomeCategory = () => {
                 //     delay: 2000,
                 //     disableOnInteraction: false,
                 //   }}
-                onSlideChange={() => console.log('slide change')}
-                onSwiper={(swiper) => console.log(swiper)}
+                // onSlideChange={() => console.log('slide change')}
+                // onSwiper={(swiper) => console.log(swiper)}
             >
                 <SwiperSlide onClick={() => dispatch(homeAllPost())} className={`${ allPost ? categoryActive : categoryClass} p-2 rounded-lg inter text-base font-normal text-center cursor-pointer`}>All Post</SwiperSlide>
                 {

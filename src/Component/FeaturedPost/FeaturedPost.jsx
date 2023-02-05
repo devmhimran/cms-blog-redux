@@ -4,10 +4,12 @@ import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
 import 'swiper/css';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import TimeConvert from '../TimeConvert/TimeConvert';
+import { useNavigate } from 'react-router-dom';
 
 const FeaturedPost = ({ data }) => {
     // const { _id, blogTitle, featuredImage, content, blogCategory, date } = data
     let blogContent;
+    const navigate = useNavigate();
     // const time = TimeConvert(date)
     return (
         <div>
@@ -19,7 +21,7 @@ const FeaturedPost = ({ data }) => {
                     delay: 2000,
                     disableOnInteraction: false,
                 }}
-                onSwiper={(swiper) => console.log(swiper)}
+                // onSwiper={(swiper) => console.log(swiper)}
             >
                 {
                     [...data].reverse().filter(data => data.featuredBlog === true).map((featuredBlog) =>
@@ -28,7 +30,7 @@ const FeaturedPost = ({ data }) => {
                             <div className='p-6 flex items-center w-[45%]'>
                                 <div className=''>
                                     <p className='my-2 text-base'><span className='p-1 px-3 border rounded-full'>{featuredBlog.blogCategory}</span></p>
-                                    <h2 className='text-4xl font-bold my-6 leading-normal'>{featuredBlog.blogTitle}</h2>
+                                    <h2 onClick={()=> navigate(`/blog/${featuredBlog._id}`)} className='text-4xl font-bold my-6 leading-normal cursor-pointer hover:text-blue-700 hover:underline'>{featuredBlog.blogTitle}</h2>
                                     <p className='text-gray-500'>Posted on: {TimeConvert(featuredBlog.date)}</p>
                                 </div>
                             </div>

@@ -16,7 +16,8 @@ const DashboardSidebar = () => {
     const [user] = useAuthState(auth);
     const handleSignOut = () =>{
         signOut(auth);
-        window.location.reload();
+        localStorage.removeItem('accessToken');
+        // window.location.reload();
     }
   
 

@@ -26,15 +26,12 @@ import SingleBlog from './Pages/SingleBlog/SingleBlog'
 import Saved from './Pages/Saved/Saved'
 import ProtectRedirect from './Component/ProtectRedirect/ProtectRedirect'
 import { useEffect } from 'react'
-import userAuthData from './Redux/Thunk/userAuthData'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import auth from './Pages/firebase.init'
 
 function App() {
   const location = useLocation();
   const dispatch = useDispatch();
-  const [user] = useAuthState(auth)
-  dispatch(userAuthData())
   // console.log(location.pathname)
   return (
     

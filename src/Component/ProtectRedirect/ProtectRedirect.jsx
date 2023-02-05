@@ -3,14 +3,17 @@ import auth from "../../Pages/firebase.init";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 
-const ProtectRedirect = ({children}) => {
+const ProtectRedirect = ({ children }) => {
     const [user, loading] = useAuthState(auth);
     const location = useLocation();
     const navigate = useNavigate();
     let from = location.state?.from?.pathname || "/";
-    if(user && location.pathname === '/sign-in' || location.pathname === '/sign-up'){
-        navigate(from, { replace: true });
+    if (user) {
+        if (location.pathname === '/sign-in' || location.pathname === '/sign-up') {
+            navigate(from, { replace: true });
+        }
     }
+
     return children
 };
 

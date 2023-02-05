@@ -60,7 +60,7 @@ const SignUp = () => {
         name,
         user
     }
-    const [token] = useToken(userData)
+    const [token] = useToken(userData, 'signUp')
     // useToken(userData)
 
     const onSubmit = async (data) => {
