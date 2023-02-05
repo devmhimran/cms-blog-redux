@@ -23,8 +23,7 @@ const SingleBlog = () => {
     const [user, loading] = useAuthState(auth)
     const [profileUser, setProfileUser] = useState([]);
     const time = TimeConvert(blog.date)
-    const {userData} = useSelector(state => state.userDataAuth)
-    console.log(userData)
+    
     useEffect(() => {
         fetch(`http://localhost:5000/blog/${id}`)
             .then(res => res.json())
@@ -58,7 +57,7 @@ const SingleBlog = () => {
         const blogComment = e.target.blogComment.value;
         const commentData = {
             postId: id,
-            userId: userData.uid,
+            userId: user.uid,
             blogComment
         }
         dispatch(addCommentData(commentData))
