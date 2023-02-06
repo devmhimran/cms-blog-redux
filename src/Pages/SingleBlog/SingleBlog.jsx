@@ -15,6 +15,7 @@ import loadCommentData from '../../Redux/Thunk/loadCommentData';
 import Comment from '../../Component/Comment/Comment';
 import Loading from '../../Component/Loading/Loading';
 import TimeConvert from '../../Component/TimeConvert/TimeConvert';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const SingleBlog = () => {
     const { id } = useParams();
@@ -23,7 +24,7 @@ const SingleBlog = () => {
     const [user, loading] = useAuthState(auth)
     const [profileUser, setProfileUser] = useState([]);
     const time = TimeConvert(blog.date)
-    
+
     useEffect(() => {
         fetch(`http://localhost:5000/blog/${id}`)
             .then(res => res.json())
@@ -66,7 +67,7 @@ const SingleBlog = () => {
     }
 
     const value = profileUser.find(data => blog.userId === data.uid)
-    console.log(value)
+    // console.log(value)
 
     let commentContent;
     const commentFIlter = comment.filter(data => data.postId === id)
@@ -85,22 +86,36 @@ const SingleBlog = () => {
     return (
         <div className='container max-w-screen-xl lg:mx-auto lg:px-0 px-3 py-20'>
             <PageTitle title={`${blog.blogTitle}`} />
-            <div className="flex gap-6">
-                <div className="w-3/5 border p-6 rounded-2xl">
+            <div className="block lg:flex gap-6">
+                <div className="w-full lg:w-3/5 border p-6 rounded-2xl">
                     <h1 className='text-4xl font-bold mb-4 syne'>{blog.blogTitle}</h1>
                     <div className="author__detail my-3 flex items-center justify-between">
                         <div className=' flex items-center gap-3'>
-                            <img className='w-10 h-10 rounded-full object-cover' src={value ? value.profileImage : ''} alt="" />
+                            <LazyLoadImage
+                                src={value ? value.profileImage : ''}
+                                alt={value ? value.name : ''}
+                                // effect="blur"
+                                className='w-10 h-10 rounded-full object-cover'
+                                loading='eager'
+                            />
+                            {/* <img className='w-10 h-10 rounded-full object-cover' src={value ? value.profileImage : ''} alt="" /> */}
                             <p className='capitalize font-semibold text-2xl'>{value ? value.name : ''}</p>
                         </div>
                         <div className="date">
                             <p>{time}</p>
                         </div>
                     </div>
-                    <img className='w-full' src={blog.featuredImage} alt="" />
+                    <LazyLoadImage
+                        src={blog.featuredImage}
+                        alt={blog.blogTitle}
+                        effect="blur"
+                        className='w-full'
+                        loading='eager'
+                    />
+                    {/* <img className='w-full' src={blog.featuredImage} alt="" /> */}
                     <p className='inter mt-6' dangerouslySetInnerHTML={{ __html: blog.content }} ></p>
                 </div>
-                <div className='w-2/5 h-[600px] border p-6 rounded-2xl'>
+                <div className='w-full lg:w-2/5 h-[600px] border p-6 rounded-2xl lg:mt-0 mt-6'>
                     <div className="blog__comment__content">
                         <form onSubmit={handleComment}>
                             <textarea className='resize-none rounded-xl border outline-0 w-full h-40 p-4 mb-2 inter' name="blogComment" placeholder='Place your comment'></textarea>

@@ -8,17 +8,44 @@ import { signOut } from 'firebase/auth';
 import { BiBookmark } from 'react-icons/bi';
 import postHubLogo from '../../assets/devmhimran-post-hub-logo.png'
 import { useSelector } from 'react-redux';
+import useSignInUserHook from '../SignInUserHook/useSignInUserHook';
+import { useEffect } from 'react';
+import Loading from '../Loading/Loading';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const NavMenu = () => {
     const [open, setOpen] = useState(false);
     const [profileDropdown, setProfileDropdown] = useState(false);
-    const [user] = useAuthState(auth);
+    const [user, loading] = useAuthState(auth);
+    // const [signInUser] = useSignInUserHook()
+
+    const [signInUser, setSignInUser] = useState({});
+
+    useEffect(() => {
+        if (user) {
+            fetch(`http://localhost:5000/user/${user.uid}`, {
+                method: "GET",
+                headers: {
+                    "authorization": `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
+                .then(res => res.json())
+                .then(data => setSignInUser(data))
+        }
+    }, [user])
 
     const handleSignOut = () => {
         signOut(auth);
         localStorage.removeItem('accessToken');
     }
-    // console.log(user)
+
+    console.log(user)
+    console.log(signInUser)
+
+    if (loading) {
+        return <Loading />
+    }
+
     return (
         <div id='nav__menu' className="nav__menu py-5 border-b">
             <div className='container max-w-screen-xl lg:mx-auto lg:px-0  px-3'>
@@ -51,10 +78,17 @@ const NavMenu = () => {
                                 user ?
                                     <>
                                         <li className='text-base font-medium lg:py-0 py-2 relative'>
-                                            <div className="profile__img border w-[46px] hover:border-black cursor-pointer rounded-full"
+                                            <div className="profile__img w-[46px] cursor-pointer rounded-full"
                                                 onClick={() => setProfileDropdown(!profileDropdown)}
                                             >
-                                                <img className='w-10 h-10 object-cover rounded-full m-0.5' src={user.photoURL} alt="" />
+                                                <LazyLoadImage
+                                                    src={signInUser.profileImage}
+
+                                                    effect="blur"
+                                                    className='w-10 h-10 object-cover rounded-full m-0.5 border hover:border-blue-600'
+                                                    loading='eager'
+                                                />
+                                                {/* <img className='w-10 h-10 object-cover rounded-full m-0.5' src={signInUser.profileImage} alt="" /> */}
                                             </div>
                                             {
                                                 profileDropdown ?
