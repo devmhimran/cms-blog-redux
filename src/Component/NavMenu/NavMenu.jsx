@@ -12,6 +12,7 @@ import useSignInUserHook from '../SignInUserHook/useSignInUserHook';
 import { useEffect } from 'react';
 import Loading from '../Loading/Loading';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { BiUser } from 'react-icons/bi';
 
 const NavMenu = () => {
     const [open, setOpen] = useState(false);
@@ -81,13 +82,21 @@ const NavMenu = () => {
                                             <div className="profile__img w-[46px] cursor-pointer rounded-full"
                                                 onClick={() => setProfileDropdown(!profileDropdown)}
                                             >
-                                                <LazyLoadImage
-                                                    src={signInUser.profileImage}
+                                                {
+                                                    signInUser ?
+                                                        <LazyLoadImage
+                                                            src={signInUser.profileImage}
 
-                                                    effect="blur"
-                                                    className='w-10 h-10 object-cover rounded-full m-0.5 border hover:border-blue-600'
-                                                    loading='eager'
-                                                />
+                                                            effect="blur"
+                                                            className='w-10 h-10 object-cover rounded-full m-0.5 border hover:border-blue-600'
+                                                            loading='eager'
+                                                        /> :
+                                                        <span className=''>
+                                                            <BiUser className='text-2xl' />
+                                                        </span>
+                                                }
+
+
                                                 {/* <img className='w-10 h-10 object-cover rounded-full m-0.5' src={signInUser.profileImage} alt="" /> */}
                                             </div>
                                             {
