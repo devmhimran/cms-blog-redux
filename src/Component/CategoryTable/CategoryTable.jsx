@@ -22,9 +22,10 @@ const CategoryTable = ({ data, index }) => {
             <td className='p-2'>{index + 1}</td>
             <td className='p-2 text-lg capitalize'>{categoryName}</td>
             <td className='flex items-center p-2'>
-                <Link to={`/dashboard/update-category/${_id}`}><VscLinkExternal className='mx-2 cursor-pointer w-5 h-5' /></Link>
+                <Link to={`/dashboard/update-category/${_id}`}><p>Edit</p></Link>
+                <span className='mx-1'>|</span>
                 {/* <span onClick={() => navigate(`/dashboard/update-category/${_id}`)}><VscLinkExternal className='mx-2 cursor-pointer w-5 h-5' /></span> */}
-                <span onClick={() => handleDelete(_id)}><AiOutlineDelete className='mx-2 cursor-pointer w-6 h-6' /></span>
+                <span onClick={() => handleDelete(_id)}><p>Delete</p></span>
             </td>
 
         </tr>

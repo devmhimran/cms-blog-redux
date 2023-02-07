@@ -23,11 +23,11 @@ import RequiredAuth from './Component/RequiredAuth/RequiredAuth'
 import YourBlog from './Pages/YourBlog/YourBlog'
 import UpdateBlog from './Pages/UpdateBlog/UpdateBlog'
 import SingleBlog from './Pages/SingleBlog/SingleBlog'
-import Saved from './Pages/Saved/Saved'
 import ProtectRedirect from './Component/ProtectRedirect/ProtectRedirect'
 import { useEffect } from 'react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import auth from './Pages/firebase.init'
+import Favorite from './Pages/Favorite/Favorite'
 
 function App() {
   const location = useLocation();
@@ -58,9 +58,9 @@ function App() {
                 <SignUp />
               </ProtectRedirect>
             } />
-            <Route path="/saved" element={
+            <Route path="/favorite" element={
               <RequiredAuth>
-                <Saved />
+                <Favorite />
               </RequiredAuth>
             } />
             <Route path="/forgot-password" element={<SignUp />} />

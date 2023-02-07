@@ -1,4 +1,4 @@
-import { ADD_BLOG, ADD_CATEGORY, DELETE_BLOG, DELETE_CATEGORY, FETCH_ERROR, FETCH_START, HOME_BLOG, LOAD_BLOG, LOAD_CATEGORY, LOAD_SINGLE_CATEGORY, PAGE_COUNT, UPDATE_CATEGORY } from "../actionTypes/actionTypes"
+import { ADD_BLOG, ADD_CATEGORY, ADD_TO_FAVORITE, DELETE_BLOG, DELETE_CATEGORY, FETCH_ERROR, FETCH_START, HOME_BLOG, LOAD_BLOG, LOAD_CATEGORY, LOAD_SINGLE_CATEGORY, PAGE_COUNT, UPDATE_CATEGORY } from "../actionTypes/actionTypes"
 
 export const initialState = {
     loading: false,
@@ -19,12 +19,12 @@ export const blogReducer = (state = initialState, action) => {
                 loading: true,
                 error: false
             }
-            case FETCH_ERROR:
-                return {
-                    ...state,
-                    loading: false,
-                    error: true
-                }
+        case FETCH_ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: true
+            }
         case LOAD_CATEGORY:
             return {
                 ...state,
@@ -72,6 +72,11 @@ export const blogReducer = (state = initialState, action) => {
             return {
                 ...state,
                 homeBlog: action.payload
+            }
+        case ADD_TO_FAVORITE:
+            return {
+                ...state,
+                favorite: [...state.favorite, action.payload]
             }
 
         default: return state

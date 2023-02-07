@@ -26,7 +26,7 @@ const FeaturedPost = ({ data }) => {
                 {
                     [...data].reverse().filter(data => data.featuredBlog === true).map((featuredBlog) =>
 
-                        <SwiperSlide key={featuredBlog._id} className='border rounded-3xl flex justify-between'>
+                        <SwiperSlide key={featuredBlog._id} className='border rounded-3xl flex h-[470px] justify-between'>
                             <div className='p-6 flex items-center w-[45%]'>
                                 <div className=''>
                                     <p className='my-2 text-base'><span className='p-1 px-3 border rounded-full'>{featuredBlog.blogCategory}</span></p>
@@ -40,7 +40,7 @@ const FeaturedPost = ({ data }) => {
                                     alt={featuredBlog.blogTitle}
                                     effect="blur"
 
-                                    className='w-[900px] h-[450px] object-cover rounded-r-3xl'
+                                    className='w-[900px] h-[470px] object-cover rounded-r-3xl'
                                     loading='eager'
                                 />
                             </div>

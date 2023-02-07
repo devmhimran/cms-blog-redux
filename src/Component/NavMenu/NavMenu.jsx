@@ -21,27 +21,27 @@ const NavMenu = () => {
     // const [signInUser] = useSignInUserHook()
 
     const [signInUser, setSignInUser] = useState({});
-
+    
     useEffect(() => {
         if (user) {
             fetch(`http://localhost:5000/user/${user.uid}`, {
                 method: "GET",
                 headers: {
+                    "Content-type": "application/json",
                     "authorization": `Bearer ${localStorage.getItem('accessToken')}`
                 }
             })
                 .then(res => res.json())
                 .then(data => setSignInUser(data))
         }
-    }, [user])
+    }, [signInUser && user])
 
     const handleSignOut = () => {
         signOut(auth);
         localStorage.removeItem('accessToken');
     }
 
-    console.log(user)
-    console.log(signInUser)
+    // console.log(signInUser)
 
     if (loading) {
         return <Loading />
@@ -74,7 +74,7 @@ const NavMenu = () => {
                                     </div>
                                 </div>
                             </li>
-                            <li><Link to='/saved'><BiBookmark className='text-2xl' /></Link></li>
+                            <li><Link to='/favorite'><BiBookmark className='text-2xl' /></Link></li>
                             {
                                 user ?
                                     <>
@@ -83,14 +83,16 @@ const NavMenu = () => {
                                                 onClick={() => setProfileDropdown(!profileDropdown)}
                                             >
                                                 {
-                                                    signInUser ?
-                                                        <LazyLoadImage
-                                                            src={signInUser.profileImage}
+                                                    signInUser.profileImage ?
+                                                        // <LazyLoadImage
+                                                        //     src={signInUser.profileImage}
 
-                                                            effect="blur"
-                                                            className='w-10 h-10 object-cover rounded-full m-0.5 border hover:border-blue-600'
-                                                            loading='eager'
-                                                        /> :
+                                                        //     effect="blur"
+                                                        //     className='w-10 h-10 object-cover rounded-full m-0.5 border hover:border-blue-600'
+                                                        //     loading='eager'
+                                                        // /> 
+                                                        <img className='w-10 h-10 object-cover rounded-full m-0.5' src={signInUser.profileImage} alt="" />
+                                                        :
                                                         <span className=''>
                                                             <BiUser className='text-2xl' />
                                                         </span>
