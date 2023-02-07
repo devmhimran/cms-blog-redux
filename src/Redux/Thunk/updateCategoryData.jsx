@@ -8,7 +8,8 @@ const updateCategoryData = (id, category) => {
             method: "PUT",
             body: JSON.stringify(category),
             headers: {
-                "Content-type": "application/json"
+                "Content-type": "application/json",
+                "authorization": `Bearer ${localStorage.getItem('accessToken')}`
             }
         })
         const data = await res.json();
@@ -19,7 +20,7 @@ const updateCategoryData = (id, category) => {
                     ...category
                 }))
             window.location.reload();
-            toastify('success', 'successfully added')
+            toastify('success', 'Successfully Updated')
         }
     }
 }

@@ -117,7 +117,8 @@ const UpdateBlog = () => {
         fetch(`http://localhost:5000/update-blog/${id}`, {
             method: "PUT",
             headers: {
-                "content-type": "application/json"
+                "content-type": "application/json",
+                "authorization": `Bearer ${localStorage.getItem('accessToken')}`
             },
             body: JSON.stringify(blogContent),
         })

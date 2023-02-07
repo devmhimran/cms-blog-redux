@@ -9,7 +9,8 @@ const addCategoryData = (category) => {
             method: "POST",
             body: JSON.stringify(category),
             headers: {
-                "Content-type": "application/json"
+                "Content-type": "application/json",
+                "authorization": `Bearer ${localStorage.getItem('accessToken')}`
             }
         })
         const data = await res.json();
@@ -20,7 +21,7 @@ const addCategoryData = (category) => {
                 _id: data.insertedId,
                 ...category
             }))
-            toastify('success', 'successfully added')
+            toastify('success', 'Successfully Added')
         }
 
     }

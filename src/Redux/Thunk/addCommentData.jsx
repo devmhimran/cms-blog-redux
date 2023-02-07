@@ -9,7 +9,8 @@ const addCommentData = (commentData) => {
             method: "POST",
             body: JSON.stringify(commentData),
             headers: {
-                "Content-type": "application/json"
+                "Content-type": "application/json",
+                "authorization": `Bearer ${localStorage.getItem('accessToken')}`
             }
         })
         const data = await res.json();
@@ -19,7 +20,7 @@ const addCommentData = (commentData) => {
                 _id: data.insertedId,
                 ...commentData
             }))
-            toastify('success', 'successfully added')
+            toastify('success', 'Successfully Added')
         }
     }
 };

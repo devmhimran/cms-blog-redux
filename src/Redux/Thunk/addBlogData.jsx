@@ -9,7 +9,8 @@ const addBlogData = (blog) => {
             method: "POST",
             body: JSON.stringify(blog),
             headers: {
-                "Content-type": "application/json"
+                "Content-type": "application/json",
+                "authorization": `Bearer ${localStorage.getItem('accessToken')}`
             }
         });
         const data = await res.json()
