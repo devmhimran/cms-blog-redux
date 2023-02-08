@@ -19,9 +19,23 @@ const Favorite = () => {
     // if(favorite.length){
     //     content = favorite.filter(data =>)
     // }
+
+    // if (favorite.length) {
+    //     content = homeBlog.filter(data => favorite.includes(data._id)).map(data => <HomeBlog key={data._id} data={data} />)
+    // }
+
     if (favorite.length) {
-        content = homeBlog.filter(data => favorite.includes(data._id)).map(data => <HomeBlog key={data._id} data={data} />)
+        content = homeBlog.filter(data => favorite.every((obj, index) => obj.postId === homeBlog[index]._id)).map(data => <HomeBlog key={data._id} data={data} />)
     }
+    console.log(content)
+
+    // if (favorite.length) {
+    //     content = homeBlog.filter(data => {
+    //         favorite.filter(favoriteData => favoriteData.includes(data._id))
+    //     }
+    //     ).map(data => <HomeBlog key={data._id} data={data} />)
+    // }
+
     if (favorite.length === 0) {
 
         content =

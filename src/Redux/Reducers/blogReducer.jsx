@@ -74,9 +74,17 @@ export const blogReducer = (state = initialState, action) => {
                 homeBlog: action.payload
             }
         case ADD_TO_FAVORITE:
-            return {
-                ...state,
-                favorite: [...state.favorite, action.payload]
+            if (!state.favorite.includes(action.payload)) {
+
+                return {
+                    ...state,
+                    favorite: [...state.favorite, action.payload]
+                }
+            } else {
+                return {
+                    ...state,
+                    favorite: state.favorite.filter(data => data !== action.payload)
+                }
             }
 
         default: return state

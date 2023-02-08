@@ -25,7 +25,6 @@ import UpdateBlog from './Pages/UpdateBlog/UpdateBlog'
 import SingleBlog from './Pages/SingleBlog/SingleBlog'
 import ProtectRedirect from './Component/ProtectRedirect/ProtectRedirect'
 import { useEffect } from 'react'
-import { useAuthState } from 'react-firebase-hooks/auth'
 import auth from './Pages/firebase.init'
 import Favorite from './Pages/Favorite/Favorite'
 
@@ -33,6 +32,7 @@ function App() {
   const location = useLocation();
   const dispatch = useDispatch();
   // console.log(location.pathname)
+
   return (
     
       <div className="App">
