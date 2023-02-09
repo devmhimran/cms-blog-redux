@@ -42,9 +42,9 @@ const HomeBlog = ({ data }) => {
     // .includes(_id)
     let favoriteValue;
     if (favorite.length) {
-        favoriteValue = favorite.every((obj, index) => obj.postId === homeBlog[index]._id);
+        favoriteValue = favorite.find(data=> data.postId === _id)
     }
-    // console.log(favorite[0].postId)
+    console.log(favoriteValue)
 
     // setFavorite(favoriteValue)
     const handleFavorite = () => {
