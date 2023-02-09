@@ -1,4 +1,4 @@
-import { ADD_BLOG, ADD_CATEGORY, ADD_COMMENT, ADD_TO_FAVORITE, DELETE_BLOG, DELETE_CATEGORY, FETCH_ERROR, FETCH_START, FILTER_CATEGORY, HOME_ALL_POST, HOME_BLOG, LOAD_BLOG, LOAD_CATEGORY, LOAD_COMMENT, LOAD_FAVORITE, LOAD_SINGLE_CATEGORY, PAGE_COUNT, TOGGLE_FEATURED_BLOG, UPDATE_CATEGORY, USER_DATA_SIGN_UP } from "../actionTypes/actionTypes"
+import { ADD_BLOG, ADD_CATEGORY, ADD_COMMENT, ADD_TO_FAVORITE, DELETE_BLOG, DELETE_CATEGORY, FETCH_ERROR, FETCH_START, FILTER_CATEGORY, HOME_ALL_POST, HOME_BLOG, LOAD_BLOG, LOAD_CATEGORY, LOAD_COMMENT, LOAD_FAVORITE, LOAD_SINGLE_CATEGORY, PAGE_COUNT, REMOVE_TO_FAVORITE, TOGGLE_FEATURED_BLOG, UPDATE_CATEGORY, USER_DATA_SIGN_UP } from "../actionTypes/actionTypes"
 
 
 export const addCategory = (data) => {
@@ -126,6 +126,13 @@ export const loadFavorite = () =>{
 export const addToFavorite = (data) =>{
     return {
         type: ADD_TO_FAVORITE,
+        payload: data
+    }
+}
+
+export const removeToFavorite = (data) =>{
+    return {
+        type: REMOVE_TO_FAVORITE,
         payload: data
     }
 }

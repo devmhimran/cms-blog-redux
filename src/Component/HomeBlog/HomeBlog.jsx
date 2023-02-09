@@ -7,7 +7,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { useNavigate } from 'react-router-dom';
 import TimeConvert from '../TimeConvert/TimeConvert';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToFavorite } from '../../Redux/actionCreators/actionCreators';
+import { addToFavorite, removeToFavorite } from '../../Redux/actionCreators/actionCreators';
 import { useState } from 'react';
 import addFavoriteData from '../../Redux/Thunk/addFavoriteData';
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -42,7 +42,7 @@ const HomeBlog = ({ data }) => {
     // .includes(_id)
     let favoriteValue;
     if (favorite.length) {
-        favoriteValue = favorite.find(data=> data.postId === _id)
+        favoriteValue = favorite.find(data => data.postId === _id)
     }
     console.log(favoriteValue)
 
@@ -55,8 +55,16 @@ const HomeBlog = ({ data }) => {
             }
             dispatch(addFavoriteData(favoriteData))
         }
-        // console.log(typeof(_id))
+    }
 
+    const handleFavoriteRemove = () =>{
+        if (user) {
+            const favoriteData = {
+                uid: user.uid,
+                postId: _id
+            }
+            dispatch(removeToFavorite(_id))
+        }
     }
     // console.log(f)
 
@@ -80,12 +88,23 @@ const HomeBlog = ({ data }) => {
                     <h2 className='text-xl syne font-bold cursor-pointer hover:text-blue-700 hover:underline' onClick={() => navigate(`/blog/${_id}`)}>{blogTitle.slice(0, 38)}...</h2>
                     <div className='flex items-center justify-between w-11/12 absolute bottom-[15px]'>
                         <p className='my-2 text-base'>Category: <span className='p-1 px-3 border rounded-full'>{blogCategory}</span></p>
-                        <span onClick={handleFavorite}>
-                            {/* <BsBookmarkFill /> */}
-                            <BsBookmarkFill
-                                className={`w-5 h-5 ${favoriteValue ? favoriteActive : favoriteBtn}`} />
-                            {/* <BiBookmark className='text-xl hover:text-red-500 hover:fill-red-500' /> */}
-                        </span>
+
+                        {/* <span onClick={handleFavorite}>
+                            <BsBookmarkFill className={`w-5 h-5 ${favoriteValue ? favoriteActive : favoriteBtn}`} />
+                        </span> */}
+
+                        {
+                            favoriteValue ?
+                                <span onClick={handleFavoriteRemove}>
+                                    <BsBookmarkFill className={`w-5 h-5 stroke-1 stroke-red-500 fill-red-500`} />
+                                </span>
+                                :
+                                <span onClick={handleFavorite}>
+                                    <BsBookmarkFill className={`w-5 h-5 fill-white hover:fill-red-500 stroke-1 stroke-black hover:stroke-red-500`} />
+                                </span>
+                        }
+
+                       
                     </div>
                     {/* <p className='inter' dangerouslySetInnerHTML={{__html: content.slice(0,10)}} ></p> */}
                 </div>

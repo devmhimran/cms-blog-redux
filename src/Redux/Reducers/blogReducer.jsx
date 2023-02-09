@@ -1,4 +1,4 @@
-import { ADD_BLOG, ADD_CATEGORY, ADD_TO_FAVORITE, DELETE_BLOG, DELETE_CATEGORY, FETCH_ERROR, FETCH_START, HOME_BLOG, LOAD_BLOG, LOAD_CATEGORY, LOAD_SINGLE_CATEGORY, PAGE_COUNT, UPDATE_CATEGORY } from "../actionTypes/actionTypes"
+import { ADD_BLOG, ADD_CATEGORY, ADD_TO_FAVORITE, DELETE_BLOG, DELETE_CATEGORY, FETCH_ERROR, FETCH_START, HOME_BLOG, LOAD_BLOG, LOAD_CATEGORY, LOAD_SINGLE_CATEGORY, PAGE_COUNT, REMOVE_TO_FAVORITE, UPDATE_CATEGORY } from "../actionTypes/actionTypes"
 
 export const initialState = {
     loading: false,
@@ -11,7 +11,7 @@ export const initialState = {
 }
 
 export const blogReducer = (state = initialState, action) => {
-    console.log(action.payload?.postId)
+
     switch (action.type) {
 
         case FETCH_START:
@@ -75,25 +75,37 @@ export const blogReducer = (state = initialState, action) => {
                 homeBlog: action.payload
             }
         case ADD_TO_FAVORITE:
-                const newFav = state.favorite.filter(data => data.postId !== action.payload.postId)
-                return {
-                    ...state,
-                    favorite: [...newFav, action.payload]
-                }
-            
-            // if (!state.favorite.includes(action.payload)) {
-
-            //     return {
-            //         ...state,
-            //         favorite: [...state.favorite, action.payload]
-            //     }
-            // } else {
-               
-            //     return {
-            //         ...state,
-            //         favorite: state.favorite.filter(data => data !== action.payload)
-            //     }
+            const filterFav = state.favorite.filter(data => data.postId !== action.payload.postId)
+            return {
+                ...state,
+                favorite: [...filterFav, action.payload]
+            }
+        case REMOVE_TO_FAVORITE:
+            console.log(action.payload)
+            const newFav = state.favorite.filter(data => data.postId !== action.payload)
+            return {
+                ...state,
+                favorite: [...newFav, action.payload]
+            }
+            // const newFav = state.favorite.filter
+            // return {
+            //     ...state,
+            //     favorite: []
             // }
+
+        // if (!state.favorite.includes(action.payload)) {
+
+        //     return {
+        //         ...state,
+        //         favorite: [...state.favorite, action.payload]
+        //     }
+        // } else {
+
+        //     return {
+        //         ...state,
+        //         favorite: state.favorite.filter(data => data !== action.payload)
+        //     }
+        // }
 
         default: return state
     }

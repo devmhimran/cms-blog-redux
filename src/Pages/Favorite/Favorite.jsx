@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PageTitle from '../../Component/PageTitle/PageTitle';
 import { useSelector } from 'react-redux';
 import HomeBlog from '../../Component/HomeBlog/HomeBlog';
@@ -36,11 +36,14 @@ const Favorite = () => {
         }
         return matchingObjects;
       }
+      useEffect(()=>{
+        
+      },[favorite.length])
       const output = getMatchingObjects(homeBlog, favorite)
-
-    if (favorite.length) {
+      if (favorite.length) {
         content = output.map(data => <HomeBlog key={data._id} data={data} />)
     }
+    
     // console.log(favorite, homeBlog)
     // console.log(v)
 
