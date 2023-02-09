@@ -2,7 +2,7 @@ import { addToFavorite } from "../actionCreators/actionCreators"
 
 
 const addFavoriteData = (data) => {
-    console.log(data)
+    // console.log(data)
     return async (dispatch, getState) => {
         
         // const res = await fetch('http://localhost:5000/category-upload', {

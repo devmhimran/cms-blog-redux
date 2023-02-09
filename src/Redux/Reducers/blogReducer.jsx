@@ -11,6 +11,7 @@ export const initialState = {
 }
 
 export const blogReducer = (state = initialState, action) => {
+    console.log(action.payload?.postId)
     switch (action.type) {
 
         case FETCH_START:
@@ -74,18 +75,25 @@ export const blogReducer = (state = initialState, action) => {
                 homeBlog: action.payload
             }
         case ADD_TO_FAVORITE:
-            if (!state.favorite.includes(action.payload)) {
+                const newFav = state.favorite.filter(data => data.postId !== action.payload.postId)
+                return {
+                    ...state,
+                    favorite: [...newFav, action.payload]
+                }
+            
+            // if (!state.favorite.includes(action.payload)) {
 
-                return {
-                    ...state,
-                    favorite: [...state.favorite, action.payload]
-                }
-            } else {
-                return {
-                    ...state,
-                    favorite: state.favorite.filter(data => data !== action.payload)
-                }
-            }
+            //     return {
+            //         ...state,
+            //         favorite: [...state.favorite, action.payload]
+            //     }
+            // } else {
+               
+            //     return {
+            //         ...state,
+            //         favorite: state.favorite.filter(data => data !== action.payload)
+            //     }
+            // }
 
         default: return state
     }

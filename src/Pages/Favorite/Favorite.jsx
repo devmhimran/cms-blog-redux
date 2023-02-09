@@ -24,10 +24,25 @@ const Favorite = () => {
     //     content = homeBlog.filter(data => favorite.includes(data._id)).map(data => <HomeBlog key={data._id} data={data} />)
     // }
 
+    function getMatchingObjects(array1, array2) {
+        const matchingObjects = [];
+        for (let i = 0; i < array1.length; i++) {
+            // console.log(array1[i])
+          for (let j = 0; j < array2.length; j++) {
+            if (JSON.stringify(array1[i]._id) === JSON.stringify(array2[j].postId)) {
+              matchingObjects.push(array1[i]);
+            }
+          }
+        }
+        return matchingObjects;
+      }
+      const output = getMatchingObjects(homeBlog, favorite)
+
     if (favorite.length) {
-        content = homeBlog.filter(data => favorite.every((obj, index) => obj.postId === homeBlog[index]._id)).map(data => <HomeBlog key={data._id} data={data} />)
+        content = output.map(data => <HomeBlog key={data._id} data={data} />)
     }
-    console.log(content)
+    // console.log(favorite, homeBlog)
+    // console.log(v)
 
     // if (favorite.length) {
     //     content = homeBlog.filter(data => {
@@ -45,7 +60,7 @@ const Favorite = () => {
                 </div>
             </>
     }
-    console.log(favorite.length)
+    // console.log(favorite.length)
     return (
         <div className='container max-w-screen-xl lg:mx-auto lg:px-0 px-3 py-12'>
             <PageTitle title='Favorite' />
