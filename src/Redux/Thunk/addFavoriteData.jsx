@@ -1,20 +1,35 @@
 import { addToFavorite } from "../actionCreators/actionCreators"
 
 
-const addFavoriteData = (data) => {
-    // console.log(data)
+const addFavoriteData = (id, favoriteData) => {
+    console.log(favoriteData)
     return async (dispatch, getState) => {
         
-        // const res = await fetch('http://localhost:5000/category-upload', {
-        //     method: "POST",
-        //     body: JSON.stringify(category),
+        // const res = await fetch(`http://localhost:5000/add-favorite?id=${postId}`, {
+        //     method: "PUT",
+        //     body: JSON.stringify(data),
         //     headers: {
         //         "Content-type": "application/json",
         //         "authorization": `Bearer ${localStorage.getItem('accessToken')}`
         //     }
         // })
         // const data = await res.json();
-        dispatch(addToFavorite(data))
+
+       
+
+        const res = await fetch(`http://localhost:5000/add-favorite?postId=${id}`, {
+            method: "PUT",
+            body: JSON.stringify(favoriteData),
+            headers: {
+                "Content-type": "application/json",
+                "authorization": `Bearer ${localStorage.getItem('accessToken')}`
+            }
+        })
+        const data = await res.json();
+
+        dispatch(addToFavorite(favoriteData))
+
+      
     }
 }
 

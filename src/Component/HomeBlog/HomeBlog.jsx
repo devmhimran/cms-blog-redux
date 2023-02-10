@@ -44,7 +44,7 @@ const HomeBlog = ({ data }) => {
     if (favorite.length) {
         favoriteValue = favorite.find(data => data.postId === _id)
     }
-    console.log(favoriteValue)
+    // console.log(favoriteValue)
 
     // setFavorite(favoriteValue)
     const handleFavorite = () => {
@@ -53,7 +53,7 @@ const HomeBlog = ({ data }) => {
                 uid: user.uid,
                 postId: _id
             }
-            dispatch(addFavoriteData(favoriteData))
+            dispatch(addFavoriteData(_id, favoriteData))
         }
     }
 
