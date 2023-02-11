@@ -11,11 +11,11 @@ const loadFavoriteData = (email) => {
                 }
             })
             const data = await res.json()
-            // if(data.length){
-            //     dispatch(loadFavorite(data))
-            // }
-            console.log(email)
-            console.log(data)
+            if(data.length){
+                dispatch(loadFavorite(data))
+            }
+            // console.log(email)
+            // console.log(data)
         }
     }
 }

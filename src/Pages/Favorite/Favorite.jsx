@@ -5,14 +5,12 @@ import HomeBlog from '../../Component/HomeBlog/HomeBlog';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../firebase.init';
 import loadFavoriteData from '../../Redux/Thunk/LoadFavorite';
+import homeBlogData from '../../Redux/Thunk/homeBlog';
 
 const Favorite = () => {
     const { favorite, homeBlog } = useSelector(state => state.blog)
     const [user] = useAuthState(auth);
     const dispatch = useDispatch();
-    if(user){
-        dispatch(loadFavoriteData(user.email))
-    }
     let content;
     // const output = Object.entries(
     //     favorite.reduce((prev, { homeBlog }) => {
@@ -32,28 +30,38 @@ const Favorite = () => {
     //     content = homeBlog.filter(data => favorite.includes(data._id)).map(data => <HomeBlog key={data._id} data={data} />)
     // }
 
-    function getMatchingObjects(array1, array2) {
-        const matchingObjects = [];
-        for (let i = 0; i < array1.length; i++) {
-            // console.log(array1[i])
-          for (let j = 0; j < array2.length; j++) {
-            if (JSON.stringify(array1[i]._id) === JSON.stringify(array2[j].postId)) {
-              matchingObjects.push(array1[i]);
+    useEffect(() => {
+        dispatch(loadFavoriteData(user.email))
+        dispatch(homeBlogData())
+    }, [user])
+
+
+
+    //   useEffect(()=>{
+    if (favorite.length) {
+        const output = getMatchingObjects(homeBlog, favorite)
+        function getMatchingObjects(array1, array2) {
+            const matchingObjects = [];
+            for (let i = 0; i < array1.length; i++) {
+                // console.log(array1[i])
+                for (let j = 0; j < array2.length; j++) {
+                    if (JSON.stringify(array1[i]._id) === JSON.stringify(array2[j].postId)) {
+                        matchingObjects.push(array1[i]);
+                    }
+                }
             }
-          }
+            return matchingObjects;
         }
-        return matchingObjects;
-      }
-      useEffect(()=>{
-        
-      },[favorite.length])
-      const output = getMatchingObjects(homeBlog, favorite)
-      if (favorite.length) {
-        content = output.map(data => <HomeBlog key={data._id} data={data} />)
-    }
     
+        content = output.map(data => <HomeBlog key={data._id} data={data} />)
+        console.log(output)
+    }
+   
+
+    console.log(homeBlog)
+
     // console.log(favorite, homeBlog)
-    // console.log(v)
+    console.log(favorite.length)
 
     // if (favorite.length) {
     //     content = homeBlog.filter(data => {

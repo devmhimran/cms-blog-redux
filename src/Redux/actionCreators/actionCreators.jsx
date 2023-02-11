@@ -117,9 +117,10 @@ export const userDataSignUp = (data) =>{
     }
 }
 
-export const loadFavorite = () =>{
+export const loadFavorite = (data) =>{
     return {
-        type: LOAD_FAVORITE
+        type: LOAD_FAVORITE,
+        payload: data
     }
 }
 
