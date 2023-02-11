@@ -26,8 +26,12 @@ const addFavoriteData = (id, favoriteData) => {
             }
         })
         const data = await res.json();
+        console.log(data)
 
-        dispatch(addToFavorite(favoriteData))
+        dispatch(addToFavorite({
+            _id: data.upsertedId,
+            ...favoriteData
+        }))
 
       
     }

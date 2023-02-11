@@ -1,10 +1,18 @@
 import React, { useEffect } from 'react';
 import PageTitle from '../../Component/PageTitle/PageTitle';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import HomeBlog from '../../Component/HomeBlog/HomeBlog';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../firebase.init';
+import loadFavoriteData from '../../Redux/Thunk/LoadFavorite';
 
 const Favorite = () => {
     const { favorite, homeBlog } = useSelector(state => state.blog)
+    const [user] = useAuthState(auth);
+    const dispatch = useDispatch();
+    if(user){
+        dispatch(loadFavoriteData(user.email))
+    }
     let content;
     // const output = Object.entries(
     //     favorite.reduce((prev, { homeBlog }) => {

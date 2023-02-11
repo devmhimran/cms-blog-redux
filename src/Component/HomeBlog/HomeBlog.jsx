@@ -44,13 +44,13 @@ const HomeBlog = ({ data }) => {
     if (favorite.length) {
         favoriteValue = favorite.find(data => data.postId === _id)
     }
-    // console.log(favoriteValue)
+    // console.log(user.email)
 
     // setFavorite(favoriteValue)
     const handleFavorite = () => {
         if (user) {
             const favoriteData = {
-                uid: user.uid,
+                userEmail: user.email,
                 postId: _id
             }
             dispatch(addFavoriteData(_id, favoriteData))
@@ -60,7 +60,7 @@ const HomeBlog = ({ data }) => {
     const handleFavoriteRemove = () =>{
         if (user) {
             const favoriteData = {
-                uid: user.uid,
+                userEmail: user.email,
                 postId: _id
             }
             dispatch(removeToFavorite(_id))
