@@ -12,6 +12,7 @@ import { useState } from 'react';
 import addFavoriteData from '../../Redux/Thunk/addFavoriteData';
 import { useAuthState } from 'react-firebase-hooks/auth'
 import auth from '../../Pages/firebase.init';
+import removeFavoriteData from '../../Redux/Thunk/removeFavorite';
 
 const HomeBlog = ({ data }) => {
     const { _id, blogTitle, featuredImage, content, blogCategory, date } = data
@@ -63,7 +64,7 @@ const HomeBlog = ({ data }) => {
                 userEmail: user.email,
                 postId: _id
             }
-            dispatch(removeToFavorite(_id))
+            dispatch(removeFavoriteData(_id))
         }
     }
     // console.log(f)
