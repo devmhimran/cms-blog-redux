@@ -48,7 +48,24 @@ const Comment = ({ data, postAuthor, id }) => {
                     }
                 })
         }
-
+    }
+    const handleDeleteButton = (id) => {
+        const isProceed = window.confirm('Are you sure to delete?')
+        if (isProceed) {
+            fetch(`http://localhost:5000/delete-comment/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "content-type": "application/json",
+                    "authorization": `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (isProceed && data.acknowledged) {
+                        window.location.reload()
+                    }
+                })
+        }
     }
 
     return (
@@ -84,7 +101,7 @@ const Comment = ({ data, postAuthor, id }) => {
                             <div className="comment__option flex items-center gap-1.5 mt-2">
                                 <button className='hover:text-blue-600' onClick={() => handleEditButton(data._id)}>Edit</button>
                                 <span className='w-px h-3 bg-gray-500'></span>
-                                <button className='hover:text-blue-600'>Delete</button>
+                                <button className='hover:text-blue-600' onClick={() => handleDeleteButton(data._id)}>Delete</button>
                             </div>
                         </> : ''
                 }
