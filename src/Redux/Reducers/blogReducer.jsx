@@ -1,4 +1,4 @@
-import { ADD_BLOG, ADD_CATEGORY, ADD_TO_FAVORITE, DELETE_BLOG, DELETE_CATEGORY, FETCH_ERROR, FETCH_START, HOME_BLOG, LOAD_BLOG, LOAD_CATEGORY, LOAD_FAVORITE, LOAD_SINGLE_CATEGORY, PAGE_COUNT, REMOVE_TO_FAVORITE, UPDATE_CATEGORY } from "../actionTypes/actionTypes"
+import { ADD_BLOG, ADD_CATEGORY, ADD_TO_FAVORITE, DELETE_BLOG, DELETE_CATEGORY, EMPTY_FAVORITE, FETCH_ERROR, FETCH_START, HOME_BLOG, LOAD_BLOG, LOAD_CATEGORY, LOAD_FAVORITE, LOAD_SINGLE_CATEGORY, PAGE_COUNT, REMOVE_TO_FAVORITE, UPDATE_CATEGORY } from "../actionTypes/actionTypes"
 
 export const initialState = {
     loading: false,
@@ -91,6 +91,11 @@ export const blogReducer = (state = initialState, action) => {
             return {
                 ...state,
                 favorite: [...newFav, action.payload]
+            }
+        case EMPTY_FAVORITE:
+            return {
+                ...state,
+                favorite: []
             }
         // const newFav = state.favorite.filter
         // return {

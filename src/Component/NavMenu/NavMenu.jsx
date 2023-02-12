@@ -7,19 +7,20 @@ import auth from '../../Pages/firebase.init';
 import { signOut } from 'firebase/auth';
 import { BiBookmark } from 'react-icons/bi';
 import postHubLogo from '../../assets/devmhimran-post-hub-logo.png'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useSignInUserHook from '../SignInUserHook/useSignInUserHook';
 import { useEffect } from 'react';
 import Loading from '../Loading/Loading';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { BiUser } from 'react-icons/bi';
+import { emptyFavorite } from '../../Redux/actionCreators/actionCreators';
 
 const NavMenu = () => {
     const [open, setOpen] = useState(false);
     const [profileDropdown, setProfileDropdown] = useState(false);
     const [user, loading] = useAuthState(auth);
     // const [signInUser] = useSignInUserHook()
-
+    const dispatch = useDispatch();
     const [signInUser, setSignInUser] = useState({});
     
     useEffect(() => {
@@ -38,6 +39,7 @@ const NavMenu = () => {
 
     const handleSignOut = () => {
         signOut(auth);
+        dispatch(emptyFavorite())
         localStorage.removeItem('accessToken');
     }
 
