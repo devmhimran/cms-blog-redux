@@ -88,7 +88,7 @@ const SingleBlog = () => {
             <PageTitle title={`${blog.blogTitle}`} />
             <div className="block lg:flex gap-6">
                 <div className="w-full lg:w-3/5 border p-6 rounded-2xl">
-                    <h1 className='text-4xl font-bold mb-4 syne'>{blog.blogTitle}</h1>
+                    <h1 className='text-2xl lg:text-4xl font-bold mb-4 syne'>{blog.blogTitle}</h1>
                     <div className="author__detail my-3 flex items-center justify-between">
                         <div className=' flex items-center gap-3'>
                             <LazyLoadImage
@@ -99,7 +99,7 @@ const SingleBlog = () => {
                                 loading='eager'
                             />
                             {/* <img className='w-10 h-10 rounded-full object-cover' src={value ? value.profileImage : ''} alt="" /> */}
-                            <p className='capitalize font-semibold text-2xl'>{value ? value.name : ''}</p>
+                            <p className='capitalize font-semibold text-lg lg:text-2xl'>{value ? value.name : ''}</p>
                         </div>
                         <div className="date">
                             <p>{time}</p>

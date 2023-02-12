@@ -37,9 +37,9 @@ const HomeCategory = () => {
                 // onSlideChange={() => console.log('slide change')}
                 // onSwiper={(swiper) => console.log(swiper)}
             >
-                <SwiperSlide onClick={() => dispatch(homeAllPost())} className={`${ allPost ? categoryActive : categoryClass} p-2 rounded-lg inter text-base font-normal text-center cursor-pointer`}>All Post</SwiperSlide>
+                <SwiperSlide onClick={() => dispatch(homeAllPost())} className={`${ allPost ? categoryActive : categoryClass} p-2 rounded-lg inter text-sm lg:text-base font-normal text-center cursor-pointer`}>All Post</SwiperSlide>
                 {
-                    category.map(data => <SwiperSlide key={data._id} onClick={() => handleSelectCategory(data.categoryName)} className={`${filterCategory && data.categoryName.includes(filterCategory) ? categoryActive : categoryClass} p-2 rounded-lg inter text-base font-normal text-center cursor-pointer`}>{data.categoryName}</SwiperSlide>)
+                    category.map(data => <SwiperSlide key={data._id} onClick={() => handleSelectCategory(data.categoryName)} className={`${filterCategory && data.categoryName.includes(filterCategory) ? categoryActive : categoryClass} p-2 rounded-lg inter text-sm lg:text-base font-normal text-center cursor-pointer`}>{data.categoryName}</SwiperSlide>)
                 }
             </Swiper>
         </div>
