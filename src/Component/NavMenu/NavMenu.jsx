@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { RiSearchLine } from 'react-icons/ri';
 import { RxHamburgerMenu, RxCross1 } from 'react-icons/rx';
@@ -58,6 +58,12 @@ const NavMenu = () => {
             console.log(newFilter)
     }
 
+    const searchRef = useRef();
+    const handler = (e) =>{
+        console.log('search', searchRef.current.contains(e.target))
+    }
+    
+
     if (loading) {
         return <Loading />
     }
@@ -85,10 +91,10 @@ const NavMenu = () => {
                                         <span className="absolute inset-y-0 left-0 flex items-center pl-2">
                                             <RiSearchLine className='h-3.5 w-3.5 fill-black' />
                                         </span>
-                                        <input className='placeholder:text-black border border-0 pl-9 pr-3 rounded-full py-1 w-full outline-0 text-base' placeholder="Search" type="text" name="search" onChange={handleSearch} />
+                                        <input className='placeholder:text-black border border-0 pl-9 pr-3 rounded-full py-1 w-full outline-0 text-base' placeholder="Search" type="text" name="search" onChange={handleSearch} ref={searchRef} />
                                         {
                                             filteredSearch.length !== 0 && <>
-                                                <div className='w-full absolute border rounded-xl p-3 top-[115%] h-[400px] overflow-hidden overflow-y-auto bg-gray-50'>
+                                                <div className='w-full absolute border rounded-xl top-[115%] h-auto overflow-hidden overflow-y-auto bg-gray-50'>
                                                     <SearchResult searchData={filteredSearch} />
                                                 </div>
                                             </>
