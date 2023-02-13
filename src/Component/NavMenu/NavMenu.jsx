@@ -14,15 +14,18 @@ import Loading from '../Loading/Loading';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { BiUser } from 'react-icons/bi';
 import { emptyFavorite } from '../../Redux/actionCreators/actionCreators';
+import SearchResult from '../SearchResult/SearchResult';
 
 const NavMenu = () => {
     const [open, setOpen] = useState(false);
     const [profileDropdown, setProfileDropdown] = useState(false);
     const [user, loading] = useAuthState(auth);
     // const [signInUser] = useSignInUserHook()
+    const { homeBlog } = useSelector(state => state.blog)
     const dispatch = useDispatch();
     const [signInUser, setSignInUser] = useState({});
-    
+    const [filteredSearch, setFilteredSearch] = useState([]);
+
     useEffect(() => {
         if (user) {
             fetch(`http://localhost:5000/user/${user.uid}`, {
@@ -43,7 +46,17 @@ const NavMenu = () => {
         localStorage.removeItem('accessToken');
     }
 
-    // console.log(signInUser)
+    console.log(filteredSearch)
+
+    const handleSearch = (e) => {
+        e.preventDefault()
+        const search = e.target.value;
+        const newFilter = homeBlog.filter(data => {
+            return data.blogTitle.toLowerCase().includes(search.toLowerCase())
+        })
+        setFilteredSearch(newFilter)
+            console.log(newFilter)
+    }
 
     if (loading) {
         return <Loading />
@@ -72,7 +85,14 @@ const NavMenu = () => {
                                         <span className="absolute inset-y-0 left-0 flex items-center pl-2">
                                             <RiSearchLine className='h-3.5 w-3.5 fill-black' />
                                         </span>
-                                        <input className='placeholder:text-black border border-0 pl-9 pr-3 rounded-full py-1 w-full outline-0 text-base' placeholder="Search" type="text" name="search" />
+                                        <input className='placeholder:text-black border border-0 pl-9 pr-3 rounded-full py-1 w-full outline-0 text-base' placeholder="Search" type="text" name="search" onChange={handleSearch} />
+                                        {
+                                            filteredSearch.length !== 0 && <>
+                                                <div className='w-full absolute border rounded-xl p-3 top-[115%] h-[400px] overflow-hidden overflow-y-auto bg-gray-50'>
+                                                    <SearchResult searchData={filteredSearch} />
+                                                </div>
+                                            </>
+                                        }
                                     </div>
                                 </div>
                             </li>
