@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import loadBlogData from '../../Redux/Thunk/loadBlogData';
 import HomeBlog from '../../Component/HomeBlog/HomeBlog';
 import HomeCategory from '../../Component/HomeCategory/HomeCategory';
 import { homeAllPost, loadHomeBlog } from '../../Redux/actionCreators/actionCreators';
 import homeBlogData from '../../Redux/Thunk/homeBlog';
 import FeaturedPost from '../../Component/FeaturedPost/FeaturedPost';
 import PageTitle from '../../Component/PageTitle/PageTitle';
-import Loading from '../../Component/Loading/Loading';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -21,11 +19,9 @@ const Home = () => {
     const { homeBlog } = useSelector(state => state.blog)
     const { homePageFilter } = useSelector(state => state.filter)
     const paginationActive = 'bg-black text-white'
-    // console.log(homePageFilter.allPost)
 
     if (homeBlog.length) {
         content = [...homeBlog].reverse().map(data => <HomeBlog key={data._id} data={data} />)
-        // console.log(content)
     }
     if (homeBlog.length && homePageFilter.allPost) {
         content = [...homeBlog].reverse().map(data => <HomeBlog key={data._id} data={data} />)
@@ -49,8 +45,7 @@ const Home = () => {
             </div>
         </>
     }
-    // const featuredPost = homeBlog.filter(data => data.featuredPost === true)
-    // console.log(featuredPost)
+
     return (
         <div className='container max-w-screen-xl lg:mx-auto lg:px-0 px-3 pb-20'>
             <PageTitle title='Home' />

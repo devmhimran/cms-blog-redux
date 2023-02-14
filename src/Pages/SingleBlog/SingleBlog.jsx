@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import PageTitle from '../../Component/PageTitle/PageTitle';
 import { useDispatch, useSelector } from 'react-redux';
 import homeBlogData from '../../Redux/Thunk/homeBlog';
-import { addComment, homeAllPost } from '../../Redux/actionCreators/actionCreators';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from 'swiper';
 import 'swiper/css';
@@ -26,13 +25,13 @@ const SingleBlog = () => {
     const time = TimeConvert(blog.date)
 
     useEffect(() => {
-        fetch(`https://cms-blog-redux-server.vercel.app/blog/${id}`)
+        fetch(`http://localhost:5000/blog/${id}`)
             .then(res => res.json())
             .then(data => setBlog(data))
     }, [id])
 
     useEffect(() => {
-        fetch('https://cms-blog-redux-server.vercel.app/user')
+        fetch('http://localhost:5000/user')
             .then(res => res.json())
             .then(data => setProfileUser(data))
     }, [])
@@ -62,12 +61,10 @@ const SingleBlog = () => {
             blogComment
         }
         dispatch(addCommentData(commentData))
-        console.log(blogComment)
         e.target.reset()
     }
 
     const value = profileUser.find(data => blog.userId === data.uid)
-    // console.log(value)
 
     let commentContent;
     const commentFIlter = comment.filter(data => data.postId === id)
@@ -78,7 +75,6 @@ const SingleBlog = () => {
     if (commentFIlter.length === 0) {
         commentContent = <><p className='font-semibold text-gray-500 mt-4'>No Comment</p></>
     }
-
 
     if (loading) {
         return <Loading />
@@ -98,7 +94,6 @@ const SingleBlog = () => {
                                 className='w-10 h-10 rounded-full object-cover'
                                 loading='eager'
                             />
-                            {/* <img className='w-10 h-10 rounded-full object-cover' src={value ? value.profileImage : ''} alt="" /> */}
                             <p className='capitalize font-semibold text-lg lg:text-2xl'>{value ? value.name : ''}</p>
                         </div>
                         <div className="date">
@@ -112,7 +107,6 @@ const SingleBlog = () => {
                         className='w-full'
                         loading='eager'
                     />
-                    {/* <img className='w-full' src={blog.featuredImage} alt="" /> */}
                     <p className='inter mt-6' dangerouslySetInnerHTML={{ __html: blog.content }} ></p>
                 </div>
                 <div className='w-full lg:w-2/5 h-[600px] border p-6 rounded-2xl lg:mt-0 mt-6'>

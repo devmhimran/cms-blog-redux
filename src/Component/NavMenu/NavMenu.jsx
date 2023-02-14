@@ -8,20 +8,16 @@ import { signOut } from 'firebase/auth';
 import { BiBookmark } from 'react-icons/bi';
 import postHubLogo from '../../assets/devmhimran-post-hub-logo.png'
 import { useDispatch, useSelector } from 'react-redux';
-import useSignInUserHook from '../SignInUserHook/useSignInUserHook';
 import { useEffect } from 'react';
 import Loading from '../Loading/Loading';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { BiUser } from 'react-icons/bi';
 import { emptyFavorite } from '../../Redux/actionCreators/actionCreators';
-import SearchResult from '../SearchResult/SearchResult';
-import { compose } from 'redux';
+
 
 const NavMenu = () => {
     const [open, setOpen] = useState(false);
     const [profileDropdown, setProfileDropdown] = useState(false);
     const [user, loading] = useAuthState(auth);
-    // const [signInUser] = useSignInUserHook()
     const { homeBlog } = useSelector(state => state.blog)
     const dispatch = useDispatch();
     const [signInUser, setSignInUser] = useState({});
@@ -30,7 +26,7 @@ const NavMenu = () => {
 
     useEffect(() => {
         if (user) {
-            fetch(`https://cms-blog-redux-server.vercel.app/user/${user.uid}`, {
+            fetch(`http://localhost:5000/user/${user.uid}`, {
                 method: "GET",
                 headers: {
                     "Content-type": "application/json",
@@ -47,8 +43,6 @@ const NavMenu = () => {
         dispatch(emptyFavorite())
         localStorage.removeItem('accessToken');
     }
-
-    // console.log(filteredSearch)
 
     const handleSearch = (e) => {
         e.preventDefault()
@@ -93,21 +87,6 @@ const NavMenu = () => {
 
     })
 
-    console.log(profileDropdown)
-
-    // let content;
-    // useEffect(() => {
-    //     content = filteredSearch.slice(0, 6).map(data =>
-    //         <>
-    //             <div key={data._id} className='flex items-center gap-3 m-4'>
-    //                 <img className='w-14 h-14 object-cover rounded-xl' src={data.featuredImage} alt="" />
-    //                 <p className='text-base'><Link to={`/blog/${data._id}`}>{data.blogTitle}</Link></p>
-    //             </div>
-    //         </>
-    //     )
-    // }, [filteredSearch.length])
-
-
     if (loading) {
         return <Loading />
     }
@@ -125,9 +104,6 @@ const NavMenu = () => {
                     <div className={`navbar__desktop lg:block lg:static absolute z-10 lg:top-0 bg-white w-full left-0 lg:p-0 p-4 lg:border-0 border lg:duration-75 duration-500 ease-in 
                     ${open ? 'top-[8%]' : 'top-[-550px]'}`}>
                         <ul className='inter block lg:flex items-center gap-6 justify-end'>
-                            {/* <li className='text-lg font-medium hover:text-[#2304FB] lg:my-0 my-2'><Link to='/'>Home</Link></li>
-                            <li className='text-lg font-medium hover:text-[#2304FB] lg:my-0 my-2'><Link to='/about'>About</Link></li>
-                            <li className='text-lg font-medium hover:text-[#2304FB] lg:my-0 my-2'><Link to='/contact'>Contact</Link></li> */}
                             <li className='lg:my-0 my-2 w-full lg:w-8/12'>
                                 <div className='search__box'>
                                     <div ref={searchRef} className="relative block border border-[#C7C9D1] rounded-full">
@@ -140,7 +116,6 @@ const NavMenu = () => {
                                             searchOpen ? <>
                                                 <div className='w-full absolute border rounded-xl top-[115%] h-auto overflow-hidden overflow-y-auto bg-gray-50'>
                                                     <div>
-                                                        {/* <p>hello print</p> */}
                                                         {
                                                             filteredSearch.slice(0, 6).map(data =>
                                                                 <><Link to={`/blog/${data._id}`}>
@@ -168,22 +143,12 @@ const NavMenu = () => {
                                             >
                                                 {
                                                     signInUser.profileImage ?
-                                                        // <LazyLoadImage
-                                                        //     src={signInUser.profileImage}
-
-                                                        //     effect="blur"
-                                                        //     className='w-10 h-10 object-cover rounded-full m-0.5 border hover:border-blue-600'
-                                                        //     loading='eager'
-                                                        // /> 
                                                         <img className='w-10 h-10 object-cover rounded-full m-0.5' src={signInUser.profileImage} alt="" />
                                                         :
                                                         <span className=''>
                                                             <BiUser className='text-2xl' />
                                                         </span>
                                                 }
-
-
-                                                {/* <img className='w-10 h-10 object-cover rounded-full m-0.5' src={signInUser.profileImage} alt="" /> */}
                                             </div>
                                             {
                                                 profileDropdown ?

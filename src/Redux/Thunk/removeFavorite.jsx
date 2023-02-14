@@ -2,7 +2,7 @@ import { removeToFavorite } from "../actionCreators/actionCreators"
 
 const removeFavoriteData = (id) => {
     return async (dispatch, getState) =>{
-        const res = await fetch(`https://cms-blog-redux-server.vercel.app/delete-favorite/${id}`,{
+        const res = await fetch(`http://localhost:5000/delete-favorite/${id}`,{
             method: "DELETE",
             headers: {
                 "authorization": `Bearer ${localStorage.getItem('accessToken')}`

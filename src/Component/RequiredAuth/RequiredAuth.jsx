@@ -10,14 +10,11 @@ const RequiredAuth = ({children}) => {
     const [user, loading] = useAuthState(auth);
     const [sendEmailVerification, sending, error] = useSendEmailVerification(auth);
     const location = useLocation();
-    const navigate = useNavigate()
-    const dispatch = useDispatch();
 
     if (loading) {
         return <Loading></Loading>;
     }
-    // console.log(<Navigate to='/sign-in' state={{ from: location }} replace></Navigate>)
-    // console.log(<Navigate to='/' replace></Navigate>)
+
     if (user) {
         if (location.pathname === '/sign-in' || location.pathname === '/sign-up') {
             window.history.back()
@@ -40,7 +37,6 @@ const RequiredAuth = ({children}) => {
                     <small className='block mt-4' disabled={true}>Note: If you not get this email, <br /> please check your spam box</small>
                 </div>
             </div>
-            {/* <Toaster position="top-center" reverseOrder={false} /> */}
         </div>;
     }
     return children;

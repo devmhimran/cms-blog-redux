@@ -23,10 +23,8 @@ const UpdateBlog = () => {
     const imageApi = 'ef367f576eca302d4916e3889c6e0cc6';
     const date = new Date();
     const options = { month: "short", day: "numeric", year: "numeric" };
-
     const [featuredBlog, setFeaturedBlog] = useState(false)
 
-    // setFeaturedBlog(blog.featuredBlog)
     useEffect(() => {
         dispatch(loadCategoryData())
 
@@ -34,7 +32,7 @@ const UpdateBlog = () => {
 
     useEffect(() => {
 
-        fetch(`https://cms-blog-redux-server.vercel.app/blog/${id}`)
+        fetch(`http://localhost:5000/blog/${id}`)
             .then(res => res.json())
             .then(data => setBlog(data))
 
@@ -46,28 +44,12 @@ const UpdateBlog = () => {
 
 
     const selected = useSelector(state => state.featuredBlogReducer.featuredBlog)
-    // console.log(blog.featuredBlog)
     const { category } = useSelector(state => state.blog)
     const btnClass = 'bg-black text-white hover:bg-white hover:text-black border border-black ';
     const btnDisable = 'bg-gray-300 text-gray-600'
 
-
-    console.log(selected)
     const handleFeaturedBlog = () => {
         dispatch(toggleFeaturedBlog(!selected))
-        // option = !selected.featuredBlog
-        // console.log(!selected)
-        // selected = { ...blog,
-        //     featuredBlog: !selected.featuredBlog
-        // };
-        // setFeaturedBlog(!featuredBlog)
-        // if(selected.featuredBlog){
-        //     selected.featuredBlog = false
-        // }else{
-        //     selected.featuredBlog = true
-        // }
-        // setFeaturedBlog(!featuredBlog)
-
     }
 
     const handleFeaturedImage = (e) => {
@@ -85,7 +67,6 @@ const UpdateBlog = () => {
                 setFeaturedImage(featuredImage);
             })
     }
-
 
     const handleFeaturedImagePreviewClear = () => {
         setFeaturedImage('')
@@ -114,7 +95,7 @@ const UpdateBlog = () => {
             date: new Intl.DateTimeFormat("en-US", options).format(date)
         }
 
-        fetch(`https://cms-blog-redux-server.vercel.app/update-blog/${id}`, {
+        fetch(`http://localhost:5000/update-blog/${id}`, {
             method: "PUT",
             headers: {
                 "content-type": "application/json",
@@ -126,8 +107,6 @@ const UpdateBlog = () => {
         toastify('success', 'Successfully Update')
 
     }
-
-
 
     return (
         <div>
@@ -146,7 +125,6 @@ const UpdateBlog = () => {
                             ref={editor}
                             value={blog.content}
                             onChange={newContent => setContent(newContent)}
-                        // defaultValue={blog.content}
                         />
                     </div>
                     <div className='flex gap-3 items-center'>
@@ -220,7 +198,6 @@ const UpdateBlog = () => {
                                     <div className="featured__image relative w-fit">
                                         <img className='w-64 mt-4' src={blog.featuredImage} alt="" />
                                         <span className='absolute top-[-5px] right-[-7px] cursor-pointer bg-white rounded-full' onClick={handleFeaturedImagePreviewClear}>
-                                            {/* <TiDeleteOutline className='text-2xl text-gray-600' /> */}
                                         </span>
                                     </div>
                                 </>

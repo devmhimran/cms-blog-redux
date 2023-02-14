@@ -1,20 +1,15 @@
 import React, { useRef, useState } from 'react';
-import { FcGoogle } from 'react-icons/fc';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { TiDeleteOutline } from 'react-icons/ti';
 import { useForm } from 'react-hook-form';
 import auth from '../firebase.init';
-import { useAuthState, useCreateUserWithEmailAndPassword, useSendEmailVerification, useSignInWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import PageTitle from '../../Component/PageTitle/PageTitle';
 import useToken from '../../Component/Token/useToken';
-import { useDispatch } from 'react-redux';
 
 const SignUp = () => {
-    const [profileImage, setProfileImage] = useState('')
     const [passwordError, setPasswordError] = useState('')
-    const resetProfileImageFile = useRef();
     const resetFeaturedImageFile = useRef();
-    // const userSignUpName = useRef();
     const [featuredImage, setFeaturedImage] = useState('')
     const imageApi = 'ef367f576eca302d4916e3889c6e0cc6';
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -61,7 +56,6 @@ const SignUp = () => {
         user
     }
     const [token] = useToken(userData, 'signUp')
-    // useToken(userData)
 
     const onSubmit = async (data) => {
         const name = data.name
@@ -69,11 +63,6 @@ const SignUp = () => {
         const email = data.email;
         const password = data.password;
         const confirmPassword = data.confirmPassword;
-        // const userData = {
-        //     name,
-        //     featuredImage,
-        //     user
-        // }
         if (password !== confirmPassword) {
             setPasswordError("Password doesn't match")
         } else {
@@ -83,44 +72,12 @@ const SignUp = () => {
             await updateProfile({ photoURL: featuredImage });
             await sendEmailVerification();
         }
-        // const signUpForm = {
-        //     name,
-        //     email,
-        //     password,
-        //     confirmPassword,
-        //     profileImage
-        // }
-
-
-        // if(name && featuredImage){
-        //     const userData = {
-        //         featuredImage,
-        //         name
-        //     }
-        //     useToken(userData)
-        // }
-        // console.log(name)
     }
-    // const value = useSelector(state => state.userSignUpData)
-    // console.log(value)
-
-
-    // if(featuredImage && user){
-    //     const userData = {
-    //         name: name,
-    //         featuredImage,
-    //         user
-    //     }
-    //     dispatch(userDataSignUp(userData))
-    //     useToken(userData)
-    //     console.log(userData)
-    // }
 
     const handleGoogleSignUp = () => {
         signInWithGoogle()
     }
 
-    console.log(name)
     if (token) {
         navigate(from, { replace: true });
     }
@@ -255,9 +212,6 @@ const SignUp = () => {
                                 <span className='mx-3 text-gray-500'>or</span>
                                 <hr className='w-full' />
                             </div>
-                            {/* <div className="input__form pt-2.5">
-                                <button onClick={handleGoogleSignUp} className='flex items-center mx-auto gap-1.5 border px-6 py-2.5 rounded-full hover:shadow-lg duration-300' to='/sign-in'> <span><FcGoogle /></span> <span>Continue With Google</span></button>
-                            </div> */}
                         </form>
                     </div>
                 </div>

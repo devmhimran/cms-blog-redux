@@ -1,6 +1,6 @@
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../Pages/firebase.init";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 const ProtectRedirect = ({ children }) => {

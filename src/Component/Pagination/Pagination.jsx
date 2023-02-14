@@ -10,7 +10,7 @@ const Pagination = () => {
     const [nextDisable, setNextDisable] = useState(false)
     const dispatch = useDispatch();
     useEffect(() => {
-        fetch('https://cms-blog-redux-server.vercel.app/page-count')
+        fetch('http://localhost:5000/page-count')
             .then(res => res.json())
             .then(data => {
                 const count = data.count
@@ -42,7 +42,7 @@ const Pagination = () => {
     useEffect(() => {
         dispatch(pageCountNum(count))
     }, [count])
-    console.log(count)
+
     return (
         <div className="pagination flex justify-between pt-16">
             <button disabled={count === 1 ? true : previousDisable} onClick={handlePrevious} className={`${count === 1 ? 'cursor-not-allowed text-gray-400' : previousDisable ? 'cursor-not-allowed text-gray-400' : btnEnable} py-1.5 px-4 border text-lg rounded-full flex items-center gap-2`}><span><HiOutlineArrowLongLeft /></span> Previous</button>

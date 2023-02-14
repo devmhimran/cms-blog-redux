@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../Pages/firebase.init';
-import Loading from '../Loading/Loading';
 
 const Comment = ({ data, postAuthor, id }) => {
     const [user, loading] = useAuthState(auth)
@@ -12,14 +11,12 @@ const Comment = ({ data, postAuthor, id }) => {
 
 
     useEffect(() => {
-        fetch('https://cms-blog-redux-server.vercel.app/user')
+        fetch('http://localhost:5000/user')
             .then(res => res.json())
             .then(data => setProfileUser(data))
     }, [])
 
-    // console.log(data._id)
     const handleEditButton = (id) => {
-        console.log(id)
         setCommentId(id)
         setEditForm(!editForm)
     }
@@ -30,10 +27,8 @@ const Comment = ({ data, postAuthor, id }) => {
         const blogComment = {
             editComment
         }
-        console.log(commentId)
-
         if (isProceed) {
-            fetch(`https://cms-blog-redux-server.vercel.app/comment-update/${commentId}`, {
+            fetch(`http://localhost:5000/comment-update/${commentId}`, {
                 method: "PUT",
                 headers: {
                     "content-type": "application/json",
@@ -52,7 +47,7 @@ const Comment = ({ data, postAuthor, id }) => {
     const handleDeleteButton = (id) => {
         const isProceed = window.confirm('Are you sure to delete?')
         if (isProceed) {
-            fetch(`https://cms-blog-redux-server.vercel.app/delete-comment/${id}`, {
+            fetch(`http://localhost:5000/delete-comment/${id}`, {
                 method: "DELETE",
                 headers: {
                     "content-type": "application/json",
@@ -81,7 +76,6 @@ const Comment = ({ data, postAuthor, id }) => {
                         profileUser.filter(profileData => profileData.uid === data.userId).map(data => <span key={data._id} className='font-semibold capitalize'>{data.name}</span>)
                     }
                     <small className='text-gray-400'>{data.userId === postAuthor ? ' - Author' : ''}</small>
-                    {/* <small className='text-gray-400'>  - {  profileUser.map(profileData => profileData.uid === postAuthor) ? 'author' : '' }</small> */}
                 </p>
                 {
                     editForm ?
@@ -94,7 +88,6 @@ const Comment = ({ data, postAuthor, id }) => {
                             </div>
                         </> : <p className='inter'>{data.blogComment}</p>
                 }
-
                 {
                     user.uid === data.userId ?
                         <>

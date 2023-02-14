@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
 import SidebarHeading from '../../Component/SidebarHeading/SidebarHeading';
 import { useDispatch, useSelector } from 'react-redux';
-import { ADD_CATEGORY } from '../../Redux/actionTypes/actionTypes';
 import CategoryTable from '../../Component/CategoryTable/CategoryTable';
 import addCategoryData from '../../Redux/Thunk/addCategoryData';
 import loadCategoryData from '../../Redux/Thunk/loadCategoryData';
-import { ToastContainer, toast } from 'react-toastify';
 import toastify from '../../Component/Toastify/Toastify';
 import PageTitle from '../../Component/PageTitle/PageTitle';
 

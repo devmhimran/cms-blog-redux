@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SidebarHeading from '../../Component/SidebarHeading/SidebarHeading';
 import { useDispatch, useSelector } from 'react-redux';
-import { ADD_CATEGORY } from '../../Redux/actionTypes/actionTypes';
 import CategoryTable from '../../Component/CategoryTable/CategoryTable';
-import addCategoryData from '../../Redux/Thunk/addCategoryData';
 import loadCategoryData from '../../Redux/Thunk/loadCategoryData';
 import { useParams } from 'react-router-dom';
 import updateCategoryData from '../../Redux/Thunk/updateCategoryData';
@@ -18,7 +16,7 @@ const UpdateCategory = () => {
     const { category } = useSelector(state => state.blog)
 
     useEffect(() => {
-        fetch(`https://cms-blog-redux-server.vercel.app/category/${id}`)
+        fetch(`http://localhost:5000/category/${id}`)
             .then(res => res.json())
             .then(data => setData(data))
     }, [id])

@@ -7,10 +7,7 @@ import TimeConvert from '../TimeConvert/TimeConvert';
 import { useNavigate } from 'react-router-dom';
 
 const FeaturedPost = ({ data }) => {
-    // const { _id, blogTitle, featuredImage, content, blogCategory, date } = data
-    let blogContent;
     const navigate = useNavigate();
-    // const time = TimeConvert(date)
     return (
         <div>
             <Swiper
@@ -21,7 +18,6 @@ const FeaturedPost = ({ data }) => {
                     delay: 2500,
                     disableOnInteraction: false,
                 }}
-                // onSwiper={(swiper) => console.log(swiper)}
             >
                 {
                     [...data].reverse().filter(data => data.featuredBlog === true).map((featuredBlog) =>
@@ -39,13 +35,11 @@ const FeaturedPost = ({ data }) => {
                                     src={featuredBlog.featuredImage}
                                     alt={featuredBlog.blogTitle}
                                     effect="blur"
-
                                     className='w-full md:w-[900px] lg:w-[900px] h-[380px] md:h-[470px] lg:h-[470px] object-cover rounded-b-2xl lg:rounded-r-3xl'
                                     loading='eager'
                                 />
                             </div>
                         </SwiperSlide>
-
                     )
                 }
             </Swiper>

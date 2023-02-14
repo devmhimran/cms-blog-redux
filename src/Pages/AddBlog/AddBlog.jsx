@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
 import SidebarHeading from '../../Component/SidebarHeading/SidebarHeading';
 import { useDispatch, useSelector } from 'react-redux';
-import CategoryTable from '../../Component/CategoryTable/CategoryTable';
 import loadCategoryData from '../../Redux/Thunk/loadCategoryData';
 import JoditEditor from 'jodit-react';
-import { useState, useRef, useMemo } from 'react';
+import { useState, useRef } from 'react';
 import { TiDeleteOutline } from 'react-icons/ti';
 import PageTitle from '../../Component/PageTitle/PageTitle';
-import addCategoryData from '../../Redux/Thunk/addCategoryData';
 import addBlogData from '../../Redux/Thunk/addBlogData';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../firebase.init';
@@ -21,7 +19,6 @@ const AddBlog = () => {
     const resetFeaturedImageFile = useRef();
     const imageApi = 'ef367f576eca302d4916e3889c6e0cc6';
     const date = new Date();
-    const options = { month: "short", day: "numeric", year: "numeric" };
     useEffect(() => {
         dispatch(loadCategoryData())
     }, [])

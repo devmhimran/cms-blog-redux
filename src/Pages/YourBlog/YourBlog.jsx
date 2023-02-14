@@ -4,23 +4,14 @@ import PageTitle from '../../Component/PageTitle/PageTitle';
 import { useDispatch, useSelector } from 'react-redux';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../firebase.init';
-import loadBlogData from '../../Redux/Thunk/loadBlogData';
 import BlogTable from '../../Component/BlogTable/BlogTable';
-import { yourPostAction } from '../../Redux/actionCreators/dashboardFilter';
 import homeBlogData from '../../Redux/Thunk/homeBlog';
 
 const YourBlog = () => {
     const { blog, homeBlog } = useSelector(state => state.blog)
-    const { allPost, yourPost } = useSelector(state => state.filter.dashboardFilter)
     const [user] = useAuthState(auth)
-    const [filter, setFilter] = useState({})
     const dispatch = useDispatch();
     let content;
-    console.log(dispatch)
-    // useEffect(() => {
-    //     dispatch(yourPostAction())
-    //     dispatch(loadBlogData())
-    // }, [yourPost])
 
     useEffect(() => {
         dispatch(homeBlogData())
@@ -30,7 +21,7 @@ const YourBlog = () => {
     if (homeBlog.length) {
         content = [...homeBlog].reverse().filter(post => post.userId === user.uid).map((data, index) => <BlogTable key={data._id} index={index} data={data} />)
     }
-    console.log(content)
+
     return (
         <div>
             <PageTitle title='Your Blog' />
@@ -50,7 +41,6 @@ const YourBlog = () => {
                     <tbody>
                         {
                             content
-                            // blog.filter(userId => userId.userId === user.uid ).map((data, index) => <BlogTable key={data._id} index={index} data={data} /> )
                         }
                     </tbody>
                 </table>

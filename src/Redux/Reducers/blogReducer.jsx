@@ -86,7 +86,6 @@ export const blogReducer = (state = initialState, action) => {
                 favorite: action.payload
             }
         case REMOVE_TO_FAVORITE:
-            console.log(action.payload)
             const newFav = state.favorite.filter(data => data.postId !== action.payload)
             return {
                 ...state,
@@ -97,25 +96,6 @@ export const blogReducer = (state = initialState, action) => {
                 ...state,
                 favorite: []
             }
-        // const newFav = state.favorite.filter
-        // return {
-        //     ...state,
-        //     favorite: []
-        // }
-
-        // if (!state.favorite.includes(action.payload)) {
-
-        //     return {
-        //         ...state,
-        //         favorite: [...state.favorite, action.payload]
-        //     }
-        // } else {
-
-        //     return {
-        //         ...state,
-        //         favorite: state.favorite.filter(data => data !== action.payload)
-        //     }
-        // }
 
         default: return state
     }

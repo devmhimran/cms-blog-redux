@@ -1,7 +1,5 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import './App.css'
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import Home from './Pages/Home/Home'
 import About from './Pages/About/About'
 import Contact from './Pages/Contact/Contact'
@@ -11,8 +9,6 @@ import Dashboard from './Pages/Dashboard/Dashboard'
 import AllBlog from './Pages/AllBlog/AllBlog'
 import AddBlog from './Pages/AddBlog/AddBlog'
 import AddCategory from './Pages/AddCategory/AddCategory'
-import { Provider, useDispatch } from 'react-redux'
-import store from './Redux/Store'
 import UpdateCategory from './Pages/UpdateCategory/UpdateCategory'
 import { ToastContainer } from 'react-toastify'
 import Loading from './Component/Loading/Loading'
@@ -23,15 +19,9 @@ import RequiredAuth from './Component/RequiredAuth/RequiredAuth'
 import YourBlog from './Pages/YourBlog/YourBlog'
 import UpdateBlog from './Pages/UpdateBlog/UpdateBlog'
 import SingleBlog from './Pages/SingleBlog/SingleBlog'
-import ProtectRedirect from './Component/ProtectRedirect/ProtectRedirect'
-import { useEffect } from 'react'
-import auth from './Pages/firebase.init'
 import Favorite from './Pages/Favorite/Favorite'
 
 function App() {
-  const location = useLocation();
-  const dispatch = useDispatch();
-  // console.log(location.pathname)
 
   return (
     
@@ -49,14 +39,10 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/loading" element={<Loading />} />
             <Route path="/sign-in" element={
-              // <ProtectRedirect>
                 <SignIn />
-              // </ProtectRedirect>
             } />
             <Route path="/sign-up" element={
-              <ProtectRedirect>
                 <SignUp />
-              </ProtectRedirect>
             } />
             <Route path="/favorite" element={
               <RequiredAuth>

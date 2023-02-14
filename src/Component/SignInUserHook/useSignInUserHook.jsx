@@ -8,13 +8,13 @@ import Loading from "../Loading/Loading";
 const useSignInUserHook = () => {
     const [user, loading] = useAuthState(auth)
     const [signInUser, setSignInUser] = useState({});
-    console.log(user?.uid)
+
     if(loading){
         return <Loading/>
     }
     useEffect(() => {
         if (user) {
-            fetch(`https://cms-blog-redux-server.vercel.app/user/${user.uid}`, {
+            fetch(`http://localhost:5000/user/${user.uid}`, {
                 method: "GET",
                 headers: {
                     "content-type": "application/json",

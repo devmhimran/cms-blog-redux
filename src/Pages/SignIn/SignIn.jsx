@@ -5,8 +5,6 @@ import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../firebase.init';
 import Loading from '../../Component/Loading/Loading';
 import PageTitle from '../../Component/PageTitle/PageTitle';
-import useToken from '../../Component/Token/useToken';
-import { useState } from 'react';
 import useSignInToken from '../../Component/SignInToken/useSignInToken';
 
 const SignIn = () => {
@@ -19,10 +17,6 @@ const SignIn = () => {
     let errorMessage;
     const navigate = useNavigate();
     const location = useLocation();
-    // const [email, setEmail] = useState('')
-    // const userData = {
-    //     user
-    // }
     const [token] = useSignInToken(user)
     
     const handleSubmit = (e) => {
@@ -41,12 +35,8 @@ const SignIn = () => {
     const userData = {
         user
     }
-    // console.log(userData)
-    // console.log(user)
-    // const [token] = useToken(userData, 'signIn')
     
     let from = location.state?.from?.pathname || "/dashboard";
-    console.log(from)
     if (token ) {
         navigate(from, { replace: true });
     }

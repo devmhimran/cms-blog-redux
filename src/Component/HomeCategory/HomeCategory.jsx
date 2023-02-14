@@ -20,7 +20,6 @@ const HomeCategory = () => {
     const handleSelectCategory = (data) => {
         dispatch(categoryFilter(data))
     }
-    // console.log(filterCategory)
     const categoryClass = 'bg-gray-100 hover:bg-gray-200';
     const categoryActive = 'bg-black text-white'
     return (
@@ -30,12 +29,6 @@ const HomeCategory = () => {
                 spaceBetween={20}
                 slidesPerView={5}
                 navigation
-                // autoplay={{
-                //     delay: 2000,
-                //     disableOnInteraction: false,
-                //   }}
-                // onSlideChange={() => console.log('slide change')}
-                // onSwiper={(swiper) => console.log(swiper)}
             >
                 <SwiperSlide onClick={() => dispatch(homeAllPost())} className={`${ allPost ? categoryActive : categoryClass} p-2 rounded-lg inter text-sm lg:text-base font-normal text-center cursor-pointer`}>All Post</SwiperSlide>
                 {

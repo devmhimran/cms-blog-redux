@@ -6,7 +6,6 @@ import BlogTable from '../../Component/BlogTable/BlogTable';
 import PageTitle from '../../Component/PageTitle/PageTitle';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../firebase.init';
-import { allPostAction, yourPostAction } from '../../Redux/actionCreators/dashboardFilter';
 import Pagination from '../../Component/Pagination/Pagination';
 import Loading from '../../Component/Loading/Loading';
 import { fetchStart } from '../../Redux/actionCreators/actionCreators';
@@ -14,8 +13,6 @@ import { fetchStart } from '../../Redux/actionCreators/actionCreators';
 const AllBlog = () => {
     const { blog, loading, error } = useSelector(state => state.blog)
     const { allPost, yourPost } = useSelector(state => state.filter.dashboardFilter)
-    const [user] = useAuthState(auth)
-    const [filter, setFilter] = useState({})
     const dispatch = useDispatch();
     const { pageNum } = useSelector(state => state.blog)
     let content;
@@ -28,9 +25,6 @@ const AllBlog = () => {
         dispatch(loadBlogData())
     }, [pageNum || dispatch])
 
-    // if (yourPost) {
-    //     content = blog.filter(post =>  post.userId === user.uid).map((data, index) => <BlogTable key={data._id} index={index} data={data} />)
-    // } 
     if (blog.length && allPost) {
         content = [...blog].map((data, index) => <BlogTable key={data._id} index={index} data={data} />)
     }
@@ -42,10 +36,6 @@ const AllBlog = () => {
             <PageTitle title='All Blog' />
             <SidebarHeading title='All Blogs' />
             <div className="w-full py-6 inter">
-                {/* <div className="btn__group my-2">
-                    <button className={`${allPost ?  activeBtn : nonActiveBtn} mx-1`} onClick={()=> dispatch(allPostAction())}>All Posts</button>
-                    <button className={`${yourPost ?  activeBtn : nonActiveBtn} mx-1`} onClick={()=> dispatch(yourPostAction())}>Your Posts</button>
-                </div> */}
                 <table className='w-full table-auto'>
                     <thead className='bg-black text-white'>
                         <tr>
@@ -60,7 +50,6 @@ const AllBlog = () => {
                     <tbody>
                         {
                             content
-                            // blog.filter(userId => userId.userId === user.uid ).map((data, index) => <BlogTable key={data._id} index={index} data={data} /> )
                         }
                     </tbody>
                 </table>
