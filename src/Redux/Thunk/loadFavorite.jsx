@@ -15,7 +15,7 @@ const loadFavoriteData = (email) => {
                 dispatch(loadFavorite(data))
             }
             // console.log(email)
-            // console.log(data)
+            console.log(data)
         }
     }
 }

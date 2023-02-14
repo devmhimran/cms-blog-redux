@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import HomeBlog from '../../Component/HomeBlog/HomeBlog';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../firebase.init';
-import loadFavoriteData from '../../Redux/Thunk/LoadFavorite';
 import homeBlogData from '../../Redux/Thunk/homeBlog';
+import loadFavoriteData from '../../Redux/Thunk/loadFavorite';
 
 const Favorite = () => {
     const { favorite, homeBlog } = useSelector(state => state.blog)

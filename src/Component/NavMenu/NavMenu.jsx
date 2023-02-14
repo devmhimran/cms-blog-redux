@@ -15,6 +15,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { BiUser } from 'react-icons/bi';
 import { emptyFavorite } from '../../Redux/actionCreators/actionCreators';
 import SearchResult from '../SearchResult/SearchResult';
+import { compose } from 'redux';
 
 const NavMenu = () => {
     const [open, setOpen] = useState(false);
@@ -25,6 +26,7 @@ const NavMenu = () => {
     const dispatch = useDispatch();
     const [signInUser, setSignInUser] = useState({});
     const [filteredSearch, setFilteredSearch] = useState([]);
+    const [searchOpen, setSearchOpen] = useState(false);
 
     useEffect(() => {
         if (user) {
@@ -46,23 +48,58 @@ const NavMenu = () => {
         localStorage.removeItem('accessToken');
     }
 
-    console.log(filteredSearch)
+    // console.log(filteredSearch)
 
     const handleSearch = (e) => {
         e.preventDefault()
         const search = e.target.value;
-        const newFilter = homeBlog.filter(data => {
-            return data.blogTitle.toLowerCase().includes(search.toLowerCase())
-        })
-        setFilteredSearch(newFilter)
-            console.log(newFilter)
+        if (search === '') {
+            setFilteredSearch([])
+        } else {
+            const newFilter = homeBlog.filter(data => {
+                return data.blogTitle.toLowerCase().includes(search.toLowerCase())
+            })
+            setFilteredSearch(newFilter)
+        }
     }
 
     const searchRef = useRef();
-    const handler = (e) =>{
-        console.log('search', searchRef.current.contains(e.target))
-    }
-    
+    useEffect(() => {
+
+        // if(filteredSearch.length !== 0){
+        //     setSearchOpen(!searchOpen)
+        // }
+
+        let handler = (e) => {
+            console.log('search', !searchRef.current.contains(e.target))
+            if (searchRef.current.contains(e.target)) {
+                setSearchOpen(true)
+            } else {
+                setSearchOpen(false)
+            }
+        }
+
+        document.addEventListener('mousedown', handler)
+
+        return () => {
+            document.removeEventListener('mousedown', handler)
+        }
+
+    })
+    console.log(searchOpen)
+
+    // let content;
+    // useEffect(() => {
+    //     content = filteredSearch.slice(0, 6).map(data =>
+    //         <>
+    //             <div key={data._id} className='flex items-center gap-3 m-4'>
+    //                 <img className='w-14 h-14 object-cover rounded-xl' src={data.featuredImage} alt="" />
+    //                 <p className='text-base'><Link to={`/blog/${data._id}`}>{data.blogTitle}</Link></p>
+    //             </div>
+    //         </>
+    //     )
+    // }, [filteredSearch.length])
+
 
     if (loading) {
         return <Loading />
@@ -84,25 +121,37 @@ const NavMenu = () => {
                             {/* <li className='text-lg font-medium hover:text-[#2304FB] lg:my-0 my-2'><Link to='/'>Home</Link></li>
                             <li className='text-lg font-medium hover:text-[#2304FB] lg:my-0 my-2'><Link to='/about'>About</Link></li>
                             <li className='text-lg font-medium hover:text-[#2304FB] lg:my-0 my-2'><Link to='/contact'>Contact</Link></li> */}
-                            <li className='lg:my-0 my-2 w-8/12'>
+                            <li className='lg:my-0 my-2 w-full lg:w-8/12'>
                                 <div className='search__box'>
-                                    <div className="relative block border border-[#C7C9D1] rounded-full">
+                                    <div ref={searchRef} className="relative block border border-[#C7C9D1] rounded-full">
                                         <span className="sr-only">Search</span>
                                         <span className="absolute inset-y-0 left-0 flex items-center pl-2">
                                             <RiSearchLine className='h-3.5 w-3.5 fill-black' />
                                         </span>
-                                        <input className='placeholder:text-black border border-0 pl-9 pr-3 rounded-full py-1 w-full outline-0 text-base' placeholder="Search" type="text" name="search" onChange={handleSearch} ref={searchRef} />
+                                        <input className='placeholder:text-black border border-0 pl-9 pr-3 rounded-full py-1 w-full outline-0 text-base' placeholder="Search" type="text" name="search" onChange={handleSearch} autoComplete="off" />
                                         {
-                                            filteredSearch.length !== 0 && <>
+                                            searchOpen ? <>
                                                 <div className='w-full absolute border rounded-xl top-[115%] h-auto overflow-hidden overflow-y-auto bg-gray-50'>
-                                                    <SearchResult searchData={filteredSearch} />
+                                                    <div>
+                                                        {/* <p>hello print</p> */}
+                                                        {
+                                                            filteredSearch.slice(0, 6).map(data =>
+                                                                <><Link to={`/blog/${data._id}`}>
+                                                                    <div key={data._id} className='flex items-center gap-3 m-4'>
+                                                                        <img className='w-14 h-14 object-cover rounded-xl' src={data.featuredImage} alt="" />
+                                                                        <p className='text-base hover:underline hover:text-blue-500'>{data.blogTitle}</p>
+                                                                    </div>
+                                                                </Link>
+                                                                </>)
+                                                        }
+                                                    </div>
                                                 </div>
-                                            </>
+                                            </> : ''
                                         }
                                     </div>
                                 </div>
                             </li>
-                            <li><Link to='/favorite'><BiBookmark className='text-2xl' /></Link></li>
+                            <li className='w-7 lg:w-auto'><Link className='' to='/favorite'><BiBookmark className='text-2xl' /></Link></li>
                             {
                                 user ?
                                     <>
