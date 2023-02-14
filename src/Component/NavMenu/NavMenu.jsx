@@ -64,29 +64,36 @@ const NavMenu = () => {
     }
 
     const searchRef = useRef();
+    const navbarDropDown = useRef();
     useEffect(() => {
-
-        // if(filteredSearch.length !== 0){
-        //     setSearchOpen(!searchOpen)
-        // }
-
         let handler = (e) => {
-            console.log('search', !searchRef.current.contains(e.target))
             if (searchRef.current.contains(e.target)) {
                 setSearchOpen(true)
             } else {
                 setSearchOpen(false)
             }
         }
-
         document.addEventListener('mousedown', handler)
-
         return () => {
             document.removeEventListener('mousedown', handler)
         }
 
     })
-    console.log(searchOpen)
+
+    useEffect(() => {
+        let dropdownHandler = (e) => {
+            if (!navbarDropDown.current.contains(e.target)) {
+                setProfileDropdown(false)
+            }
+        }
+        document.addEventListener('mousedown', dropdownHandler)
+        return () => {
+            document.removeEventListener('mousedown', dropdownHandler)
+        }
+
+    })
+
+    console.log(profileDropdown)
 
     // let content;
     // useEffect(() => {
@@ -155,7 +162,7 @@ const NavMenu = () => {
                             {
                                 user ?
                                     <>
-                                        <li className='text-base font-medium lg:py-0 py-2 relative'>
+                                        <li className='text-base font-medium lg:py-0 py-2 relative' ref={navbarDropDown}>
                                             <div className="profile__img w-[46px] cursor-pointer rounded-full"
                                                 onClick={() => setProfileDropdown(!profileDropdown)}
                                             >
