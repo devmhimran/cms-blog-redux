@@ -117,14 +117,16 @@ const NavMenu = () => {
                                                 <div className='w-full absolute border rounded-xl top-[115%] h-auto overflow-hidden overflow-y-auto bg-gray-50'>
                                                     <div>
                                                         {
-                                                            filteredSearch.slice(0, 6).map(data =>
-                                                                <><Link to={`/blog/${data._id}`}>
-                                                                    <div key={data._id} className='flex items-center gap-3 m-4'>
-                                                                        <img className='w-14 h-14 object-cover rounded-xl' src={data.featuredImage} alt="" />
-                                                                        <p className='text-base hover:underline hover:text-blue-500'>{data.blogTitle}</p>
-                                                                    </div>
-                                                                </Link>
-                                                                </>)
+                                                            filteredSearch.slice(0, 6).map((data, index) =>
+                                                                <div key={index}>
+                                                                    <Link to={`/blog/${data._id}`}>
+                                                                        <div key={data._id} className='flex items-center gap-3 m-4'>
+                                                                            <img className='w-14 h-14 object-cover rounded-xl' src={data.featuredImage} alt="" />
+                                                                            <p className='text-base hover:underline hover:text-blue-500'>{data.blogTitle}</p>
+                                                                        </div>
+                                                                    </Link>
+                                                                </div>
+                                                            )
                                                         }
                                                     </div>
                                                 </div>
@@ -167,7 +169,6 @@ const NavMenu = () => {
                                                         </div>
                                                     </> :
                                                     ''
-
                                             }
 
                                         </li>
