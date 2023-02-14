@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../Pages/firebase.init';
 import { signOut } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
+import { emptyFavorite } from '../../Redux/actionCreators/actionCreators';
 
 const DashboardSidebar = () => {
     const location = useLocation();
     const navigate = useNavigate();
+    const [signInUser, setSignInUser] = useState({});
+    const dispatch = useDispatch();
     const activeNav  = (nav) =>{
         const content = location.pathname
         if(content === nav){
@@ -14,9 +18,23 @@ const DashboardSidebar = () => {
         }
     }
     const [user] = useAuthState(auth);
+    useEffect(() => {
+        if (user) {
+            fetch(`http://localhost:5000/user/${user.uid}`, {
+                method: "GET",
+                headers: {
+                    "Content-type": "application/json",
+                    "authorization": `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
+                .then(res => res.json())
+                .then(data => setSignInUser(data))
+        }
+    }, [signInUser && user])
     const handleSignOut = () =>{
         signOut(auth);
         localStorage.removeItem('accessToken');
+        dispatch(emptyFavorite())
         // window.location.reload();
     }
   
@@ -61,7 +79,7 @@ const DashboardSidebar = () => {
 
                 </div>
                 <span className="flex items-center justify-center w-full h-16 mt-auto bg-gray-800 hover:bg-gray-700 hover:text-gray-300 cursor-pointer" onClick={handleSignOut}>
-                    <img className='w-7 h-7 rounded-full border object-cover' src={user.photoURL} alt="" />
+                    <img className='w-7 h-7 rounded-full border object-cover' src={signInUser.profileImage} alt="" />
                     <span className="ml-2 text-sm font-medium">Logout</span>
                 </span>
             </div>
