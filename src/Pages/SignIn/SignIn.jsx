@@ -67,14 +67,6 @@ const SignIn = () => {
                             <div className="input__form pt-2.5">
                                 <span className='mb-2'>Don't have an account? <Link className='text-blue-600' to='/sign-up'>Sign up</Link> </span>
                             </div>
-                            <div className="input__form pt-2.5 flex items-center">
-                                <hr className='w-full' />
-                                <span className='mx-3 text-gray-500'>or</span>
-                                <hr className='w-full' />
-                            </div>
-                            <div className="input__form pt-2.5">
-                                <button className='flex items-center mx-auto gap-1.5 border px-6 py-2.5 rounded-full hover:shadow-lg duration-300' to='/sign-in'> <span><FcGoogle /></span> <span>Continue With Google</span></button>
-                            </div>
                         </form>
                     </div>
                 </div>

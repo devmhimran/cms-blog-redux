@@ -207,11 +207,6 @@ const SignUp = () => {
                             <div className="input__form pt-2.5">
                                 <span className='mb-2'>Already have account? <Link className='text-blue-600' to='/sign-in'>Sign in</Link> </span>
                             </div>
-                            <div className="input__form pt-2.5 flex items-center">
-                                <hr className='w-full' />
-                                <span className='mx-3 text-gray-500'>or</span>
-                                <hr className='w-full' />
-                            </div>
                         </form>
                     </div>
                 </div>
