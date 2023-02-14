@@ -7,7 +7,7 @@ const ProtectRedirect = ({ children }) => {
     const [user, loading] = useAuthState(auth);
     const location = useLocation();
     const navigate = useNavigate();
-    let from = location.state?.from?.pathname || "/";
+
     if (user) {
         if (location.pathname === '/sign-in' || location.pathname === '/sign-up') {
             window.history.back()

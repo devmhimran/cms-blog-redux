@@ -49,9 +49,9 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/loading" element={<Loading />} />
             <Route path="/sign-in" element={
-              <ProtectRedirect>
+              // <ProtectRedirect>
                 <SignIn />
-              </ProtectRedirect>
+              // </ProtectRedirect>
             } />
             <Route path="/sign-up" element={
               <ProtectRedirect>

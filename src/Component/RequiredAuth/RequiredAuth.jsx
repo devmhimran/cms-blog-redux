@@ -18,6 +18,11 @@ const RequiredAuth = ({children}) => {
     }
     // console.log(<Navigate to='/sign-in' state={{ from: location }} replace></Navigate>)
     // console.log(<Navigate to='/' replace></Navigate>)
+    if (user) {
+        if (location.pathname === '/sign-in' || location.pathname === '/sign-up') {
+            window.history.back()
+        }
+    }
     if (!user) {
         return <Navigate to='/sign-in' state={{ from: location }} replace></Navigate>
     }

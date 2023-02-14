@@ -46,6 +46,7 @@ const SignIn = () => {
     // const [token] = useToken(userData, 'signIn')
     
     let from = location.state?.from?.pathname || "/dashboard";
+    console.log(from)
     if (token ) {
         navigate(from, { replace: true });
     }
