@@ -34,7 +34,7 @@ const UpdateBlog = () => {
 
     useEffect(() => {
 
-        fetch(`http://localhost:5000/blog/${id}`)
+        fetch(`https://cms-blog-redux-server.vercel.app/blog/${id}`)
             .then(res => res.json())
             .then(data => setBlog(data))
 
@@ -114,7 +114,7 @@ const UpdateBlog = () => {
             date: new Intl.DateTimeFormat("en-US", options).format(date)
         }
 
-        fetch(`http://localhost:5000/update-blog/${id}`, {
+        fetch(`https://cms-blog-redux-server.vercel.app/update-blog/${id}`, {
             method: "PUT",
             headers: {
                 "content-type": "application/json",

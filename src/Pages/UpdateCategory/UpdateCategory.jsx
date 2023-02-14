@@ -18,7 +18,7 @@ const UpdateCategory = () => {
     const { category } = useSelector(state => state.blog)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/category/${id}`)
+        fetch(`https://cms-blog-redux-server.vercel.app/category/${id}`)
             .then(res => res.json())
             .then(data => setData(data))
     }, [id])
