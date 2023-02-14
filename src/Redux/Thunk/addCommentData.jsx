@@ -3,7 +3,7 @@ import { addComment } from "../actionCreators/actionCreators";
 
 const addCommentData = (commentData) => {
     return async (dispatch) => {
-        const res = await fetch('http://localhost:5000/comment-upload', {
+        const res = await fetch('https://cms-blog-redux-server.vercel.app/comment-upload', {
             method: "POST",
             body: JSON.stringify(commentData),
             headers: {
