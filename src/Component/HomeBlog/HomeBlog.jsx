@@ -43,13 +43,13 @@ const HomeBlog = ({ data }) => {
     }
 
     return (
-        <div className="card border relative h-[465px] rounded-3xl hover:shadow duration-300">
+        <div className="card border relative h-[465px] rounded-xl lg:rounded-3xl hover:shadow duration-300">
             <div className="card-body p-3">
                 <LazyLoadImage
                     src={featuredImage}
                     alt={blogTitle}
                     effect="blur"
-                    className='w-full h-72 object-cover rounded-2xl'
+                    className='w-full h-72 object-cover rounded-xl lg:rounded-3xl'
                     loading='eager'
                 />
                 <div className="blog__date mt-1">
