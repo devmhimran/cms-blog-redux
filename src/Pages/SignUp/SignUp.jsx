@@ -27,6 +27,7 @@ const SignUp = () => {
     const navigate = useNavigate();
     let from = location.state?.from?.pathname || "/dashboard";
     const [name, setName] = useState('');
+    let userError;
 
     const handleFeaturedImage = (e) => {
         const photoURL = e.target.files[0];
@@ -74,8 +75,8 @@ const SignUp = () => {
         }
     }
 
-    const handleGoogleSignUp = () => {
-        signInWithGoogle()
+    if(error){
+        userError = error?.message
     }
 
     if (token) {
@@ -195,6 +196,7 @@ const SignUp = () => {
                                     })}
                                 />
                                 <div className="error__msg inter">
+                                    {userError && <span className='text-sm text-red-500 mt-2'>{userError}</span>}
                                     {errors.confirmPassword?.type === 'required' && <span className='text-sm text-red-500 mt-2'>{errors.confirmPassword.message}</span>}
                                     {errors.confirmPassword?.type === 'minLength' && <span className='text-sm text-red-500 mt-2'>{errors.confirmPassword.message}</span>}
                                     {errors.confirmPassword ? '' : <span className={`text-sm text-red-500 mt-2`}>{passwordError}</span>}

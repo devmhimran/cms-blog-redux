@@ -20,6 +20,7 @@ import YourBlog from './Pages/YourBlog/YourBlog'
 import UpdateBlog from './Pages/UpdateBlog/UpdateBlog'
 import SingleBlog from './Pages/SingleBlog/SingleBlog'
 import Favorite from './Pages/Favorite/Favorite'
+import AllUsers from './Pages/AllUsers/AllUsers'
 
 function App() {
 
@@ -57,7 +58,7 @@ function App() {
             } >
               <Route index element={<AllBlog />} />
               <Route path='add-blog' index element={<AddBlog />} />
-              <Route path='all-users' index element={<AddBlog />} />
+              <Route path='all-users' index element={<AllUsers />} />
               <Route path='your-blog' index element={<YourBlog />} />
               <Route path='add-category' element={<AddCategory />} />
               <Route path='update-category/:id' element={<UpdateCategory />} />

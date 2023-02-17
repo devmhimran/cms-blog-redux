@@ -5,6 +5,7 @@ import { paginationReducer } from "./paginationReducer";
 import featuredBlogReducer from "./featuredBlogReducer";
 import commentReducer from "./commentReducer";
 import { userSignUpReducer } from "./userSignUpReducer";
+import { userReducer } from "./userReducer";
 
 
 
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
     pagination: paginationReducer,
     featuredBlogReducer: featuredBlogReducer,
     comment: commentReducer,
-    userDataAuth: userSignUpReducer
+    userDataAuth: userSignUpReducer,
+    users: userReducer
 })
 
 export default rootReducer;
