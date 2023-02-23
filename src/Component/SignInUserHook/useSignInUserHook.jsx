@@ -14,7 +14,7 @@ const useSignInUserHook = () => {
     }
     useEffect(() => {
         if (user) {
-            fetch(`https://cms-blog-redux-server.vercel.app/user/${user.uid}`, {
+            fetch(`http://localhost:5000/user/${user.uid}`, {
                 method: "GET",
                 headers: {
                     "content-type": "application/json",

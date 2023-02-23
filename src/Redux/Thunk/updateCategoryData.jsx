@@ -4,7 +4,7 @@ import { updateCategory } from "../actionCreators/actionCreators";
 
 const updateCategoryData = (id, category) => {
     return async (dispatch, getState) => {
-        const res = await fetch(`https://cms-blog-redux-server.vercel.app/category/${id}`, {
+        const res = await fetch(`http://localhost:5000/category/${id}`, {
             method: "PUT",
             body: JSON.stringify(category),
             headers: {

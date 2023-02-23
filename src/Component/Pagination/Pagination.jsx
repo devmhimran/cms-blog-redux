@@ -10,7 +10,7 @@ const Pagination = () => {
     const [nextDisable, setNextDisable] = useState(false)
     const dispatch = useDispatch();
     useEffect(() => {
-        fetch('https://cms-blog-redux-server.vercel.app/page-count')
+        fetch('http://localhost:5000/page-count')
             .then(res => res.json())
             .then(data => {
                 const count = data.count
