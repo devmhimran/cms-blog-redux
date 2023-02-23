@@ -3,7 +3,7 @@ import { deleteUser } from "../actionCreators/actionCreators"
 
 export const deleteUserData = (id) => {
     return async (dispatch, getState) => {
-        const res = await fetch(`http://localhost:5000/user-delete/${id}`, {
+        const res = await fetch(`https://cms-blog-redux-server.vercel.app/user-delete/${id}`, {
             method: "Delete",
             headers: {
                 "Content-type": "application/json"

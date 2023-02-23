@@ -26,32 +26,11 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import auth from './Pages/firebase.init'
 import { useDispatch } from 'react-redux'
 import { signOut } from 'firebase/auth'
+import { emptyFavorite } from './Redux/actionCreators/actionCreators'
 
 function App() {
-  const [user] = useAuthState(auth);
-  const [time, setTime] = useState(false)
-  const dispatch = useDispatch()
-  useEffect(() => {
-    fetch('http://localhost:5000/session', {
-      method: "GET",
-      headers: {
-        "authorization": `Bearer ${localStorage.getItem('accessToken')}`
-      }
-    })
-      .then(res => res.json())
-      .then(data => console.log(data.time))
-  }, [user])
-
-  // if (time) {
-  //   signOut(auth);
-  //   dispatch(emptyFavorite())
-  //   localStorage.removeItem('accessToken');
-  // }
-
-  // console.log(timeOut)
 
   return (
-
     <div className="App">
       <div className="posthub__main">
         <NavMenu />
