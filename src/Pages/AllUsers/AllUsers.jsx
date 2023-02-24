@@ -30,7 +30,7 @@ const AllUsers = () => {
                             <th className='text-left'>Image</th>
                             <th className='text-left'>Name</th>
                             <th className='text-left'>Email</th>
-                            <th className='text-left'>Status</th>
+                            <th className='text-center'>Status</th>
                         </tr>
                     </thead>
                     <tbody>
