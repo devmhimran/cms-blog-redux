@@ -6,7 +6,7 @@ import auth from "../../Pages/firebase.init"
 const loadBlogData = () => {
     return async (dispatch, getState) => {
         const { pageNum } = getState().blog
-        const res = await fetch(`http://localhost:5000/blog?page=${pageNum}`, {
+        const res = await fetch(`https://cms-blog-redux-server.vercel.app/blog?page=${pageNum}`, {
             method: "GET",
             headers: {
                 "authorization": `Bearer ${localStorage.getItem('accessToken')}`

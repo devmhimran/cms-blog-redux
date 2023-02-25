@@ -4,7 +4,7 @@ import toastify from '../../Component/Toastify/Toastify';
 const userRoleData = (userRole, id) => {
     console.log(userRole)
     return async (dispatch) =>{
-        const res = await fetch(`http://localhost:5000/user/admin/${id}`, {
+        const res = await fetch(`https://cms-blog-redux-server.vercel.app/user/admin/${id}`, {
             method: "PUT",
             body: JSON.stringify(userRole),
             headers: {

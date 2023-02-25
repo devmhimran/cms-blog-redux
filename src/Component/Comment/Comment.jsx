@@ -11,7 +11,7 @@ const Comment = ({ data, postAuthor, id }) => {
 
 
     useEffect(() => {
-        fetch('http://localhost:5000/user')
+        fetch('https://cms-blog-redux-server.vercel.app/user')
             .then(res => res.json())
             .then(data => setProfileUser(data))
     }, [])
@@ -28,7 +28,7 @@ const Comment = ({ data, postAuthor, id }) => {
             editComment
         }
         if (isProceed) {
-            fetch(`http://localhost:5000/comment-update/${commentId}`, {
+            fetch(`https://cms-blog-redux-server.vercel.app/comment-update/${commentId}`, {
                 method: "PUT",
                 headers: {
                     "content-type": "application/json",
@@ -47,7 +47,7 @@ const Comment = ({ data, postAuthor, id }) => {
     const handleDeleteButton = (id) => {
         const isProceed = window.confirm('Are you sure to delete?')
         if (isProceed) {
-            fetch(`http://localhost:5000/delete-comment/${id}`, {
+            fetch(`https://cms-blog-redux-server.vercel.app/delete-comment/${id}`, {
                 method: "DELETE",
                 headers: {
                     "content-type": "application/json",

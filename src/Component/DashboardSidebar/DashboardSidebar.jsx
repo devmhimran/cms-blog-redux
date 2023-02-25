@@ -23,7 +23,7 @@ const DashboardSidebar = () => {
     console.log(admin)
     useEffect(() => {
         if (user) {
-            fetch(`http://localhost:5000/user/${user.uid}`, {
+            fetch(`https://cms-blog-redux-server.vercel.app/user/${user.uid}`, {
                 method: "GET",
                 headers: {
                     "Content-type": "application/json",
