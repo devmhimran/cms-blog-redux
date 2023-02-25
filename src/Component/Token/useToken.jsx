@@ -13,7 +13,7 @@ const useToken = (value) => {
         };
 
         if (value?.user?.user?.email) {
-            fetch(`https://cms-blog-redux-server.vercel.app/user/${value?.user?.user?.email}`, {
+            fetch(`http://localhost:5000/user/${value?.user?.user?.email}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json'

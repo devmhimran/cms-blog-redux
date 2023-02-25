@@ -1,4 +1,4 @@
-import { DELETE_USER, LOAD_USERS } from "../actionTypes/actionTypes"
+import { DELETE_USER, LOAD_USERS, USER_ROLE } from "../actionTypes/actionTypes"
 
 const initialState = {
     users: []

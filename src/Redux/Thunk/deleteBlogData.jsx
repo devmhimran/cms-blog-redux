@@ -2,7 +2,7 @@ import { deleteBlog } from "../actionCreators/actionCreators"
 
 const deleteBlogData = (id) => {
     return async (dispatch, getState) => {
-        const res = await fetch(`https://cms-blog-redux-server.vercel.app/blog-delete/${id}`, {
+        const res = await fetch(`http://localhost:5000/blog-delete/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-type": "application/json"

@@ -13,7 +13,7 @@ const useSignInToken = (user) =>{
         };
 
         if (email) {
-            fetch(`https://cms-blog-redux-server.vercel.app/user/${email}`, {
+            fetch(`http://localhost:5000/user/${email}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json'

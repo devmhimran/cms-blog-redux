@@ -25,13 +25,13 @@ const SingleBlog = () => {
     const time = TimeConvert(blog.date)
 
     useEffect(() => {
-        fetch(`https://cms-blog-redux-server.vercel.app/blog/${id}`)
+        fetch(`http://localhost:5000/blog/${id}`)
             .then(res => res.json())
             .then(data => setBlog(data))
     }, [id])
 
     useEffect(() => {
-        fetch('https://cms-blog-redux-server.vercel.app/user')
+        fetch('http://localhost:5000/user')
             .then(res => res.json())
             .then(data => setProfileUser(data))
     }, [])
