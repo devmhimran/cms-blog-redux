@@ -5,19 +5,22 @@ import auth from '../../Pages/firebase.init';
 import { signOut } from 'firebase/auth';
 import { useDispatch } from 'react-redux';
 import { emptyFavorite } from '../../Redux/actionCreators/actionCreators';
+import useAdmin from '../useAdmin/useAdmin';
 
 const DashboardSidebar = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [signInUser, setSignInUser] = useState({});
     const dispatch = useDispatch();
-    const activeNav  = (nav) =>{
+    const activeNav = (nav) => {
         const content = location.pathname
-        if(content === nav){
+        if (content === nav) {
             return content
         }
     }
     const [user] = useAuthState(auth);
+    const [admin] = useAdmin(user)
+    console.log(admin)
     useEffect(() => {
         if (user) {
             fetch(`http://localhost:5000/user/${user.uid}`, {
@@ -31,7 +34,7 @@ const DashboardSidebar = () => {
                 .then(data => setSignInUser(data))
         }
     }, [signInUser && user])
-    const handleSignOut = () =>{
+    const handleSignOut = () => {
         signOut(auth);
         localStorage.removeItem('accessToken');
         dispatch(emptyFavorite())
@@ -48,19 +51,30 @@ const DashboardSidebar = () => {
                 </a>
                 <div className="w-full px-2">
                     <div className="flex flex-col items-center w-full mt-3 border-t border-gray-700">
+                        {
+                            admin ?
+                                <>
+                                    <Link className={`flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 ${activeNav('/dashboard/all-blog') ? 'bg-gray-700 text-gray-300' : ''}`} to="all-blog">
+                                        <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                        </svg>
+                                        <span className="ml-2 text-sm font-medium">All Post</span>
+                                    </Link>
+                                    <Link className={`flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 ${activeNav('/dashboard/all-users') ? 'bg-gray-700 text-gray-300' : ''}`} to="all-users">
+                                        <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                                        </svg>
+                                        <span className="ml-2 text-sm font-medium">All Users</span>
+                                    </Link>
+                                    <Link className={`flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 ${activeNav('/dashboard/add-category') ? 'bg-gray-700 text-gray-300' : ''}`} to="add-category">
+                                        <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+                                        </svg>
+                                        <span className="ml-2 text-sm font-medium">Add Category</span>
+                                    </Link>
+                                </> : ''
+                        }
                         <Link className={`flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 ${activeNav('/dashboard') ? 'bg-gray-700 text-gray-300' : ''}`} to="/dashboard">
-                            <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                            </svg>
-                            <span className="ml-2 text-sm font-medium">All Post</span>
-                        </Link>
-                        <Link className={`flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 ${activeNav('/all-users') ? 'bg-gray-700 text-gray-300' : ''}`} to="all-users">
-                            <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                            </svg>
-                            <span className="ml-2 text-sm font-medium">All Users</span>
-                        </Link>
-                        <Link className={`flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 ${activeNav('/dashboard/your-blog') ? 'bg-gray-700 text-gray-300' : ''}`} to="your-blog">
                             <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                             </svg>
@@ -73,12 +87,7 @@ const DashboardSidebar = () => {
                             </svg>
                             <span className="ml-2 text-sm font-medium">Add Blog</span>
                         </Link>
-                        <Link className={`flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 ${activeNav('/dashboard/add-category') ? 'bg-gray-700 text-gray-300' : ''}`} to="add-category">
-                            <svg className="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
-                            </svg>
-                            <span className="ml-2 text-sm font-medium">Add Category</span>
-                        </Link>
+
                     </div>
 
                 </div>

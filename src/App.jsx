@@ -27,6 +27,7 @@ import auth from './Pages/firebase.init'
 import { useDispatch } from 'react-redux'
 import { signOut } from 'firebase/auth'
 import { emptyFavorite } from './Redux/actionCreators/actionCreators'
+import RequireAdmin from './Component/RequireAdmin/RequireAdmin'
 
 function App() {
 
@@ -61,11 +62,11 @@ function App() {
               <Dashboard />
             </RequiredAuth>
           } >
-            <Route index element={<AllBlog />} />
-            <Route path='add-blog' index element={<AddBlog />} />
-            <Route path='all-users' index element={<AllUsers />} />
-            <Route path='your-blog' index element={<YourBlog />} />
-            <Route path='add-category' element={<AddCategory />} />
+            <Route index element={<YourBlog />} />
+            <Route path='all-blog' index  element={<RequireAdmin><AllBlog /></RequireAdmin>} />
+            <Route path='add-blog' element={<AddBlog />} />
+            <Route path='all-users' element={<RequireAdmin><AllUsers /></RequireAdmin>} />
+            <Route path='add-category' element={<RequireAdmin><AddCategory /></RequireAdmin>} />
             <Route path='update-category/:id' element={<UpdateCategory />} />
             <Route path='update-blog/:id' element={<UpdateBlog />} />
           </Route>

@@ -15,11 +15,19 @@ const YourBlog = () => {
 
     useEffect(() => {
         dispatch(homeBlogData())
-    }, [dispatch])
-
+    }, [])
 
     if (homeBlog.length) {
         content = [...homeBlog].reverse().filter(post => post.userId === user.uid).map((data, index) => <BlogTable key={data._id} index={index} data={data} />)
+        console.log(content)
+    }
+
+    if (content.length === 0) {
+        content = <>
+            <div className='h-[65vh]'>
+                <h1 className='font-bold text-5xl text-gray-500 mt-16'>No Blog Post Yet</h1>
+            </div>
+        </>
     }
 
     return (
