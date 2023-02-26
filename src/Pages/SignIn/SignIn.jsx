@@ -25,6 +25,7 @@ const SignIn = () => {
         const password = e.target.password.value;
         signInWithEmailAndPassword(email, password)
     }
+
     if(loading){
         return <Loading></Loading>
     }

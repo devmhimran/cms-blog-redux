@@ -2,7 +2,6 @@ import { userRole } from '../actionCreators/actionCreators';
 import toastify from '../../Component/Toastify/Toastify';
 
 const userRoleData = (userRole, id) => {
-    console.log(userRole)
     return async (dispatch) =>{
         const res = await fetch(`https://cms-blog-redux-server.vercel.app/user/admin/${id}`, {
             method: "PUT",
@@ -17,7 +16,6 @@ const userRoleData = (userRole, id) => {
             window.location.reload();
             toastify('success', 'Successfully Updated')
         }
-        console.log(data)
     }
 };
 

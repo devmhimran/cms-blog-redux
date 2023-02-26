@@ -1,6 +1,6 @@
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../Pages/firebase.init";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 
 const ProtectRedirect = ({ children }) => {
@@ -11,8 +11,13 @@ const ProtectRedirect = ({ children }) => {
     if (user) {
         if (location.pathname === '/sign-in' || location.pathname === '/sign-up') {
             window.history.back()
+            // return <Navigate to='/sign-in' state={{ from: location }} replace></Navigate>
         }
+       
     }
+    // if (!user) {
+    //     return <Navigate to='/sign-in' state={{ from: location }} replace></Navigate>
+    // }
 
     return children
 };

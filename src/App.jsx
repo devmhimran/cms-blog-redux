@@ -28,6 +28,7 @@ import { useDispatch } from 'react-redux'
 import { signOut } from 'firebase/auth'
 import { emptyFavorite } from './Redux/actionCreators/actionCreators'
 import RequireAdmin from './Component/RequireAdmin/RequireAdmin'
+import ProtectRedirect from './Component/ProtectRedirect/ProtectRedirect'
 
 function App() {
 
@@ -63,7 +64,7 @@ function App() {
             </RequiredAuth>
           } >
             <Route index element={<YourBlog />} />
-            <Route path='all-blog' index  element={<RequireAdmin><AllBlog /></RequireAdmin>} />
+            <Route path='all-blog' index element={<RequireAdmin><AllBlog /></RequireAdmin>} />
             <Route path='add-blog' element={<AddBlog />} />
             <Route path='all-users' element={<RequireAdmin><AllUsers /></RequireAdmin>} />
             <Route path='add-category' element={<RequireAdmin><AddCategory /></RequireAdmin>} />

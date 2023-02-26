@@ -20,7 +20,6 @@ const DashboardSidebar = () => {
     }
     const [user] = useAuthState(auth);
     const [admin] = useAdmin(user)
-    console.log(admin)
     useEffect(() => {
         if (user) {
             fetch(`https://cms-blog-redux-server.vercel.app/user/${user.uid}`, {

@@ -10,16 +10,18 @@ const RequiredAuth = ({children}) => {
     const [user, loading] = useAuthState(auth);
     const [sendEmailVerification, sending, error] = useSendEmailVerification(auth);
     const location = useLocation();
+    const [loginUser] = useAuthState(auth)
 
     if (loading) {
         return <Loading></Loading>;
     }
 
-    if (user) {
-        if (location.pathname === '/sign-in' || location.pathname === '/sign-up') {
-            window.history.back()
-        }
-    }
+    // if (loginUser) {
+    //     if (location.pathname === '/sign-in' || location.pathname === '/sign-up') {
+    //       return  window.history.back()
+    //     }
+    // }
+
     if (!user) {
         return <Navigate to='/sign-in' state={{ from: location }} replace></Navigate>
     }
