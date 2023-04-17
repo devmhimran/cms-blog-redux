@@ -15,6 +15,8 @@ import Comment from '../../Component/Comment/Comment';
 import Loading from '../../Component/Loading/Loading';
 import TimeConvert from '../../Component/TimeConvert/TimeConvert';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { signOut } from 'firebase/auth';
+import { emptyFavorite } from '../../Redux/actionCreators/actionCreators';
 
 const SingleBlog = () => {
     const { id } = useParams();
@@ -25,8 +27,21 @@ const SingleBlog = () => {
     const time = TimeConvert(blog.date)
 
     useEffect(() => {
-        fetch(`https://cms-blog-redux-server.vercel.app/blog/${id}`)
-            .then(res => res.json())
+        fetch(`https://cms-blog-redux-server.vercel.app/blog/${id}`, {
+            method: "GET",
+                headers: {
+                    "content-type": "application/json",
+                    "authorization": `Bearer ${localStorage.getItem('accessToken')}`
+                }
+        })
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    signOut(auth);
+                    dispatch(emptyFavorite())
+                    localStorage.removeItem('accessToken');
+                }
+                return res.json()
+            })
             .then(data => setBlog(data))
     }, [id])
 

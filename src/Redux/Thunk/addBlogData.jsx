@@ -1,5 +1,7 @@
+import { signOut } from "firebase/auth";
 import toastify from "../../Component/Toastify/Toastify";
-import { addBlog } from "../actionCreators/actionCreators";
+import { addBlog, emptyFavorite } from "../actionCreators/actionCreators";
+import auth from "../../Pages/firebase.init";
 
 const addBlogData = (blog) => {
 
@@ -13,7 +15,11 @@ const addBlogData = (blog) => {
             }
         });
         const data = await res.json()
-
+        if (res.status === 401 || res.status === 403) {
+            dispatch(emptyFavorite())
+            signOut(auth);
+            localStorage.removeItem('accessToken');
+        }
         if (data.acknowledged) {
             dispatch(addBlog({
                 _id: data.insertedId,

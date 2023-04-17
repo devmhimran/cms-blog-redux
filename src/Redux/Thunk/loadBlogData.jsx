@@ -14,8 +14,8 @@ const loadBlogData = () => {
         })
         const data = await res.json()
         if (res.status === 401 || res.status === 403) {
-            signOut(auth);
             dispatch(emptyFavorite())
+            signOut(auth);
             localStorage.removeItem('accessToken');
         }
         if (data.length) {

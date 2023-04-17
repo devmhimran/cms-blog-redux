@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../Pages/firebase.init';
+import { signOut } from 'firebase/auth';
+import { emptyFavorite } from '../../Redux/actionCreators/actionCreators';
+import { useDispatch } from 'react-redux';
 
 const Comment = ({ data, postAuthor, id }) => {
     const [user, loading] = useAuthState(auth)
     const [profileUser, setProfileUser] = useState([]);
     const [editForm, setEditForm] = useState(false)
     const [commentId, setCommentId] = useState('')
+    const dispatch = useDispatch();
 
 
     useEffect(() => {
@@ -36,7 +40,14 @@ const Comment = ({ data, postAuthor, id }) => {
                 },
                 body: JSON.stringify(blogComment)
             })
-                .then(res => res.json())
+                .then(res => {
+                    if (res.status === 401 || res.status === 403) {
+                        dispatch(emptyFavorite())
+                        signOut(auth);
+                        localStorage.removeItem('accessToken');
+                    }
+                    return res.json()
+                })
                 .then(data => {
                     if (isProceed) {
                         window.location.reload()
